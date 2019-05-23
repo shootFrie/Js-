@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta charset="utf-8" />
+	 <title>选项卡 </title>
+	 <style type="text/css">
+	   *{margin:0; padding:0;} 
+		.m{
+		   margin:0 auto;
+		   background:#fff;
+		   width:100%;
+		   position:relative;
+		   padding:20px 20px;
+		   border-bottom:1px solid #e5e5e5;
+         box-shadow:0 2px 10px rgba(0,0,0,.1);
+		}
+		#tab{
+	     height:10px;
+		  line-height:24px;
+		}
+		ul li{
+		   float:left;
+		   padding:0 10px;
+		   display:block;
+		   list-style:none;
+		   background:white;
+		   text-align:center;
+		   cursor: pointer;
+		}
+		#tab_div{
+		   height:268px;
+			background:none;
+		}
+		.hide{
+		   display:none;
+		}
+		.Li_alter a{
+		  border-bottom:2px solid red;
+		  color:red;
+		}
+		.act{
+			width:100%!important;
+		   max-width:1440px;
+		   background:#ccc;
+		   margin:0 auto;
+		   padding:0 15px;
+		   overflow:hidden;
+		   position:absolute;
+		   display:block;
+		}
+	 </style>
+	 <script>
+	   window.onload = function (){
+		  var tab=document.getElementById("tab");
+		  var tab_li=document.getElementsByTagName("li");
+		  var tab_div=document.getElementById("tab_div");
+		  var tab_div1=tab_div.getElementsByTagName("div");
+		  //获取div，li的元素。li的长度
+		  var li_len=tab_li.length;
+		  var i=0;
+		  for(i=0;i<li_len;i++){
+		  //自定义每个li的顺序
+		   tab_li[i].index=i;//DOM index返回下拉列表中某个选项的索引位置。
+			 //当鼠标到li元素上时
+			 tab_li[i].className="";
+			 tab_div1[i].className="hide";
+			 tab_li[i].onmouseover=function(){
+        tab_li[this.index].className = 'Li_alter';
+            tab_div1[this.index].className = 'act';
+			 }
+			 tab_li[i].onmouseout=function(){
+			   tab_li[this.index].className = '';
+          tab_div1[this.index].className = 'hide';
+	   }
+	   }
+	   }
+	 </script>
+  </head>
+  <body>
+     <div class="m" >
+	     <ul id="tab">
+		    <li><a>我想...</a></li>
+			 <li><a>个人及家用产品</a></li>
+			 <li><a>商用解决方案</a></li>
+			 <li><a>合作伙伴</a></li>
+			 <li><a>技术支持</a></li>
+		  </ul>
+	 </div>
+	 <div id="tab_div">
+	 <div class="hide">
+	 </div>
+	 <div  class="hide">dierge</div>
+	 <div class="hide">disange</div>
+	 <div  class="hide">sihe</div>
+	 <div class="hide">wuge</div>
+	 </div>
+  </body>
+</html>

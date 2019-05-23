@@ -1,0 +1,192 @@
+/*js1的换肤css*/
+.b1{ background:red;
+}
+
+/*js5的css*/
+.div1color{
+ color:#31708f;
+ background-color:#d9edf7;
+ border-color:#bce8f1;
+}
+.btn-color{
+  color:#fff;
+  background-color:#5bc0de;
+  border-color:#46b8da;
+}
+.btn-color.active{
+  color:#333;
+  background-color:#aaa;
+}
+.btn{
+  display:inline-block;/*用来处理行内非替换元素的高宽问题的*/
+  padding:6px 12px;
+  margin-bottom:0;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.5;
+  text-align:center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  border-radius:3px;
+}
+.btn-color1{
+ color:#fff;
+ background-color:#449d44;
+ border-color:#398439;
+}
+.div1color1{
+ color:#3c763d;
+ background-color:#dff0d8;
+ border-color:#d6e9c6;
+}
+.btn-color2{
+ color:#fff;
+ background-color:#ec971f;
+ border-color:#d58512;
+}
+.div1color2{
+ color:#8a6d3b;
+ background-color:#fcf8e3;
+ border-color:#faebcc;
+}
+
+/*js6的css*/
+.in-text{ 
+  line-height:20px;
+  width:200px;
+  background:#fff;
+  border:1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius:7px;
+ }
+/*js7的css*/
+.calendar{
+ width:210px;
+ margin:50px auto 0;
+ padding:10px 10px 20px 20px;
+ background:#eae9e9;
+}
+.calendar ul{
+ width:210px;
+ overflow:hidden;
+ padding-bottom:10px;
+}
+.calendar ul li{
+ float:left;
+ width:58px;
+ height:54px;
+ margin:10px 10px 0 0;
+ border:1px solid #fff;
+ color:#fff;
+ background:#424242;
+ text-align:center;
+ cursor:pointer;
+}
+.calendar ul li h2{
+ font-size:20px;
+ padding-top:5px;
+}
+.calendar ul li p{
+ font-size:14px;
+}
+.text{
+ width:178px;
+ padding:10px 10px; 10px 10px;
+ border:1px solid #fff;
+ color:#555;
+ background:#f1f1f1;
+}
+/*js11的css，包含select的样式*/
+.sel-control{
+  height:34px;
+  padding:6px 12px;
+  font-size:14px;
+  line-hight:1.43;
+  color:#555;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:4px;  
+}
+/*js10、11的li表格*/
+.list-group li{
+	  border:1px solid #ddd;
+	  display:block;
+	  list-style:none;
+	  background-color:#fff;
+	  width:500px;
+	  height:20px;
+	  padding:2px 0 1px 10px;
+	}
+/*js16的li*/
+.js16li{
+  height:100px;
+  position:relative;
+  overflow:hidden;
+  transition:none;
+  backgroundlist-color:#c00;
+}
+.js16li ul{
+  margin:0;
+  padding:0;
+  position:absolute;
+  top:0;
+  transparent:none;
+  background:green;
+}
+.js16li ul li{
+  float:left;
+  list-style:none;
+  margin:0 10px 0 0;
+  padding:0;
+  width:100px;
+  height:100px;
+  border:0 double red;
+  background:#efefef;
+  line-height:100px;
+  font-size:32px;
+  text-align:center;
+  cursor:pointer;
+}
+/*js20的table css样式*/
+.table{
+  width:100%;
+  max-width:100%;
+  border-collapse: collapse
+}
+
+.table td{
+ padding:8;
+ line-height:1.5;
+ vertical-align:top;
+ border-top:1px solid #ddd;
+ border-left:1px solid #ddd;
+}
+
+
+.table-bordered{
+  border:1px solid #ddd;
+}
+.astyle{
+ cursor:pointer;
+ outline:none;
+ color:#7698A7;
+ text-decoration:none;
+ 
+}
+/*js25中textarea的样式*/
+.text-style{
+ width:245px;
+ height:25px;
+ margin:0px;
+ display:block;
+ font-size:14px;
+ line-height:1.5;
+ color:#555;
+ background:#fff;
+ display:inline-block;
+ border:1px solid #ccc;
+}

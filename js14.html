@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>数组添加、删除、连接、分割、排序</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function()
+   {
+    var div1=document.getElementById('div1');
+    var Btn1=div1.getElementsByTagName('button');
+    Btn1[0].onclick=function()
+	 {
+	  var a=[1,2,3];
+	  alert(a.length);
+	 }	
+	 Btn1[1].onclick=function()
+	 {
+	  var a=new Array(1,2,3);
+	  alert(a.length);
+	 }	
+	 
+	 var div2=document.getElementById("div2");
+	 var Btn2=div2.getElementsByTagName('button');
+	 Btn2[0].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  alert(a);
+	 }
+	 Btn2[1].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.length=3;
+	  alert(a);
+	 }
+	 Btn2[2].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.push(7);
+	  alert(a);
+	 }
+	 Btn2[3].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.pop();
+	  alert(a);
+	 }
+	 Btn2[4].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.unshift('a');
+	  alert(a);
+	 }
+	 Btn2[5].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.shift();
+	  alert(a);
+	 }
+	 
+	 var div3=document.getElementById("div3");
+	 var Btn3=div3.getElementsByTagName("button");
+	 Btn3[0].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.splice(3,5);
+	  alert(a);
+	 }
+	 Btn3[1].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.splice(2,0,'a','b','c');
+	  alert(a);
+	 }
+	 Btn3[2].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  a.splice(2,2,'a','b');
+	  alert(a);
+	 }
+	 
+	 var div4=document.getElementById("div4");
+	 var Btn4=div4.getElementsByTagName('button');
+	 Btn4[0].onclick=function(){
+	  var a=[1,2,3];
+	  var b=[4,5,6];
+	  alert(a.concat(b));
+	 }
+	 Btn4[1].onclick=function(){
+	  var a=[1,2,3,4,5,6];
+	  alert(a.join('-'));
+	 }
+	 Btn4[2].onclick=function(){
+	  var a=['float','height','window','zoom','load'];
+	  alert(a.sort());
+	 }
+	 Btn4[3].onclick=function(){
+	  var a=[33,22,15,53,355,134,2,5,6];
+	  a.sort(function (n1,n2)
+	  {
+	    return n1-n2;
+	  });
+	  alert(a);
+	 }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、数组写法<br> </br>
+  <p>例1：之前讲过的写法</p></br>
+  <code>var a=[1,2,3]</code>
+  <button class="btn btn-color">length</button></br>
+  
+  <p>例2：另一种写法</p></br>
+  <code>var a=new Array(1,2,3)</code>
+  <button class="btn btn-color">length</button>
+  <br>两种写法作用是一样的，一般采用第一种就可以了。
+  </div>
+  
+  <div class="c1" id="div2">
+  2、数组添加删除 头部或尾部<br> </br>
+  <p>例1：设置数组的length</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">默认length</button>
+  <button class="btn btn-color">只要前3个</button></br>
+  <p>例2：数组尾部添加 push|a.push(7)</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">尾部添加</button></br>
+  <p>例3：数组尾部删除 pop</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">尾部删除一位</button></br>
+  <p>例4：数组头部添加 unshift</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">头部添加一位</button></br>
+  <p>例5：数组头部删除 shift</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">头部删除一位</button>
+  </div>
+  
+  <div class="c1" id="div3">
+  3、数组添加删除 任意操作<br> </br>
+  <p><a href="http://blog.csdn.net/baidu_25343343/article/details/54908519">
+  数组splice()方法详解</a></p></br>
+  <p>例1、删除 splice</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">删除3-5位</button>
+  
+  <p>例2、插入 splice</p></br>
+  <p>语法：array.splice(starti,0,值1，值2...);</p>
+  <p>starti: 在哪个位置插入，原来starti位置的值向后顺移
+0：表示删除0个元素，因为插入和替换都是由删除功能拓展的。
+值1，值2：需要插入的值</p>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">在第2位添加abc</button>
+  
+  <p>例3、替换 splice</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">在第2位删除2位又插入2位</button>
+  </div>
+  
+  <div class="c1" id="div4">
+  4、数组连接、分割、排序<br> </br>
+  <p>例1、数组连接 concat</p></br>
+  <code>var a=[1,2,3];var b=[4,5,6]</code>
+  <button class="btn btn-color">连接两个数组</button>
+  a和b可以换位置
+  
+  <p>例2、数组分隔 join</p></br>
+  <code>var a=[1,2,3,4,5,6]</code>
+  <button class="btn btn-color">用-连接</button> 自定义连接符
+
+  <p>例3、数组字符串排序 sort</p></br>
+  <code>var a=['float','height','window','zoom','load']</code>
+  <button class="btn btn-color">字符串排序</button> 
+  
+  <p>例4、数组数字排序 sort(function (n1,n2){return n1-n2})</p></br>
+  <code>var a=[33,22,15,53,355,134,2,5,6]</code>
+  <button class="btn btn-color">数字排序</button> 
+  </div>
+  
+  <div class="c1">
+  记录<br> </br>
+  <p>数组：一个数组里面尽量只存一种类型，要么都是数字，要么都是字符串。</p></br>
+  <p>push：数组尾部添加1个内容。写法arr.push(内容)</p></br>
+  <p>pop：数组尾部删除1个内容。写法arr.pop()</p></br>
+  <p>unshift：数组头部添加1个内容。写法arr.unshift(内容)</p></br>
+  <p>shift：数组头部删除1个内容。写法arr.shift()</p></br>
+  <p>splice：数组的万能操作。删除写法：arr.splice(起点,长度)。插入写法：
+  arr.splice(起点,长度为0,需要添加的元素)。替换写法：arr.splice(起点,长度为要替换的个数
+   ,替换后的元素)</p></br>
+   <p>concat：数组连接。写法a.concat(b)</p></br>
+   <p>join：数组分隔符。写法a.join('-')</p></br>
+   <p>sort：数组内容排序。写法a.soft()，sort是可以有一个参数的a.soft(function(n1,n2))，
+   这个参数实际是一个函数，叫做比较函数。这个函数里可以有两个参数，一个1一个2，每次提取两个数字比较哪个小，
+   把小的往前排。</p></br>
+   
+  </br>
+  </div>
+ </body>
+</html>

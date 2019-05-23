@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>密码强度</title>
+	 <style type="text/css">
+	   #passStrength{
+	   height:12px;
+	   width:165px;
+	   border:1px solid #ccc;
+	   border-radius:10px;
+	   padding:2px;
+	   text-align:center;
+	   }
+	   .strengthLv1{margin:3px 5px;background:red;height:6px;width:30px;} 
+      .strengthLv2{margin:3px 5px;background:orange;height:7px;width:88px;} 
+      .strengthLv3{margin:3px 5px;background:green;height:7px;width:150px;} 
+	 </style>
+	 
+  </head>
+  <body>
+     <input type="password" name="pass" id="pass" maxlength="16"/><!--允许最大输入字符数-->
+	   <div class="pass-wrap">
+       密码强度：
+        <div id="passStrength"></div>
+    </div>
+	<script>
+	window.onload=function(){
+	  function PasswordStrength(passwordID,strengthID){
+	  //设置两个参数 PasswordStrength控件正是是用来提示用户输入密码强弱情况的 
+	   this.init(strengthID); //初始化自己 
+	   var _this=this; //定义变量的作用域，指代本作用域的对象。希望_this代表最初的对象
+	   document.getElementById('passStrength').onkeyup=function(){
+	   //onkeyup 事件会在键盘按键被松开时发生
+	     _this.checkStrength(this.value); 
+		 //checkStrength方法中可以自定义密码强度的规则
+	   }
+	 };
+	 PasswordStrength.prototype.init = function(strengthID){
+	 //prototype 属性向对象添加属性和方法。
+    var id = document.getElementById(strengthID);
+    var div = document.createElement('div');
+	//创建元素节点div
+    var strong = document.createElement('strong');
+	//创建元素节点strong
+    this.oStrength = id.appendChild(div);
+	//向id节点添加最后一个子节点div<div></div>
+    this.oStrengthTxt = id.parentNode.appendChild(strong);
+	//返回id节点的父节点，并向其添加最后一个字节点strong<div><strong></strong></div>
+};
+   PasswordStrength.prototype.checkStrength = function (val){
+var aLvTxt = ['','低','中','高']; 
+var lv = 0; 
+if(val.match(/[a-z]/g)){lv++;} 
+if(val.match(/[0-9]/g)){lv++;} 
+if(val.match(/(.[^a-z0-9])/g)){lv++;} 
+if(val.length < 6){lv=0;} 
+if(lv > 3){lv=3;} 
+this.oStrength.className = 'strengthLv' + lv; 
+this.oStrengthTxt.innerHTML = aLvTxt[lv]; 
+};
+function PasswordStrength(passwordID,strengthID){ 
+this.init(strengthID); 
+var _this = this; 
+document.getElementById(passwordID).onkeyup = function(){ 
+_this.checkStrength(this.value); 
+} 
+}; 
+PasswordStrength.prototype.init = function(strengthID){ 
+var id = document.getElementById(strengthID); 
+var div = document.createElement('div'); 
+var strong = document.createElement('strong'); 
+this.oStrength = id.appendChild(div); 
+this.oStrengthTxt = id.parentNode.appendChild(strong); 
+}; 
+PasswordStrength.prototype.checkStrength = function (val){ 
+var aLvTxt = ['','低','中','高']; 
+var lv = 0; 
+if(val.match(/[a-z]/g)){lv++;} 
+if(val.match(/[0-9]/g)){lv++;} 
+if(val.match(/(.[^a-z0-9])/g)){lv++;} 
+if(val.length < 6){lv=0;} 
+if(lv > 3){lv=3;} 
+this.oStrength.className = 'strengthLv' + lv; 
+this.oStrengthTxt.innerHTML = aLvTxt[lv]; 
+}; 
+new PasswordStrength('pass','passStrength'); }
+	 </script>
+  </body>
+</html>

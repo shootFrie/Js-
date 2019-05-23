@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+   <title>jQuery</title>
+    <link  rel="stylesheet" type="text/css" href="css/index.css" />
+   <script src="js/jquery.js"></script>
+   <script>
+   </script>
+ </head>
+ <body>
+  <div class="divClass">
+    <button id="btn">单击我添加事件</button>
+    <button id="delAll">删除所有的事件</button>
+    <div id="test"></div>
+    <script>
+      $(function(){
+        $('#btn').bind('click',function(){   //点击显示函数事件
+          $('#test').append("<p>我的绑定函数1</p>");
+        }).bind('click',function(){
+          $('#test').append("<p>我的绑定函数2</p>");
+        }).bind('click',function(){
+          $('#test').append("<p>我的绑定函数3</p>");
+        });
+
+        $("#delAll").click(function(){
+          $("#btn").unbind('click');
+        });
+
+      });
+    </script>
+  </div>
+  
+  <div class="divClass">
+    <input type="button" value="获取数据" id="j_btnGetData">
+    <table class="tab" border="1">
+      <thead>
+        <tr>
+          <th>人物</th>
+          <th>角色</th>
+          <th>特点</th>
+        </tr>
+      </thead>
+      <tbody id="j_tbData" >
+      </tbody>
+    </table>
+
+    <script>
+      //模拟从后台拿到数据
+      var data = [{
+        name: "宅总",
+        role: "技术支持",
+        feature: "有钱"
+      },{
+        name:"李四",
+        role:"外勤",
+        feature:"能打，膝盖侠"
+      },{
+        name:"根妹",
+        role:"机器代言人",
+        feature:"全能"
+      }];
+
+      $(function(){
+        //给按钮绑定单击事件
+        $('#j_btnGetData').click(function(){
+          //获取数据，然后处理之后放到我们的table里面去
+          var tbHtml = "";
+          for(var i = 0; i < data.length;i++){
+            tbHtml += "<tr>";
+            tbHtml += "<td>"+data[i].name+"</td>";
+            tbHtml += "<td>"+data[i].role+"</td>";
+            tbHtml += "<td>"+data[i].feature+"</td>";
+            tbHtml += "</tr>";
+          }
+
+          $("#j_tbData").html(tbHtml);
+        });
+        
+      });
+    </script>
+  </div>
+ 
+  <div class="divClass">
+    <input type="button" value="开灯" class="btnOpen">
+    <input type="button" value="关灯" id="j_btnClose">
+    <script>
+      $(function(){
+      // 开灯效果
+      $('.btnOpen').click(function(){
+        $('body').css({"backgroundColor":"#fff","color":"#000"});
+      });
+      // 关灯效果
+      $('#j_btnClose').click(function(){
+        $('body').css({"backgroundColor":"#000","color":"#fff"});
+      });
+      });
+    </script>
+  </div>
+  <div class="c1">
+  记录</br></br>
+  <p></p></br></br>
+  <p></p></br></br>
+  </div>
+ </body>
+</html>

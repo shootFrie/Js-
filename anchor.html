@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网页定位导航效果</title>
+	<style>
+	    *{
+	    	padding: 0;
+	    	margin:0;
+	    }
+	    body{  /* 基本字体和行距 */
+	    	font-size:12px;
+	    	line-height: 1.7;
+	    }
+		
+		li{
+			list-style: none;
+		}
+		/* 左侧内容的样式 */
+		#content{
+			width: 800px;
+			margin:0 auto;
+			padding: 20px;
+		}
+		#content h1{
+			color:#0088bb;
+		}
+		 /* 设置每个相同模块大小 字体*/
+		#content .item{ 
+			padding: 20px;
+			margin-bottom:20px;
+			border:1px dotted #0088bb;
+		}
+		#content .item h2{
+			font-size:16px;
+			font-weight:bold;
+			border-bottom:2px solid #0088bb;
+			margin-bottom: 10px;
+		}
+		/* 图片样式 */
+		#content .item li{
+			display: inline;  /* 一行显示 */
+			margin-right: 10px;
+		}
+		#content .item li a img {
+			width: 230px;
+			height: 150px;
+			border:none;
+		}
+		/*右侧导航栏的样式*/
+		#menu{
+			position: fixed;
+			top:100px;
+			left: 50%;
+			margin-left:400px; /* 先居中再根据右侧的内容调整 */
+			width: 80px;
+		}
+		#menu ul li a{
+			display: block;
+			margin:5px 0;
+			font-size:14px;
+			font-weight:bold;
+			color:#333;
+			width: 80px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			text-decoration: none;
+		}
+		#menu ul li a:hover,
+		#menu ul li a.current /* 变成焦点时 */
+		{
+			color:#fff;
+			background: #0088bb;
+		}
+	</style>
+
+	<script src="js/jquery.js"></script>
+	<script>
+		$(function(){
+			//滚动条发生滚动，滚动事件监听
+			$(window).scroll(function(){
+				var top=$(document).scrollTop(); //获取滚动条滚动的距离
+				var menu = $("#menu");   //获取右侧的导航
+				var item = $("#content").find(".item"); //获取所有的item，这种方式效率高点
+
+				var currentId =""; //当前所在楼层的id
+
+				item.each(function(){
+					var m = $(this); //存this
+					var itemTop = m.offset().top;  //获取每个楼层相应的位置
+					if(top > itemTop-200)  //过了相应的楼层
+					{
+						currentId = "#" + m.attr("id"); //获取相应的id
+ 					}else{
+ 						return false; //跳出if循环，比如到了3就没必要再进4和5
+ 					}
+
+ 					//给相应的楼层设置current，取消其他链接的current
+ 					var currentLink = menu.find(".current");
+ 					if(currentId && currentLink.attr("href") != currentId ) //判断currentId是否有值以及选取的href属性不是当前楼层的currentId
+ 					{
+ 						currentLink.removeClass("current");//删除原来的current
+ 						menu.find("[href="+currentId+"]").addClass("current");
+ 					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="#item1" class="current">男装</a></li>
+			<li><a href="#item2">女装</a></li>
+			<li><a href="#item3">数码</a></li>
+			<li><a href="#item4">家电</a></li>
+			<li><a href="#item5">母婴</a></li>
+		</ul>
+	</div>
+	<div id="content">		
+		<h1>购物网站</h1>
+		<div id="item1" class="item">
+			<h2>男装</h2>
+			<ul>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div id="item2" class="item">
+			<h2>女装</h2>
+			<ul>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div id="item3" class="item">
+			<h2>数码</h2>
+			<ul>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div id="item4" class="item">
+			<h2>家电</h2>
+			<ul>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_2_bigger.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div id="item5" class="item">
+			<h2>母婴</h2>
+			<ul>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+				<li><a href="#"><img src="img\apple_1_bigger.jpg" alt=""></a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

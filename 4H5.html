@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<title>WEB存储及文件域</title>	
+	<link rel="stylesheet" href="css/index.css">		
+</head>
+<body>
+	<div class="divClass">
+		<textarea  id="text_editor" cols="80" rows="10"></textarea>
+		<button id="btn_set">存储到浏览器本地</button>
+		<button id="btn_get">获取</button>
+		<script>
+			var btnSet=document.querySelector('#btn_set');
+			var btnGet=document.querySelector('#btn_get');
+			var txtEditor=document.querySelector('#text_editor');
+
+			//注册点击事件
+			btnSet.addEventListener('click',function(){
+				var value = txtEditor.value;
+				//存起来
+				//在H5中window对象多了一个localStorage属性，可以用于操作本地存储
+				if(window.sessionStorage){
+				 //window.localStorage
+					//浏览器支持
+				  // localStorage['aaa']=value;
+				  sessionStorage.setItem('aaa',value);
+				}
+			});
+
+			btnGet.addEventListener('click',function(){
+				if(window.sessionStorage){  
+				  // window.localStorage
+				 //txtEditor.value = localStorage['aaa'];
+				 txtEditor.value = sessionStorage('aaa');
+				}
+			});
+			//sessionStorage 和 localStorage 除了存储的生命周期不同，其他相同
+		</script>
+	</div>
+
+	<div class="divClass">
+		<h3>文件域的files属性就是读取文件信息的入口</h3>
+		<input type="file" name="file" id="input_file" multiple>
+
+		<input id="btn" type="button" value="读取文件信息">
+
+		<ul id="result"></ul>
+		<script>
+			var inputFile=document.querySelector('#input_file');
+			var btn = document.querySelector('#btn');
+			var result = document.querySelector("#result");
+
+			btn.addEventListener('click',function(){
+				for(var i=0; i<inputFile.files.length;i++)
+				{
+					var file = inputFile.files[i];
+					var liElement = document.createElement("li");
+					liElement.innerHTML = file.name+';'+(file.size/1024/1024)+"mb"+file.lastModifiedDate.toLocaleDateString()+' '+file.lastModifiedDate.toLocaleTimeString();
+				//文件名，文件大小，文件修改日期
+
+					result.appendChild(liElement);
+			}
+		});
+	</script>
+</div>
+
+<div class="divClass">
+	<h3>因为文件选择域无法选择外观。所以将其隐藏换用别的元素显示</h3>
+	<input type="file" name="" id="dis_file" multiple style="display:none">
+
+	<input type="button" value="选择文件" id="input_btn" >
+
+	<ul id="result_ul"></ul>
+
+	<script>
+		var displayFile = document.querySelector('#dis_file');
+		var inputBtn = document.querySelector('#input_btn');
+
+		inputBtn.addEventListener('click',function(e){
+			displayFile.click();
+		});
+
+		var resultUl = document.querySelector('#result_ul');
+		displayFile.addEventListener('change',function(e){
+			//当文件选择域发生变化时触发的事件
+			//清除上一次的文件
+			resultUl.innerHTML="";
+			for(var i=0; i<displayFile.files.length;i++){
+				var file = displayFile.files[i];
+				var liElement = document.createElement('li');
+				liElement.innerHTML = file.name+";"+(file.size/1024)+'kb'+file.lastModifiedDate.toLocaleDateString()+" "+file.lastModifiedDate.toLocaleTimeString();
+				resultUl.appendChild(liElement);
+			}
+		});
+	</script>
+</div>
+<div class="divClass">
+	<h3>用户读取文件内容</h3>
+
+	<input type="file" id="i_file">
+
+	<div id="i_result"></div>
+
+	<script>
+		var iFile = document.querySelector('#i_file');
+
+		var iResult = document.querySelector('#i_result');
+
+
+		iFile.addEventListener('change',function(e){
+			var file = iFile.files[0];
+			if(file){
+				//用户选了文件
+				// 读取文件内容
+				// js读取文件有个专门的对象叫 FileReader；
+				var reader = new FileReader();
+				reader.readAsText(file);
+				reader.addEventListener('load',function(e){
+					//我们在事件的回调函数中最想要的数据往往都可以通过e拿到
+					iResult.innerHTML = (e.target.result);
+				});
+				//JS读取文件完成后会触发一个事件：onload
+			}
+		});
+
+		//编码
+		function html_encode(str) {
+			var s = "";
+			if (str.length == 0) return "";
+			s = str.replace(/&/g, ">");
+			s = s.replace(/</g, "<");
+			s = s.replace(/>/g, ">");
+			s = s.replace(/ /g, " ");
+			s = s.replace(/\'/g, "'");
+			s = s.replace(/\"/g, "");
+			s = s.replace(/\n/g, "<br>");
+			return s;
+		}
+
+	    //解码
+	    function html_decode(str) {
+	    	var s = "";
+	    	if (str.length == 0) return "";
+	    	s = str.replace(/>/g, "&");
+	    	s = s.replace(/</g, "<");
+	    	s = s.replace(/>/g, ">");
+	    	s = s.replace(/ /g, " ");
+	    	s = s.replace(/'/g, "\'");
+	    	s = s.replace(/"/g, "\"");
+	    	s = s.replace(/<br>/g, "\n");
+	    	return s;
+	    }
+</script>
+</div>
+
+<div class="divClass">
+	<h3>用户读取文件内容</h3>
+
+	<input type="file" id="n_file">
+
+	<div id="n_result"></div>
+
+	<script>
+		var nFile = document.querySelector('#n_file');
+
+		var nResult=document.querySelector('#n_result');
+
+		nFile.addEventListener('change',function(e){
+			var file = nFile.files[0];
+			if(file){
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.addEventListener('load',function(e){
+					//console.log(e.target.result);
+					var img = document.createElement('img');
+					img.src=this.result;
+					nResult.appendChild(img);
+				});
+			}
+		});
+	</script>
+
+	<p>DATAURL 格式描述： console.log(e.target.result);图片的格式 data:image/png;base64,iVBO
+	 <br>data:   以此开头
+	 <br>image/png  数据描述的类型
+	 <br>base64  以此格式转义
+	</p>
+</div>
+</body>
+</html>		

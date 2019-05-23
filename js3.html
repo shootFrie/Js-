@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js基本练习3 </title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <script>
+    window.onload=function(){
+	   var b1=document.getElementById("button1");
+	   var b2=document.getElementById("button2");
+	   var b3=document.getElementById("button3");
+	   
+	   b1.onclick=function(){
+	     document.getElementById("line1").className='box1'; 
+	   }
+	   b2.onclick=function(){
+	    var line=document.getElementById("line2");
+		  var span=line.getElementsByTagName("span");
+		  span[0].style.background="yellow";
+	    span[1].style.background="blue";
+	   }
+	   b3.onclick=function(){
+	    alert('当前页面共有'+document.getElementsByTagName("div").length+"个DIV"); 
+	   }
+	}
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="line1">
+   1、提取onclick进JS window.onload
+   <p> 
+    <button id="button1" type="button" class="bnt2">修改样式</button>
+   </p>
+  </div>
+  
+  <div class="c1" id="line2">
+   2、批量获取元素修改样式getElementsByTagName数组里逐个挑选
+   <p> 
+    <button id="button2" type="button" class="bnt2">修改前两个样式</button>
+	</p>
+	<p>获取当前背景的div中的span，对前两个span增加class。
+   </p>
+   <div class="js3_span" >
+     <span></span>
+     <span></span>
+     <span></span>
+     <span></span>
+   </div>
+  </div>
+  
+  <div class="c1">
+   3、获取当前页面中所有div的个数(length)
+   <p>
+     <button id="button3" type="button" class="bnt2">统计当前页面有多少个div</button>
+   </p>
+  </div>
+  
+  <div class="c1">
+  <p>记录</p>
+  <p>提取onclick进JS，必须调用函数。</p>
+  <p>JS里函数可以没有名字，需要把函数内容直接放到事件。例如：div1.onclick=function(){}</p>
+  <p>window.onload的作用是当页面加载完成后才执行这个函数的内容。</p>
+  <p>JS CSS HTM三者分离：不加行间JS事件，不加行间样式。提取行间事件就是为了三者分离。</p>
+  <p>getElementsByTagName，可以获取一组标签元素，所谓的TagName就是标签名，他的参数就是需要获取什么类型的元素，例如div。
+  他所获取到的就不是一个元素了，而是一组。可以通过length属性统计个数。getElementById，每次只能获取一个ID元素。</p>
+  </div>
+ </body>
+</html>

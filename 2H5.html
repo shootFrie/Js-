@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单元素</title>
+	<link  rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<!-- 
+	Date Pickers  日期时间选择器
+	   data -选取日、月、年
+	   month - 选取月、年
+	   week - 选取周和年
+	   time - 选取时间（小时和分钟）
+	   datetime - 选取UTC时间、日、月、年
+	   datetime-local - 选取本地时间、日、月、年
+	search - 搜索域（语言）
+input：
+   novalidate   设置H5的表单校验是否工作，true 不工作
+   autocomplete   是否开启下拉默认值，on/off
+   autofocus    获取焦点
+   form    让表单外的表单元素随表单一起提交
+   from overrides   一组属性,只能放在提交按钮上
+       （formaction,    重写属性不怎么用
+       formenctype,
+       formmethod,
+       formnovalidate, 
+       formtarget）
+
+   list   指定当前文本框的自动完成列表的数据  datalist
+        min /max / step
+        multiple       选择多个文件 
+        pattern        根据正则校验文本框格式
+        placeholder    默认值
+        required      限制当前文本框必须输入
+   -->
+   <!--[if lt IE 9]>
+   	条件注释
+   	如果是IE9以下的版本就会显示这句话
+   <![endif]-->
+   <body>
+   	<div class="divClass">
+   		<h3>表单元素</h3>
+   		<form action="#" method="get">
+   			文本输入：<input type="text" >
+   			按钮：<input type="button" value="button">
+   			密码输入：<input type="password">
+   			圆形选择： <input type="radio">
+   			方形选择： <input type="checkbox">
+   			提交：<input type="submit">
+   			重置默认值： <input type="reset" value="重置">
+   			文件上传: <input type="file" >
+   			隐藏只是在网页页面上不显示输入框,隐藏域:<input type="hidden" name="隐藏域">
+   			图片域：<input type="image" >
+   			<button>button</button>
+   			<select name="" id="">
+   				<option value="1">aaa</option>
+   				<option value="2">bbb</opti on>
+   					<option value="3">ccc</option>
+   				</select>
+   				<hr>
+   				<h3>智能表单元素</h3>
+   				<label for="">email邮箱地址
+   					<input type="email">
+   					<span>限定输入内容必须为邮箱格式</span>
+   				</label>
+   				<br>
+   				<label for="">url
+   					<input type="url">
+   					<span>限定输入格式必须为URL</span>
+   				</label>
+   				<br>
+   				<label for="">数字number
+   					<input type="number" >
+   					<span>限定输入内容为数字，可以加减按钮，手机上没有</span>
+   				</label>
+   				<br>
+   				<label for="">数值范围选择器rang
+   					<input type="range" >
+   					<span>选择数字区间</span>
+   				</label>
+   				<br>
+   				<label for="">data
+   					<input type="data" >
+   					<span>定义日期选择器，样式不能修改，适用于移动端</span>
+   				</label>
+   				<br>
+   				<label for="">month
+   					<input type="month" >
+   					<span>定义日期选择器，样式不能修改，适用于移动端</span>
+   				</label>
+   				<br>	
+   				<label for="">week
+   					<input type="week" >
+   					<span>定义日期选择器，样式不能修改，适用于移动端</span>
+   				</label>
+   				<br>	
+   				<label for="">time
+   					<input type="time" >
+   					<span>定义日期选择器，样式不能修改，适用于移动端</span>
+   				</label>
+   				<br>	
+   				<label for="">datetime
+   					<input type="datetime" >
+   					<span>兼容性不好，只有个别(ff,o)支持,效果等同于datetime-local</span>
+   				</label>
+   				<br>	
+   				<label for="">datetime-local
+   					<input type="datetime-local" >
+   				</label>
+   				<br>	
+   				<label for="">search
+   					<input type="search" >
+   					<span>定义一个语义化的搜索框</span>
+   				</label>
+   			</form>
+   		</div>
+   		<div class="divClass">
+   			<h3></h3>
+   			<form id="main_form" action="#" method="get" autocomplete="off" novalidate="true">
+	    <!-- autocomplete 到否开启下拉默认值
+	    	nobaliable 设置H5的校验是否开启，true不开启。不加就默认是工作的 -->
+	    	<p>1、获取焦点 autofocus</p>
+	    	<input type="submit" value="提交">
+	    	<hr>
+	    	<label for="autotxt"> 获取焦点
+	    		<input type="text" name="input1" id="" auto>
+	    	</label>
+	    	<!-- 提交按钮重写 -->
+	    	<input type="submit" value="重写表单属性提交" formmethod="post" formaction="1h5.html"/>
+	    </form>
+	    <script> /*给表单的有auto的元素加上了光标。一开始就有光标，js的实现*/
+	    var autofocus1=document.querySelectorAll('input[auto]');
+	    for (var i = 0; i < autofocus1.length; i++) {
+	    	autofocus1[i].focus();
+	    }
+	</script>
+	<hr>
+	外表单元素：<input type="text" name="input2" form="main_form" /> 
+	<!-- 在没有form值的时候，在提交表单的时候浏览器不会显示其表单值，加了form之后才有 
+		form 属性是让表单外的表单元素也可以随表单一起提交-->
+	</div>
+
+	<div class="divClass">
+		<form action="#">
+			指定当前文本框的自动完成列表的数据：
+			<input type="text" list="text_list">
+			<datalist id="text_list">            
+				<!-- datalist在页面上是看不见的，用于定义数据列表 -->
+				<option value="aaa"></option>  <!-- 内容都写在value里面 -->
+				<option value="bbb"></option>
+				<option value="ccc"></option>
+			</datalist>
+			<!--min，max限制  值的范围，但是不会在输入时限制，而是在提交时校验，step设置的是每次加减的量 -->
+			数字的step增量：<input type="number" min="10" max="100" step="5" name="num">
+			<input type="submit" value="提交">
+			<br>
+			rang的范围：<input type="range" min="10" max="1000" value="50" step="2">
+			<br>
+			日期的最小/大值： <input type="date" name="" max="2018-06-09" min="2018-06-01" id="">
+			<br>
+			<!-- file默认只能选择单个文件 -->
+			<label for="">multiple 
+				<input type="file" multiple>
+			</label>
+			<label for=""> required
+				<input type="text" required>
+			</label>
+		</form>
+	</div>
+
+	<div class="divClass">
+		<h3>虚拟键盘适配</h3>
+		<p>在移动端中，我们可以通过不同的表单类型控制弹出的键盘类型</p>
+	</div>
+</body>
+</html>

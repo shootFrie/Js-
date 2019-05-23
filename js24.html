@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>dom综合运用</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   	<style>
+		#couple{
+			width:100px;
+			height:200px;
+			position: absolute;
+			background: red;
+			right: 0;
+			bottom: 0px;
+		}
+	</style>
+   <script>
+   window.onload=function()
+   {
+     var div1=document.getElementById("div1");
+	   var btn=document.getElementsByTagName("button");
+	   var atab=div1.getElementsByTagName("table")[0];
+	   var ipt=div1.getElementsByTagName("input");
+	   var Simple=atab.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	   for(var i=0;i<Simple.length;i++)
+	   {
+	    Simple[i].getElementsByTagName("td")[3].getElementsByTagName("a")[0].onclick=function()
+		  {
+		    atab.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode);
+		  } 
+	   }
+	   btn[0].onclick=function()
+	   {
+	     var aName=ipt[0].value;
+        var aAge=ipt[1].value;
+		   var aDel='<a href="javascript:;" class="astyle">删除</a>';
+       if(ipt[0]==""||ipt[1]=="")
+	     {
+	       alert("必须输入名字和年龄才能添加");
+	     }else if(!isNaN(aName)||isNaN(aAge))
+		   {
+		     alert("请填写正确的名字和年龄"); 
+		   }else
+		   {
+		     var atr=document.createElement("tr");
+	       var atd=document.createElement("td");
+			  atd.innerHTML=Simple.length+1;
+         atr.appendChild(atd);	
+
+         var atd=document.createElement("td");
+         atd.innerHTML=aName;
+         atr.appendChild(atd);	
+	 
+	       var atd=document.createElement("td");
+         atd.innerHTML=aAge;
+         atr.appendChild(atd);
+		 
+		    var atd=document.createElement("td");
+         atd.innerHTML=aDel;
+         atr.appendChild(atd);
+		 
+		    atd.getElementsByTagName("a")[0].onclick=function(){
+			     atab.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode);  
+			   }
+			   
+			 atab.getElementsByTagName("tbody")[0].appendChild(atr);
+		   }	
+        ipt[0].value="";		 
+        ipt[1].value="";		
+	   }
+	   
+	   btn[1].onclick=function()
+	   {
+	     if(this.innerHTML=="开启移入变色")
+		   {
+		     this.innerHTML="关闭移入变色";
+      		 this.style.background="red";
+			   for(var i=0;i<Simple.length;i++)
+			   {
+			     Simple[i].onmouseover=function()
+				   {
+				     this.style.background="#eee"; 
+				   }	
+				   Simple[i].onmouseout=function()
+				   {
+				    this.style.background=""; 
+				   }
+			   }
+			}else if(this.innerHTML=="关闭移入变色")
+		   {
+		     this.innerHTML="开启移入变色";
+			  this.style.background="";
+			 for(var i=0;i<Simple.length;i++)
+			 {
+			  Simple[i].onmouseover=function()
+				{
+				  this.style.background=""; 
+				}	
+			 }
+		   }
+		}
+	   
+	   btn[2].onclick=function()
+	   {
+	     var in1=ipt[2].value.toLowerCase();
+		   for(var i=0;i<Simple.length;i++)
+		   {
+		     var td1=Simple[i].getElementsByTagName("td")[1].innerHTML.toLowerCase();
+		     if(td1.search(in1)!==-1)
+			  {
+			    Simple[i].style.background="yellow"; 
+			  }else
+			  {
+			   Simple[i].style.background=""
+			  } 
+		   }
+	   }
+     
+	   btn[3].onclick=function()
+	   {
+	    var Rtd=[];
+		  for(var i=0;i<Simple.length;i++)
+		  { 
+		    Rtd[i]=Simple[i];
+		  }
+		  Rtd.sort(function(tr1,tr2)
+		  {
+		     n1=parseInt(tr1.getElementsByTagName("td")[2].innerHTML);
+		     n2=parseInt(tr2.getElementsByTagName("td")[2].innerHTML);
+			   return n1-n2;
+		  });
+		  for(var i=0;i<Simple.length;i++)
+		  { 
+		    
+		    atab.getElementsByTagName("tbody")[0].appendChild(Rtd[i]);
+		  }
+		  
+	   }
+
+   }
+   </script>
+
+   <script>
+
+		window.onscroll=function(){  //为当前页面的页面滚动事件添加事件处理函数
+			var div1=document.getElementById("couple");
+			var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+			//这个是为了获取浏览器滚动条滚动的距离，而这种写法是为了兼容ie低版本和其他浏览器
+
+			//div1.style.top=document.documentElement.clientHeight-div1.offsetHeight+scroll+"px";
+			//可视区高度-div高度+滚动高度
+			startMove(parseInt((document.documentElement.clientHeight-div1.offsetHeight)/2+scroll));
+
+			document.title=scroll+","+div1.style.top;
+        };
+			var timer = null;
+			function startMove(target){
+				var div1=document.getElementById("couple");
+				clearInterval(timer)
+				timer=setInterval(function(){
+					var speed = (target-div1.offsetTop)/4;
+					speed= speed>0?Math.ceil(speed):Math.floor(speed);
+					//取整数，如果speed是正数就向上取整，是负数就向下取整
+
+					if(div1.offsetTop == target){
+						clearInterval(timer);
+					}else{
+						div1.style.top=div1.offsetTop+speed+"px";
+					}
+				},30);
+			}
+
+
+	</script>
+ </head>
+ <body>
+ <div class="c1" id="div1">
+  添加：<input type="text" class="in-text" placeholder="姓名">
+  <input type="text" class="in-text" placeholder="年龄">
+  <button class="btn btn-color">添加</button>
+  变色：<button class="btn btn-color">开启移入变色</button></br></br>
+  <table  class="table table-bordered">
+   <thead>
+    <tr>
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+	   <td>操作</td>
+	 </tr>
+   </thead>
+   <tbody>
+    <tr>
+	  <td>1</td>
+	  <td>宅总</td>
+	  <td>43</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td>
+	</tr>
+    <tr>
+	  <td>2</td>
+	  <td>李四</td>
+	  <td>44</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td></tr>
+    <tr>
+	  <td>3</td>
+	  <td>肖大锤</td>
+	  <td>32</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td>
+	</tr>
+    <tr>
+	  <td>4</td>
+	  <td>Root</td>
+	  <td>38</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td>
+	  </tr>
+    <tr>
+	  <td>5</td>
+	  <td>莱豆豆</td>
+	  <td>42</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td>
+	</tr>
+    <tr>
+	  <td>6</td>
+	  <td>卡姐</td>
+	  <td>37</td>
+	  <td><a href="javascript:;" class="astyle">删除</a></td>
+	</tr>
+   </tbody>
+  </table>  </br></br>
+  搜索：<input class="in-text" type="text" placeholder="姓名" >
+  <button class="btn btn-color">搜索</button>
+  排序：<button class="btn btn-color">年龄从小排序</button>
+
+  </div>
+ 
+ <div id="couple">
+	</div>
+  <div class="c1">
+  记录</br></br>
+  <p>Rtd[i]=atab.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[i]</p></br></br>
+  <p>n1=parseInt(tr1.getElementsByTagName("td")[2].innerHTML);</p></br></br>
+  </div>
+ </body>
+</html>

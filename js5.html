@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js基本练习5</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type="text/css">
+   #nav1 div, #nav2 div, #nav3 div{
+   padding: 0px 0px 0px 40px;
+   margin: 0px 30px 0 0;
+   display:none;
+}
+   </style>
+   <script>
+   window.onload=function(){
+   var nav1=document.getElementById("nav1");
+   var nav1btn=nav1.getElementsByTagName('button');
+   var nav1div=nav1.getElementsByTagName('div');
+   for(var i=0;i<nav1btn.length;i++){
+    nav1btn[i].index=i;
+	  nav1btn[i].onmouseover=function()
+	  {
+	   for(var i=0;i<nav1btn.length;i++)
+	    {
+	     nav1btn[i].className="btn btn-color";
+		   nav1div[i].style.display="none";
+	    }
+	   this.className="btn btn-color.active";
+	   nav1div[this.index].style.display="block";
+	  }
+   }
+   var nav2=document.getElementById("nav2");
+   var nbtn2=nav2.getElementsByTagName("button");
+   var ndiv2=nav2.getElementsByTagName("div");
+   for(var i=0;i<nbtn2.length;i++)
+   {
+    nbtn2[i].index=i;
+    nbtn2[i].onclick=function()
+	  {
+	   for(var i=0;i<nbtn2.length;i++)
+	    {
+		   nbtn2[i].className="btn btn-color1";
+		   ndiv2[i].style.display="none";
+		 }
+		 this.className="btn btn-color.active";
+		 ndiv2[this.index].style.display="block";
+	  }	
+   }
+   var nav3=document.getElementById("nav3");
+   var nbtn3=nav3.getElementsByTagName("button");
+   var ndiv3=nav3.getElementsByTagName("div");
+   for (var i=0; i<nbtn3.length;i++)
+   {
+    nbtn3[i].index=i;
+	  nbtn3[i].onclick=function()
+	  {
+	   for(var i=0;i<nbtn3.length;i++)
+	   {
+	     nbtn3[i].className="btn btn-color2";
+		  ndiv3[i].style.display="none";		
+	   }
+	   this.className="btn btn-color.active";
+	   ndiv3[this.index].style.display="block";
+	  }
+   }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="nav1">
+   1、选项卡 鼠标经过变换</br> </br>
+   <button type="button" class="btn btn-color.active">栏目一</button>
+   <button type="button" class="btn btn-color">栏目二</button>
+   <button type="button" class="btn btn-color">栏目三</button>
+   <button type="button" class="btn btn-color">栏目四</button>
+   <div class="div1color" style="display:block;" >栏目一内容</br>栏目一内容</br>栏目一内容</div>
+   <div class="div1color" >栏目二内容</br>栏目二内容</br>栏目二内容</div>
+   <div class="div1color">栏目三内容</br>栏目三内容</br>栏目三内容</div>
+   <div class="div1color">栏目四内容</br>栏目四内容</br>栏目四内容</div>
+  </div>
+  
+  <div class="c1" id="nav2">
+   2、选项卡 鼠标点击变换</br></br>
+   <button type="button" class="btn btn-color.active">栏目一</button>
+   <button type="button" class="btn btn-color1">栏目二</button>
+   <button type="button" class="btn btn-color1">栏目三</button>
+   <button type="button" class="btn btn-color1">栏目四</button>
+   <div class="div1color1" style="display:block;" >栏目一内容</br>栏目一内容</br>栏目一内容</div>
+   <div class="div1color1" >栏目二内容</br>栏目二内容</br>栏目二内容</div>
+   <div class="div1color1">栏目三内容</br>栏目三内容</br>栏目三内容</div>
+   <div class="div1color1">栏目四内容</br>栏目四内容</br>栏目四内容</div>
+  </div>
+  
+  <div class="c1" id="nav3">
+   2、选项卡 鼠标点击变换</br></br>
+   <button type="button" class="btn btn-color.active">栏目一</button>
+   <button type="button" class="btn btn-color2">栏目二</button>
+   <button type="button" class="btn btn-color2">栏目三</button>
+   <button type="button" class="btn btn-color2">栏目四</button>
+   <div class="div1color2" style="display:block;" >栏目一内容</br>栏目一内容</br>栏目一内容</div>
+   <div class="div1color2" >栏目二内容</br>栏目二内容</br>栏目二内容</div>
+   <div class="div1color2">栏目三内容</br>栏目三内容</br>栏目三内容</div>
+   <div class="div1color2">栏目四内容</br>栏目四内容</br>栏目四内容</div>
+  </div>
+  
+  <div class="c1">
+   <p>记录</p>
+   <p>index 属性可返回下拉列表中选项的索引位置。nav1btn[i].index=i;自定义每个button的顺序,因为当每个nav1btn在点击的时候，是在for循环结束后才执行。
+   这个时候i的值已经是nav1button.length了。这个index是给nav1btn添加私有属性，在用的时候可以知道这个nav1btn在序列中是第几个。</p>
+  <p>索引值：需要知道是第几个的时候通过自定义的index属性（标签）定义当前激活的div，例如：aBtn1[i].index=i，在整个循环的开始加入。然后通过this.index来激活，例如：aDiv1[this.index].style</p>
+  <p>this：当前发生事件的元素</p>
+  </div>
+ </body>
+</html>

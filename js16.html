@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>延时提示框、无缝滚动</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type='text/css'>
+   #div1{
+    background:#fff;
+	padding:20px;
+	line-height:22px;
+	height:140px;
+   }
+   #div1 div span{
+    width:100px;
+	height:100px;
+	background:#efefef;
+	line-height:100px;
+	font-size:32px;
+	text-align:center;
+	cursor:pointer;
+	position:absolute;
+	display:block;
+   }
+   #fun1{
+ position:absolute;
+left:-120px;
+ width:120px;
+ height:200px;
+background:red;
+}
+#fun1 span {
+ position:absolute;
+ width:20px;
+ height:60px;
+ line-height:20px;
+ background:#000;
+ color:#fff;
+ top:70px;
+ right:-20px;
+}
+   </style>
+   <script>
+   window.onload=function(){
+    var div1=document.getElementById('div1');
+	  var Spn1=div1.getElementsByTagName('span')[0];
+	  var adiv1=div1.getElementsByTagName('div')[0];
+	  Spn1.onclick=function()
+	  {
+	   var timer=null;
+	   function show()
+	   {
+	    var speed=2;
+	    Spn1.style.left=Spn1.offsetLeft+2+'px'; //left值加2px
+		  Spn1.style.fontSize='12px';
+		  Spn1.style.lineHeight='24px';
+		  Spn1.innerHTML='当前位置'+Spn1.offsetLeft+'</br>当前速度：'+speed;
+		  if(Spn1.offsetLeft>=adiv1.offsetWidth-Spn1.offsetWidth)
+		  {
+		   Spn1.style.left=0;
+		   clearInterval(timer);
+		  }
+	   }
+	   timer=setInterval(show,30); //定时器，每30执行一次
+	  }
+	  
+	  var div2=document.getElementById('div2');
+	  var Btn2=div2.getElementsByTagName('button');
+	  var Slt2=div2.getElementsByTagName('select')[0];
+	  var adiv2=div2.getElementsByTagName('div')[0];
+	  var ul2=div2.getElementsByTagName('ul')[0];
+	  var li2=div2.getElementsByTagName('li');
+	  var speed2=0;
+	  var timer2=null;
+	  
+	  ul2.innerHTML=ul2.innerHTML+ul2.innerHTML; //innerHTML是ul中的li，把自己复制一份给自己
+	  ul2.style.width=li2[4].offsetWidth*li2.length+'px'; //li的宽度等于把所有里的个数乘以一个li的宽度
+	  adiv2.style.width=ul2.offsetWidth/2+'px';
+	  function speed(){
+	   var n=0;
+	   var val=Slt2.selectedIndex;
+	   if (val==1){
+	     n=10; 
+	   }else if(val==2){n=2;}
+	   else{ n=0;}
+	   return n;
+	  }
+	  //输入的speed速率
+	  var speed2=0;
+	  Btn2[0].onclick=function(){
+	   speed2=-speed();
+	  }
+	  Btn2[1].onclick=function(){
+	  speed2=speed();
+	  }
+	  var t1=setInterval(startMove,30);
+	  adiv2.onmouseover=function(){
+	   clearInterval(t1);
+	  }
+	  adiv2.onmouseout=function(){
+	   t1=setInterval(startMove,30);
+	  }
+	  function startMove(){
+	   ul2.style.left=ul2.offsetLeft+speed2+'px';
+	   if (ul2.offsetLeft<-ul2.offsetWidth/2)
+	   {
+	     ul2.style.left=0;
+	   }else if(ul2.offsetLeft>0)
+	   {
+	     ul2.style.left=-ul2.offsetWidth/2+'px';
+	   }
+	  }
+	  }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、向右移动</br></br>
+  <div>
+  <span>飘</span>
+  </div>
+  </div>
+  
+  <div id="fun1" onmouseover="out(0)" onmouseout="out(-120)">
+ <span>分享到</span>
+</div>
+  <script>
+
+ var div1=document.getElementById("fun1");
+var timer=null;
+function out(target){
+  if(div1.offsetLeft<target){
+     var speed  = 10;
+  }else{
+      speed = -10;
+  }
+  clearInterval(timer);
+  timer=setInterval(function(){
+     if(div1.offsetLeft==target){
+         clearInterval(timer);
+     }else{
+      div1.style.left=div1.offsetLeft+speed+"px"
+     }
+  },30);
+}
+</script>
+  
+  <div class="c1" id="div2">
+   2、无缝滚动</br></br>
+   <select class="sel-control">
+    <option>速度</option>
+    <option>快</option>
+    <option>慢</option>
+   </select>
+   <button class="btn btn-color">向左滚动</button>
+   <button class="btn btn-color">向右滚动</button></br></br>
+   <div  class="js16li">
+    <ul style='left:0px;'>
+	  <li>1</li>
+	  <li>2</li>
+	  <li>3</li>
+	  <li>4</li>
+	  <li>5</li>
+    </ul>
+   </div>
+  </div>
+  
+  <div class="c1">
+   记录</br><br>
+   <p>向右移动：offsetLeft 例如可以通过onclick="alert(this.offsetLeft)" 查看left的值（左边距）。
+   让物体向右动起来，其实就是自动修改绝对定位的left。通过定时器，让aSpn1的left每30毫秒自动加10像素，
+   并还给他自己。aSpn1.style.left=aSpn1.offsetLeft+Speed+'px';</p>
+   
+   <p>
+   无缝滚动：开定时器，让ul的left自动增加。但是当ul一走，ul后边div的背景就漏出来了。所以可以通过复
+   制一份ul的innerHTMLul.innerHTML=ul.innerHTML+ul.innerHTML 然后需要修改ul的宽度，他得宽度等于li.length*li.offsetWidth+'px'
+   但是这个ul也有滚完的时候，所以可以让ul滚动到一半的时候if(ul.style.left>=ul的宽度/2)，把left的值改为初始化ul.style.left=0。
+   </p>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>函数返回值、arguments、取非行间样式</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type="text/css">
+    .color1{
+	  height:200px;
+	  background:yellow;
+	  width:50%;
+	}
+   </style>
+   <script>
+   window.onload=function(){
+    var adiv=document.getElementById('ad');
+	  var aBtn=adiv.getElementsByTagName('button');
+	  var aIpt=adiv.getElementsByTagName('input');
+	  aBtn[0].onclick=function(){
+	   var n=aIpt[0].value;
+	   if (n==''){
+	    alert('必须输入内容') ;
+	   }else{
+	    function adivSum(){
+		    return n;
+		  } 
+		 alert(adivSum());
+	   }
+	  }
+	  aBtn[1].onclick=function(){
+	   var n1=aIpt[1].value; 
+	   var n2=aIpt[2].value; 
+	   if(n1==''||n1==''){
+	    alert('必须输入内容'); 
+	   }else{
+	     function adivSum2(a,b){
+		   return a+b;
+		   } 
+		 alert(adivSum2(n1,n2));
+	   }
+	  }
+	  var bdiv=document.getElementById('bd');
+	  var bBtn2=bdiv.getElementsByTagName('button')[0];
+	  bBtn2.onclick=function(){
+	  function sum3(){
+	   var result=0;
+      for(var i=0;i<arguments.length;i++)
+	   {
+	     result+=arguments[i]; //result=result+arguments[i] 
+	   }	   
+	   return result;
+	  }
+	  alert(sum3(12,13,14));
+	  }
+	  //以上是div2的内容
+	  var cdiv=document.getElementById('cd');
+	  var cBtn=cdiv.getElementsByTagName('button');
+	  var cdiv3=cdiv.getElementsByTagName('div')[0];
+	  function getStyle3()
+	   {
+	     if(arguments.length==2) //获取样式
+		  {
+		   return arguments[0].style[arguments[1]];
+		   //由于arguments是一个变量，所以在此处必须用[]
+		  }else{
+		   arguments[0].style[arguments[1]]=arguments[2];
+		  }
+		}
+	  cBtn[0].onclick=function(){
+        cdiv3.innerHTML='当前容器的宽度是：'+getStyle3(cdiv3,'width')
+		    +'</br>当前容器的高度是：'+getStyle3(cdiv3,'height')
+			 +'</br>当前容器的背景颜色是：'+getStyle3(cdiv3,'background');		  
+	   }
+	  cBtn[1].onclick=function(){
+	   getStyle3(cdiv3,'width','100%');
+	   getStyle3(cdiv3,'height','150px');
+	   getStyle3(cdiv3,'background','green');
+	   getStyle3(cdiv3,'color','#FFF');
+	  }
+	  //以上是div3的内容
+	  var ediv=document.getElementById('ed');
+	  var eBtn=ediv.getElementsByTagName('button');
+	  var ediv4=ediv.getElementsByTagName('div')[0];
+	  eBtn[0].onclick=function(){
+	   function css4(){
+	    if(ediv4.currentStyle)
+		 {
+		  return arguments[0].currentStyle[arguments[1]];
+		  //只兼容IE
+		 }else
+		 {
+		  return getComputedStyle(arguments[0],false)[arguments[1]];
+		  //只兼容火狐，谷歌
+		 }
+		 }
+		 ediv4.innerHTML='当前容器的宽度是：'+css4(ediv4,'width')
+		    +'</br>当前容器的高度是：'+css4(ediv4,'height')
+			 +'</br>当前容器的背景颜色是：'+css4(ediv4,'background');
+	   } 
+	  
+	  eBtn[1].onclick=function(){
+	   function css5(obj,name)
+	   {
+	   if(obj.currentStyle){
+ 	    return obj.currentStyle[name];
+	   }else
+	   {
+	    return getComputedStyle(obj,false)[name]; 
+	   }
+	  }
+	  ediv4.innerHTML='当前容器的宽度是：'+css5(ediv4,'width')
+		    +'</br>当前容器的高度是：'+css5(ediv4,'height')
+			 +'</br>当前容器的背景颜色是：'+css5(ediv4,'background');
+	  
+	  }
+	  }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="ad">
+   1、函数返回值 return</br></br>
+   <p>例1：return函数内容传出，已知将输入框的value作为函数返回值，return按钮输出。
+   return内容用不用变量存没关系，可以直接调用函数名输出</p>
+   <input type="text" class="in-text" >
+   <button class="btn btn-color">return</button>(输出变量内容)
+   </br>例2：return参数内容传出，已知将两个输入框的value作为参数返回值，return按钮相加后输出。
+   </br>
+   <input type="text" class="in-text" >加<input type="text" class="in-text" >
+   <button class="btn btn-color">return</button>(输出参数加内容)
+  </div>
+  
+  <div class="c1" id="bd">
+  2、函数传参 arguments</br> </br>
+  <p>例1：已知传给参数内容：alert(sum(12,13,14))，做个arguments.length的循环，
+  并且每循环一次把参数里的数依次相加，整个参数数组加一遍为止。最后再把这个结果通过return返回出来。</p>
+  <button class="btn btn-color">循环相加结果</button>
+  </div>
+  
+  <div class="c1" id="cd">
+  3、CSS函数 行间样式</br> </br>
+  <p>源码内有解释 这个函数可以根据参数不同匹配相应的功能。如果是两个参数，就是获取CSS样式。
+  如果是三个参数，就是设置CSS样式。</p>
+  <button class="btn btn-color">获取行间样式</button>
+  <button class="btn btn-color">设置行间样式</button>
+  （需要设置成100%的宽度，100px的高度，背景颜色为绿色）
+  <div  style="width:50%;height:200px;background:yellow;"></div>
+  </div>
+  
+  <div class="c1" id="ed">
+  4、CSS函数 非行间样式</br> </br>
+  <p>因为浏览器兼容问题，所以获取非行间样式需要做个判断。</p>
+  <button class='btn btn-color'>获取非行间样式</button>未封装
+  <button class='btn btn-color'>获取非行间样式</button>已封装
+  <div class="color1"> </div>
+  </div>
+  
+  <div class="c1">
+  记录</br></br>
+  <p>行内样式：写在标签的样式</br>非行内样式：不是写在标签内的style样式</p>
+  <p>函数返回值（return）：就是函数的执行结果。与函数传参相反，函数传参是把内容传到函数里。
+  而函数返回值可以通过return把函数里的内容传到外面来。函数返回值就是函数的执行结果，可以在函数里把结果算出来之后再传出来。</p>
+  <p>函数传参（arguments）可变参/不定参：可变参的意思就是参数的个数是可变的，不管有多少参数，都可以获取到。
+  arguments是数组，他里边存的是传给函数的参数。</p>
+  <p>obj.currentStyle[attr] for ie </p>
+  <p>getComputedStyle(obj,false)[attr] for ff</p>
+  <code>if(element.currentStyle){
+    //IE
+	element.currentStyle.样式
+  }else{
+    //FF 火狐
+	getComputedStyle((element,false).样式);
+  }</code>
+  </div>
+ </body>
+</html>

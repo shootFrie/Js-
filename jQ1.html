@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<title>选择器</title>
+	<style>
+	ul{list-style: none;}
+	a{text-decoration: none;}
+	.box{
+		width: 180px;
+		height: 100%;
+		float: left;
+	}
+	.menu{
+		width: 180px;
+		background-color: #ccc;
+		padding-left: 0;
+		margin:0;
+	}
+	.level1{
+		line-height: 34px;
+		text-indent: 15px;
+		border:1px solid  #B1D7EF;;
+		margin-bottom: -1px;
+		font-size: 14px;
+	}
+	.menu li.level1 a{
+		display: block;
+		height: 28px;
+		line-height: 28px;
+		text-indent: 14px;
+		color: #000;
+	}
+	.level2{
+		border-top: 1px solid #000;
+		line-height: 24px;
+		background-color: #fff;
+		padding-left: 0px;
+		font-size: 12px;
+		display:none;
+	}
+	.level2 li a{
+		color: #000;
+	}
+	.menu li.level1 a.current{
+		background: #B1D7EF;
+	}
+	.menu li ul.level2 li a:hover{
+		color:#f60;
+	}
+	#test_form{
+		width: 550px;
+		margin:2px auto;
+		border:1px solid #000;
+	}
+	.SubCat{
+		border:1px solid #000;
+		margin:10px auto;
+		clear: both;
+		width: 650px;
+		height:230px;
+		position: relative;
+	}
+	.SubCat li{
+		float: left;
+		display: inline-block;
+		width: 200px;
+		line-height: 20px;
+	}
+	.showmore{
+		clear: both;
+	}
+	.showmore span{
+		border:1px solid #000;
+		position: absolute;
+		bottom: 20px;
+		left: 40%;
+		padding: 5px;
+		padding-left: 15px;
+		background: url(img/down.gif) left center no-repeat;
+	}
+	#sub .active a{
+		color:#FFA500;
+	}
+</style>
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+		$(".level1>a").click(function(){
+			$(this).addClass("current")
+			.next().show()  /*level1的a元素下一个元素显示*/
+			.parent().siblings().children("a").removeClass("current") /*level1其他同级元素的a子元素去除样式*/
+			.next().hide(); /*隐藏起来*/
+			return false;
+		});
+	})
+
+	$(function(){
+		$('#test_form input:enabled')
+	})
+
+</script>
+</head>
+<body>
+	<div class="box">
+		<ul class="menu">
+			<li class="level1 ">
+				<a href="" >衬衫</a>
+				<ul class="level2">
+					<li><a href="">短袖衬衫</a></li>
+					<li><a href="">长袖衬衫</a></li>
+					<li><a href="">短袖T恤</a></li>
+					<li><a href="">长袖T恤</a></li>
+				</ul>
+			</li>
+			<li class="level1">
+				<a href="">卫衣</a>
+				<ul class="level2">
+					<li><a href="">开襟卫衣</a></li>
+					<li><a href="">套头卫衣</a></li>
+					<li><a href="">运动卫衣</a></li>
+					<li><a href="">童装卫衣</a></li>
+				</ul>
+			</li>
+			<li class="level1">
+				<a href="">裤装</a>
+				<ul class="level2">
+					<li><a href="">开襟卫衣</a></li>
+					<li><a href="">套头卫衣</a></li>
+					<li><a href="">运动卫衣</a></li>
+					<li><a href="">童装卫衣</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div id="cr">
+		其实我知道这段不会被显示，因为被替换了
+		<script>
+			$(function(){
+				var $cr=$("#cr");
+				var cr=$cr[0];
+				cr.innerHTML="替换文本";
+		/*var cr=document.getElementById("cr");
+        var $cr=$(cr);
+        $cr.hide();*/
+        $("#dd").css("background","red");
+    })
+</script>
+</div>
+<br>
+	<div id="table_jq">
+		<table>
+			<tbodty>
+				<tr>
+					<td>第一行</td>
+					<td>第一行</td>
+					<td>第一行</td>
+				</tr>
+				<tr>
+					<td>第二行</td>
+					<td>第二行</td>
+					<td>第二行</td>
+				</tr>
+				<tr>
+					<td>第三行</td>
+					<td>第三行</td>
+					<td>第三行</td>
+				</tr>
+				<tr>
+					<td>第四行</td>
+					<td>第四行</td>
+					<td>第四行</td>
+				</tr>
+				<tr>
+					<td>第五行</td>
+					<td>第五行</td>
+					<td>第五行</td>
+				</tr>
+				<tr>
+					<td>第六行</td>
+					<td>第六行</td>
+					<td>第六行</td>
+				</tr>
+			</tbodty>
+		</table>
+		<script>
+			$(function(){
+				$('#table_jq tr:even').css('background','red');
+			})
+		</script>
+	</div>
+<!-- 表单对象属性过滤选择器 -->
+	<script>
+		$(function(){
+			$("#btn1").click(function(){
+				$("#form1 input:enabled").val("这里变化了！");
+			});   //可用文本框变化
+
+			$("#btn2").click(function(){
+				$("#form1 input:disabled").val("这里变化了！");
+			});  //不可用文本框变化
+
+			 $(":checkbox").click(countChecked);  //跟随用户的添加和减少变化
+
+			function countChecked(){  
+				var n=$("#form1 input:checked").length;
+				$("#form1 div").eq(0).html("<strong>有"+n+"个被选中</strong>");
+			}
+			countChecked();  //进入页面就调用
+
+			$("#form1 select").change(function(){
+				var str="";
+				$("select :selected").each(function(){
+					str +=$(this).text()+",";
+				});
+				$("#form1 div").eq(1).html("<strong>你选中的是："+str+"</strong>");
+			}).trigger('change');
+		})
+	</script>
+
+	<div id="test_form">
+		<h3> 表单对象属性过滤选择器</h3>
+		<form id="form1" action="#">
+			<br /><br />
+			<button id="btn1">对表单内 可用input 赋值操作.</button>
+			<button id="btn2">对表单内 不可用input 赋值操作.</button>
+
+			<br /><br />
+
+			<!-- 测试的元素 -->
+
+			可用元素：<input name="add" value="可用文本框"/>  <br/>
+			不可用元素：<input name="email" disabled="disabled" value="不可用文本框"/><br/>
+			可用元素： <input name="che" value="可用文本框" /><br/>
+			不可用元素：<input name="name" disabled="disabled"  value="不可用文本框"/><br/>
+			<br/>
+			多选框：<br/>
+			<input type="checkbox" name="newsletter" checked="checked" value="test1" />test1
+			<input type="checkbox" name="newsletter" value="test2" />test2
+			<input type="checkbox" name="newsletter" value="test3" />test3
+			<input type="checkbox" name="newsletter" checked="checked" value="test4" />test4
+			<input type="checkbox" name="newsletter" value="test5" />test5
+			<div></div>
+
+			<br/><br/>
+			下拉列表1：<br/>
+			<select name="test" multiple="multiple" style="height:100px">
+				<option>浙江</option>
+				<option selected="selected">湖南</option>
+				<option>北京</option>
+				<option selected="selected">天津</option>
+				<option>广州</option>
+				<option>湖北</option>
+			</select>
+
+			<br/><br/>
+			下拉列表2：<br/>
+			<select name="test2" >
+				<option>浙江</option>
+				<option>湖南</option>
+				<option selected="selected">北京</option>
+				<option>天津</option>
+				<option>广州</option>
+				<option>湖北</option>
+			</select>
+			<br/><br/>
+
+			<div></div>
+		</form>
+	</div>
+
+	<!-- 某网站品牌列表的效果，显示全部和精简 -->
+	<div class="SubCat" id="sub">
+		<p> 选择器是帮助我们查找元素的。利用不同的选择器可找到想要的元素。</p>
+		<ul>
+			<li><a href="#">佳能</a><i>(30440)</i></li>
+			<li><a href="#">索尼</a><i>(27220)</i></li>
+			<li><a href="#">三星</a><i>(20808)</i></li>
+			<li><a href="#">尼康</a><i>(17821)</i></li>
+			<li><a href="#">松下</a><i>(12289)</i></li>
+			<li><a href="#">卡西欧</a><i>(8242)</i></li>
+			<li><a href="#">富士</a><i>(14894)</i></li>
+			<li><a href="#">柯达</a><i>(9520)</i></li>
+			<li><a href="#">宾得</a><i>(2195)</i></li>
+			<li><a href="#">理光</a><i>(4114)</i></li>
+			<li><a href="#">奥林巴斯</a><i>(12205)</i></li>
+			<li><a href="#">明基</a><i>(1466)</i></li>
+			<li><a href="#">爱国者</a><i>(3091)</i></li>
+			<li><a href="#">其他品牌相机</a><i>(7275)</i></li>
+		</ul>
+
+		<div class="showmore">
+			<a href="#"><span>显示全部品牌</span></a>
+		</div>
+
+		<script>
+			$(function(){
+				//从第7条开始隐藏后面的品牌,最后一个除外
+				var $category=$("#sub ul li:gt(5):not(:last)");
+				$category.hide();
+				var $toggleBtn=$('div.showmore>a');  //获取class名为showmore的div下全部的a标签
+				//单击事件
+			
+				$toggleBtn.click(function()
+				{
+					if($category.is(":visible"))
+					{
+						$category.hide();
+						$(this).find('span').text('显示全部品牌');
+						$("#sub ul li").filter(":contains('佳能'),:contains('尼康'),:contains('奥林巴斯')")
+						.removeClass('active');
+					}
+					else
+					{
+					   $category.show(); //显示
+					   $(this).find('span').text("精简显示品牌");
+					   $('#sub ul li').filter(":contains('佳能'),:contains('尼康'),:contains('奥林巴斯')")
+					   .addClass("active");
+				    }
+					return false;  //链接不跳转
+				})
+			})
+		</script>
+	</div>
+
+	<div id="Fruit" style="border:1px solid #000; width:600px; margin:0 auto; padding:12px 20px;">
+		<button>替换</button>
+		<button>包裹</button>
+		<p title="选择你最喜欢的水果。">你最喜欢的水果是什么？</p>
+		<ul style="list-style-type:square ">
+			<li title="苹果">苹果</li>
+			<li title="橘子">橘子</li>
+			<li title="菠萝">菠萝</li>
+		</ul>
+		<p>DOM节点添加，删除的基本方法，一开始只有苹果，橘子，菠萝三个水果。</p>
+		<p>append()可以用在向匹配的元素内部追加内容，$(A).insrtAfter(B)的操作是将A插入到B的后面</p>
+		<p>remove()方法返回值是一个指向已被删除的节点的引用，而detach()方法不会吧匹配的元素从jQuery对象中删除，而且被删除的元素所有绑定的事件、附加的数据等都会保留下来.而empty()方法就只是清空节点</p>
+		<p>clone() 复制节点被复制的新元素不具备任何行为 ,clone(true)复制元素的同时也复制了元素中所绑定的事件</p>
+		<p>warp()单独包裹,warpAll()统一包裹,warpInner()包裹子元素</p>
+		<script>
+			function fruitDOM(){
+				var $li_1=$("<li title='雪梨'>雪梨</li>");
+				var $li_2=$("<li title='香蕉'>香蕉</li>");
+				var $li_3=$("<li title='其他'>其他</li>");
+
+				var $parent_ul=$("#Fruit ul");
+				var $two_li = $("#Fruit ul li:eq(1)");
+				$parent_ul.append($li_1);   //在ul末尾添加
+				$parent_ul.prepend($li_2);  //在ul开头添加
+				$li_3.insertAfter($two_li); //将li_3放在原本的第2个之后
+
+				var $li_new=$("#Fruit ul li:eq(1)").remove();  //将序号为1的苹果去掉，删除节点
+				$li_new.appendTo($parent_ul); 
+				 //remove()方法返回值是一个指向已被删除的节点的引用。以后还可以使用。在ul后面添加
+
+				// $("#Fruit ul li").remove("#Fruit ul li[title!= '菠萝']");
+				//删除title不是菠萝的节点
+
+				$("#Fruit ul li").click(function(){
+					alert($(this).html() );
+				})
+				var $li_detach=$("#Fruit ul li:eq(1)").detach();
+				$li_detach.appendTo("#Fruit ul");
+				//对比，detach() 方法之后还有click事件，但是remove()方法之后没有事件了
+				var $li_remove=$("#Fruit ul li:eq(1)").remove();
+				$li_remove.appendTo("#Fruit ul");  
+
+				$("#Fruit ul li:eq(1)").empty();  //清空元素
+
+				$("#Fruit ul li").click(function(){
+					$(this).clone(true).appendTo("#Fruit ul");  //复制当前节点并且把它追加到ul元素中
+				})
+
+				$("#Fruit button:eq(0)").click(function(){
+					$("#Fruit p:eq(0)").replaceWith("<strong>你最不喜欢的水果是？</strong>");
+				})
+				$("#Fruit button:eq(1)").click(function(){
+					$("#Fruit strong").wrap("<b></b>");
+				})
+			}
+			fruitDOM();
+		</script>
+	</div>
+
+</body>
+</html>

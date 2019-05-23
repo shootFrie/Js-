@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>多物体同时运动</title>
+	<style>
+	    .frame1{
+	    	width: 100px;
+	    	height: 50px;
+	    	background: red;
+	    	margin-top: 10px;
+	    }
+
+	    .tran{
+	    	width:100px;
+	    	height: 100px;
+	    	margin:20px;
+	    	float: left;
+	    	background: red;
+	    	filter:alpha(opacity:30); /* IE8及更早的版本支持 */
+	        opacity: 0.3; 
+	    }
+
+	     .frame2{
+	    	width: 100px;
+	    	height: 50px;
+	    	background: red;
+	    	margin-top: 10px;
+	    	border: 10px solid #000;
+	    }
+
+	    .tran2{
+	    	width:100px;
+	    	height: 100px;
+	    	margin:20px;
+	    	float: left;
+	    	background: yellow;
+	    	border:0px solid #000;
+	    }
+	</style>
+	<script>
+		//var timer =null;
+		/*多物体运动*/
+		window.onload=function(){
+			var adiv = document.getElementById("div1").getElementsByTagName("div");
+
+			for(var i=0;i<adiv.length;i++){
+				adiv[i].timer = null;  //加一个自定义的属性，为每个运动物体添加一个定时器
+				adiv[i].onmouseover=function()
+				{
+					largen(this,400);
+				};
+				adiv[i].onmouseout=function(){
+					largen(this,100);
+				}
+
+			}
+            
+           /* 淡入淡出*/
+			var odiv = document.getElementById("div2").getElementsByTagName("div");
+      	    for(var i=0;i<odiv.length;i++){
+              odiv[i].alpha=30;
+ 
+      		  odiv[i].onmouseover=function()
+      		  {
+                startOpacity(this,100);
+      		  }
+
+      		  odiv[i].onmouseout=function()
+      		  {
+                startOpacity(this,30);
+      		  }
+            }
+
+            var ediv=document.getElementById("div3").getElementsByTagName("div");
+
+            for(var i=0;i<ediv.length;i++){
+
+            	ediv[i].timer2 = null;
+            	ediv[i].onmouseover=function(){
+           		    changeLength(this,400);
+            	}
+
+            	ediv[i].onmouseout=function(){
+            		changeLength(this,100);
+            	}
+            }
+
+            //不同的div有不同的变化
+            var div4=document.getElementById("div4").getElementsByTagName("div");
+            div4[0].onmouseover=function()
+            {   //第0个div移入变高
+                changeStyle(this,"height",200);
+            }
+
+            div4[0].onmouseout=function()
+            {  //第0个div移出恢复原状
+               changeStyle(this,"height",100);
+            }
+
+            div4[1].onmouseover=function()
+            { //第1个div移入变宽
+            	changeStyle(this,"width",200);
+            }
+
+            div4[1].onmouseout=function()
+            {  //第一个div移出恢复原状
+            	changeStyle(this,"width",100);
+            }
+
+            div4[2].onmouseover=function()
+            {  //第3个div移入字体变为50px
+            	changeStyle(this,"fontSize",50);
+            }
+
+            div4[2].onmouseout=function()
+            {
+            	changeStyle(this,"fontSize",14);
+            }
+
+            div4[3].onmouseover=function()
+            { //第4个div移入边框宽度变为100；
+            	changeStyle(this,"borderWidth",100);
+            }
+
+            div4[3].onmouseout=function()
+            {
+            	changeStyle(this,"borderWidth",0);
+            }
+
+      }
+         
+
+
+      /*以下为调用的函数，分别和上面的顺序一一相对应*/
+
+
+         //多个div长度改变 函数
+		function largen(obj,type){
+			clearInterval(obj.timer);  //关闭每个定时器
+			obj.timer = setInterval(function()
+			{
+				var speed = (type-obj.offsetWidth)/6;
+				//做缓冲运动
+				speed = speed>0?Math.ceil(speed):Math.floor(speed);
+				//取整数
+				if(obj.offsetWidth == type)
+				{
+					clearInterval(obj.timer);
+				}else{
+					obj.style.width=obj.offsetWidth+speed+"px";
+				}
+			},30);
+		}
+
+	    /* 多个div淡入淡出 函数*/
+		function startOpacity(obj2,target){
+			clearInterval(obj2.timer1);
+			obj2.timer1=setInterval(function(){
+				var speed=(target-obj2.alpha)/6;
+				speed>0?Math.ceil(speed):Math.floor(speed);
+
+				if(obj2.alpha == target)
+				{
+					clearInterval(obj2.timer1);
+				}else
+				{
+					obj2.alpha+=speed;
+					obj2.style.filter='alpha(opacity:'+obj2.alpha+')';
+					obj2.style.opacity=obj2.alpha/100;
+				}
+			},30);
+		}
+
+         
+        function getStyle(obj,name)
+		{
+			if(obj.currentStyle)
+			{
+				return  obj.currentStyle[name]  //获取不在行间的样式 
+			}else
+			{
+				return getComputedStyle(obj,false)[name]; 
+			}
+		}
+
+		//多个border div长度变化 函数
+		function changeLength(obj3,cTarget)
+		{
+			clearInterval(obj3.timer2);
+
+			obj3.timer2=setInterval(function(){
+				var ave = parseInt(getStyle(obj3,"width"));
+
+				var speed=(cTarget-ave)/6;
+				speed>0?Math.ceil(speed):Math.floor(speed);
+
+				if(ave==cTarget){
+					clearInterval(obj3.timer2);
+				}else
+				{
+					obj3.style["width"]=ave+speed+"px"; //注意：如果写成以前那样obj3.style.width是不会显示变化的
+				}
+			},30);
+		}
+
+			function changeStyle(obj,type,target)
+			{
+
+				clearInterval(obj.atimer);
+
+				obj.atimer=setInterval(function(){
+					var cur = parseInt(getStyle(obj,type));  
+                   //注：一定要将其放在定时器以内
+				    var speed=(target-cur)/6;
+				    speed>0?Math.ceil(speed):Math.floor(speed);
+
+				    if(cur == target){
+					  clearInterval(obj.atimer);
+					  obj.style[type]= target+"px";
+				    }else{
+					   obj.style[type]=cur+speed+"px";
+				    }
+				},30);
+			}
+
+
+
+	</script>
+
+</head>
+<body>
+<!-- 多物体运动 -->
+	<div id="div1">
+	<div class="frame1"></div>
+	<div class="frame1"></div>
+	<div class="frame1"></div>
+   </div>
+   <div>
+
+<!-- 多个div淡入淡出 -->
+   <div id="div2" style=" height: 300px;">
+    <div class="tran"></div>
+    <div class="tran"></div>
+    <div class="tran"></div>
+    <div class="tran"></div>
+    <div class="tran"></div>
+   </div>
+  </div>
+
+<!-- 多物体运动 -->
+  	<div id="div3">
+	<div class="frame2"></div>
+	<div class="frame2"></div>
+	<div class="frame2"></div>
+   </div>
+   <div>
+
+<!-- 多个div有不同的样式 -->
+   	<div id="div4">
+    <div class="tran2"></div>
+    <div class="tran2"></div>
+    <div class="tran2">字体变化</div>
+    <div class="tran2"></div>
+   </div>
+  </div>
+
+
+</body>
+</html>

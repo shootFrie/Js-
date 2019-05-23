@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>创建、插入和删除元素</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+    window.onload=function()
+	{
+	  var div1=document.getElementById("div1");
+	  var btn1=div1.getElementsByTagName("button");
+	  var aul=div1.getElementsByTagName("ul");
+	  var Ipt1=div1.getElementsByTagName("input")[0];
+	  
+	  btn1[0].onclick=function()
+	  {
+	   var ali=document.createElement("li"); //创建li元素
+		 aul[0].appendChild(ali);  //将li元素赋给第一个ul
+		 var aLi=aul[0].getElementsByTagName("li"); //获取第一个ul的li
+		 for(var i=0;i<aLi.length;i++)
+		 {
+		  ali.innerHTML="创建成功，这是第"+i+"个li";//给每个li获取内容
+		  if(i%2!==0){
+		   aLi[i].style.background="#d9edf7";//假如i除以2的余数不等于0就更改颜色
+		  }
+		 }
+		} 
+		btn1[1].onclick=function()
+		{
+		  if(Ipt1.value==""){ //检查input.value是否为空
+		    alert("必须输入内容才能创建li");
+		  }else          //不为空时开始获取
+		  {
+		     var bli=document.createElement("li");
+		     aul[1].appendChild(bli);
+		     var bLi=aul[1].getElementsByTagName('li');   //如果先声明变量再判断是否为空，无论是否为空都会创建一个空的li
+		     for (var i=0;i<bLi.length;i++)
+		     {
+		         bli.innerHTML="创建成功，这是第"+i+"个li "+""+Ipt1.value; //在创建li时创建了它的内容
+		         if(i%2!==0)
+		         {
+		             bLi[i].style.background="#d9edf7"; 
+		         }  
+				}
+				Ipt1.value="";  //在循环结束后将input空格里的值清空，方便下次使用
+		  }
+		}
+	  
+	  var div2=document.getElementById("div2");
+	  var btn2=div2.getElementsByTagName("button")[0];
+	  var ul2=div2.getElementsByTagName("ul")[0];
+	  var Ipt2=div2.getElementsByTagName("input")[0];
+	  btn2.onclick=function()
+	  {
+	     if(Ipt2.value=="")
+		   {
+		     alert("必须输入内容才能创建li");
+		   }else
+		   {
+		       var ali=document.createElement("li");
+			     if(ul2.children.length>0){
+			     ul2.insertBefore(ali,ul2.children[0]);
+				  }else{
+				   ul2.appendChild(ali); 
+				  }
+				   for (var i=0;i<ul2.children.length;i++)
+				   {
+				     ali.innerHTML="创建成功，这是第"+i+"个li "+Ipt2.value;
+					   if(i%2!==0){
+					    ali.style.background="#d9edf7"; 
+					   }else{ali.style.background="#fff";}
+				   }
+				   Ipt2.value="";
+		   }
+	  }
+	  
+	  var div3=document.getElementById("div3");
+	  var btn3=div3.getElementsByTagName("button")[0];
+	  var ul3=div3.getElementsByTagName("ul")[0];
+	  var Ipt3=div3.getElementsByTagName("input")[0];
+	  btn3.onclick=function()
+	  {
+	     var ali=document.createElement("li");
+		   if(ul3.children>0){
+		   ul3.insertBefore(ali,ul3.children);
+			}else{
+			 ul3.appendChild(ali);
+			}
+			for(var i=0;i<ul3.children.length;i++)
+			{
+			  ali.innerHTML='创建完成，这是第'+i+'个li'+Ipt3.value+'<a href="javascript:;" class="astyle">删除</a>'
+			  if (i%2!==0){
+			   ali.style.background="#d9edf7";
+			  }else{ali.style.background="#fff";}
+			}
+			Ipt3.value="";
+			 var a3=div3.getElementsByTagName("a");
+	  for(var i=0;i<a3.length;i++)
+	  {
+	     if(a3[i].innerHTML=="删除")
+		  {
+		     a3[i].onclick=function()
+			  {
+			    ul3.removeChild(this.parentNode); //点击后删除a3的父节点li 
+			  }
+		  }
+	  }
+	  }
+	 
+	  
+	}
+   </script>
+ </head>
+ <body>
+ <div class="c1" id="div1">
+ 1、创建元素 createElement & appendChild (创建文本节点createTextNode)<br></br>
+ <div class="c3">
+ 例1：创建li</br></br>
+ <ul class="list-group">
+ </ul>
+ <button class="btn btn-color">创建li</button>
+ </div>
+ 
+ <div class="c3">
+  例2：创建自定义内容的li</br></br>
+  <ul class="list-group">
+  </ul>
+  <input type="text" class="in-text" placeholder="可以自定义内容">
+  <button class="btn btn-color">创建li</button>
+ </div>
+ </div>
+ 
+ <div class="c1" id="div2">
+ 2、插入元素 createElement & insertBefore</br></br>
+ <div class="c3">
+  <input type="text" class="in-text" placeholder="可以自定义内容">
+  <button class="btn btn-color">创建li</button>
+    <ul class="list-group">
+  </ul>
+ </div>
+ </div>
+ 
+ <div class="c1" id="div3">
+ 3、删除元素 removeChild</br></br>
+  <div class="c3">
+  <input type="text" class="in-text" placeholder="可以自定义内容">
+  <button class="btn btn-color">创建li</button>
+    <ul class="list-group">
+  </ul>
+ </div>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p>创建元素：var 子节点=document.createElement('li') 创建子节点变量 等于需要创建什么元素 那么参数就是什么。
+  在创建完成之后系统并不知道把创建出的元素放到哪个父级下，所以需要指派：父级.appendChild(子节点) 这一步是把li
+  作为子节点添加给父级的末尾。appendChild就是给元素添加父级的。</p></br></br>
+  <p>插入元素：父级.insertBefore(子节点,插入在谁之前（原有节点）) 需要先判断ul中是否包含第0个li，如果包含才使
+  用insertBefore，如果不包括则需要使用appendChild。 例如可以在li的第0个之前插入，那么刚插入的永远都是第0个，也
+  就是在父级的开始插入的。</p></br></br>
+  <p>删除元素：父级.removeChild(this.parentNode) 在父级下删除this的父级 也就是删除首父级的子级。</p></br></br>
+  </div>
+ </body>
+</html>

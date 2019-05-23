@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta http-equiv="Content-Type" content='text/html' charset="utf-8">
+   <title>程序流程控制、获取select选中值</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function(){
+    var div1=document.getElementById('div1');
+    var dIpt1=div1.getElementsByTagName('input')[0];
+    var dSe1=div1.getElementsByTagName('select')[0];
+    var dBtn1=div1.getElementsByTagName('button')[0];
+    dBtn1.onclick=function(){
+	   var n=dIpt1.value;
+	   if(!isNaN(n))
+	   {
+	    alert('必须输入姓名且不能以数字开头');		
+	   }else{
+	    var sex=dSe1.options[dSe1.selectedIndex].text //获取选择中的文本
+       switch(sex)
+       {
+	     case '男':
+		    alert(n+'先生，你好');
+			  break;
+			case '女':
+			  alert(n+'女士，你好');
+			  break;
+			default:
+			  alert(n+'你好');
+		  }
+	   }
+	 }	
+	 //以上是div1的内容
+	 var div2=document.getElementById('div2');
+	 var dIpt2=div2.getElementsByTagName('input')[0];
+	 var dBtn2=div2.getElementsByTagName('button')[0];
+	 dBtn2.onclick=function(){
+	  var n=dIpt2.value;
+	  if(!isNaN(n)&&!n==''){
+	   n%2==0?alert('双数'):alert('单数');
+	  }else{
+	  alert('必须输入数字');
+	  }
+	 }
+	 //以上是div2的内容
+	 var odiv3=document.getElementById('div3');
+	 var dBtn3=odiv3.getElementsByTagName('button');
+	 var dli3=odiv3.getElementsByTagName('li');
+	 
+	 dBtn3[0].onclick=function()
+	 {
+	  var i=0;
+	  while(i<dli3.length){
+	   if(i==1){break;}
+	   dli3[i].style.background="green";
+	   i++;
+	  }
+	 }
+	 dBtn3[1].onclick=function(){
+	  
+	  for(var i=0;i<dli3.length;i++){
+	   if(i==1){
+	   continue;
+	   }
+	   dli3[i].style.background="blue";
+	   
+	  }
+	 }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、switch判断练习</br></br>
+  弹出问候var sex=dSe1.options[dSe1.selectedIndex].text </br>
+  <input type="text" class="in-text" placeholder="姓名">
+  <select class="sel-control">
+   <option value="0">性别</option>
+   <option value="1">男</option>
+   <option value="2">女</option>
+  </select>
+  <button class="btn btn-color">问候</button>
+  </div>
+  
+  <div class="c1" id="div2">
+  2、三目运算符练习</br></br>
+  随便输入一个数字，判断是单数还是双数</br>
+  <input type="text" class="in-text" placeholder="数字">
+  <button class="btn btn-color">判断单双</button>
+  </div>
+  
+  <div class="c1" id="div3">
+  3、break、continue批量改色练习。</br></br>
+  <p>分析：获取所有li，做li的循环，当循环到第二个的时候，执行break或continue。
+  这个循环执行到break以后，就跳出去了，不再循环了，也就是后边的li颜色不会再改了。
+  当执行到continue的时候，跳出当前循环后执行下一个循环。</p>
+  <ul class="list-group">
+   <li>break、continue练习</li>
+   <li>break、continue练习</li>
+   <li>break、continue练习</li>
+   <li>break、continue练习</li>
+   <li>break、continue练习</li>
+  </ul>
+  <button class="btn btn-color">break</button>
+  <button class="btn btn-color">continue</button>
+  </div>
+  
+  <div class="c1">
+   记录</br></br>
+   <p>判断：if、switch、?:（三目运算符）</p>
+   <p>循环：while、for</p>
+   <p>跳出：break（中断-整个循环中断）、continue（继续-本次循环中断）</p>
+   <p>取得select选中值：首先获取select对象，拿到选中项的索引：selectedIndex 属性可设置或返回下拉列表中被选选项的索引号。 
+   var index=select.selectedIndex;，selectedIndex代表的是所选中项的index，
+   拿到选中项options的value：select.options[index].value;
+   拿到选中项options的text：select.options[index].text;</p>
+   <p>?:：三目运算符（三元），与if一样。if的写法是if(条件){语句1}else{语句2}，三目的写法是：条件?语句1:语句2。</p>
+   <p>什么是真、什么是假：</p>
+   <p>真：true非零数字、非空字符串、非空对象.</p>
+   <p>假：false数字零、空字符串、空对象、undefined</p>
+   <code>
+   switch(n)</br>
+   {</br>
+    case 1:</br>
+    执行代码块 1</br>
+    break;</br>
+    case 2:</br>
+    执行代码块 2</br>
+    break;</br>
+    default:</br>
+    n 与 case 1 和 case 2 不同时执行的代码</br>
+	}
+   </code>
+  </div>
+ </body>
+</html>

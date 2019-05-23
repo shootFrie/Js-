@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+	 <link id="skin1" rel="stylesheet" type="text/css" href="" />
+	 <link  rel="stylesheet" type="text/css" href="css/js1.css" />
+	 <title>java基本练习1</title>
+	 <script>
+	  function display1(){//鼠标移入时的样式
+	   var div3=document.getElementById("div3");
+	   div3.style.background="red";
+	   div3.style.height="200px";
+	   div3.style.color="#fff";
+	   }
+	   function display2(){//鼠标移出时的样式
+	   var div3=document.getElementById("div3");
+	   div3.style.background="";
+	   div3.style.height="";
+	   div3.style.color="";
+	   }
+	   //以上两个是div3的鼠标经过执行变高变色
+	   function d3(){
+	    document.getElementById("div4").style.display="block";
+	   }
+	   function d4(){
+	    document.getElementById("div4").style.display="none";
+	   }
+	   //以上两个是div4的鼠标经过执行显示
+	   function d5(){
+	    var div5=document.getElementById("div5");
+		  if(div5.style.display=="none"){
+		   div5.style.display="block";
+		  }else{
+		   div5.style.display="none";
+		  }
+		  }
+		  //以上是判断是否显示div如果有点击时就把它变为没有
+	   function toSkin1(){
+	     document.getElementById("skin1").href="css/css1.css";
+	    }
+		function toSkin2(){
+	     document.getElementById("skin1").href="css/css2.css";
+	    }
+     //以上是根据link更改css文件进行换肤
+     function showHide(){
+	   var div7=document.getElementById("div7");
+	   if(div7.style.display=="block"){
+	    div7.style.display="none"; 
+	   }else{
+	    div7.style.display="block"; 
+	   }
+	 }		
+	 </script>
+  </head>
+  <body class="b1">
+    <div class="c1">
+	  <p>1、说明事件</p>
+	  <p><button id="div1" onclick="alert('弹出窗口')" class="bnt1">按钮</button> </p>
+	 </div>
+	 
+	 <div class="c1">
+	  <p>2、移入移出</p>
+	  <p>btn1.style.display='block' 将btn1的style的display的值设置为block;
+	  get Element By Id 通过id获取元素
+	  获取 元素 用 id</p>
+	  <p id="div2" onmouseover="document.getElementById('btn1').style.display='block'" onmouseout="document.getElementById('btn1').style.display='none'" >鼠标经过出现按钮</p>
+	   <button id="btn1" onclick="alert('弹出窗口')" class="bnt1">按钮</button>
+	 </div>
+	 
+	 <div  class="c1" id="div3" onmouseover="display1()" onmouseout="display2()">
+	  <p>3、函数 鼠标经过这个div执行变窄变高变色 移出再恢复</p>
+	 </div>
+	 
+	 <div class="c1">
+	  <a onmouseover="d3()" onmouseout="d4()">4、鼠标经过就弹出层</a>
+	  <div id="div4" class="c2" style="display:none;">
+	  <p>这是弹出的层</p></div>
+	 </div>
+	 
+	 <div class="c1">
+	  <a onclick="d5()">5、鼠标点击就弹出层</a>
+	  <div id="div5" class="c2" style="display:none;">
+	  <p>这是弹出的层</p></div>
+	 </div>
+	 
+	 <div class="c1">
+	  <p>6、网页换肤</p>
+	  <p><button onclick="toSkin1()"class="bnt1" >样式1</button> 
+	  <button onclick="toSkin2()" class="bnt1">样式2</button></p>
+	 </div>
+	 
+	 <div class="c1">
+	  <p>7、显示隐藏</p>
+	  <p><button onclick="showHide()" class="bnt1">显示隐藏</button> 
+	  <button id="div7" style="display:none;"  >隐藏显示</button></p>
+	 </div>
+	 
+	 <div class="c1">
+	   <p>记录</p></br>
+	     编写JS的流程：</br>
+		    -布局：html＋css 在写js之前必须保证有一个稳固的布局，这个布局本身不能有任何兼容问题。</br>
+          -属性：确定要修改哪些属性 确定通过js修改哪些属性，例如display</br>
+          -事件：确定用户做哪些操作（产品设计）确定要在什么样的事件里修改，比如点击、移入移出</br>
+          -编写js：在事件中，用js来修改页面元素的样式</br>
+		  事件：用户的操作</br>
+		  == ：判断</br>
+		  = ：赋值（改变）</br>
+		  注：document.getElementById("id_name").style.display="none"</br>
+	 </div>
+  </body>
+</html>

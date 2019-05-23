@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js练习简易日历</title>
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <style type="text/css">
+   *{
+    padding:0;
+	margin:0;
+   }
+   body{
+    background:#f6f9fc;
+	font-family:arial;
+   } 
+	li{
+	  list-style:none;
+	 }
+	.calendar .act{
+	 border:1px solid #424242;
+	 background:#fff;
+	 color:#e84a7e;
+	 }
+   </style>
+   <script>
+    window.onload=function(){
+	   var tab=document.getElementById("tab");
+	   var tli=tab.getElementsByTagName("li");
+	   var tdiv=tab.getElementsByTagName("div")[0];
+	   var text1=[
+	   '1月活动','2月活动','3月活动','4月活动','5月活动',
+	   '6月活动','7月活动','8月活动','9月活动','10月活动',
+	   '11月活动','12月活动']; 
+	   for(var i=0;i<tli.length;i++)
+	   {
+	    tli[i].index=i;
+	    tli[i].onmouseover=function()
+		  {
+		   for(var i=0;i<tli.length;i++)
+		   {
+		     tli[i].className=""; 
+		   }
+		   this.className="act";
+		   tdiv.innerHTML='<h2>'+(this.index+1)+'月活动</h2>'+'<p>'+text1[this.index]+'</p>'
+		  } 
+	   }
+	}
+   </script>
+ </head>
+ <body>
+  <div class="calendar" id="tab">
+   <ul>
+	 <li class="act"><h2>1</h2><p>JAN</p></li>
+	 <li><h2>2</h2><p>FER</p></li>
+	 <li><h2>3</h2><p>MAR</p></li>
+	 <li><h2>4</h2><p>APR</p></li>
+	 <li><h2>5</h2><p>MAY</p></li>
+	 <li><h2>6</h2><p>JUN</p></li>
+	 <li><h2>7</h2><p>JUL</p></li>
+	 <li><h2>8</h2><p>AUG</p></li>
+	 <li><h2>9</h2><p>SEP</p></li>
+	 <li><h2>10</h2><p>OCT</p></li>
+	 <li><h2>11</h2><p>NOV</p></li>
+	 <li><h2>12</h2><p>DEC</p></li>
+	 </ul>
+	 <div class="text">
+	   <h2>1月活动</h2>
+	   <p>这是1月活动</p>
+	 </div>
+  </div>
+  <div class="c1">
+   <p>记录</p></br>
+   <p>this.index的用法是这个元素循环中当前i的值</p>
+   <p>tli[i].index=i;</p>
+  </div>
+ </body>
+</html>

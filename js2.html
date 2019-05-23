@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="UTF-8" />
+   <title>js基本练习2</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css"/>
+   <script>
+    function setcolor1(color){
+     document.getElementById("parameter1").style.background=color;	
+	}
+	function setcontent(name,value){
+     document.getElementById("parameter2").style[name]=value;	
+	}
+	function t1(name){
+	 document.getElementById("text1")[name]="更改默认值";
+	}
+	function tostyle(){
+	 document.getElementById("parameter3").className="box1";
+	}
+  </script>
+ </head>
+ <body>
+   <div class="c1" id="parameter1">
+   1、函数传参 一个参数
+   <p>
+     <button type="button" onclick="setcolor1('yellow')">背景变黄</button>
+     <button type="button" onclick="setcolor1('red')">背景变红</button>
+     <button type="button" onclick="setcolor1('black')">背景变黑</button>
+     <button type="button" onclick="setcolor1('#fff')">恢复原样</button>
+	</p>
+	定义函数的参数为color，变量div的样式调用参数color，onclick事件把背景颜色的值传给参数color。
+   </div>
+   
+   <div class="c1" id="parameter2">
+   2、函数传参 两个参数
+   <p>
+     <button type="button" onclick="setcontent('width','41%')">背景变窄</button>
+     <button type="button" onclick="setcontent('background','yellow')">背景变黄</button>
+     <button type="button" onclick="setcontent('height','300px')">背景变高</button>
+	</p>
+	定义函数的参数为name和value，变量div的样式的属性名用参数name代替，属性值用参数value代替，onclick事件把样式的属性名和值分别传给参数name和value。
+   </div>
+   
+   <div class="c1">
+    3、函数传参 参数加变量
+	<p>
+	 <input id="text1" type="text" value="默认值" title="title更改值">
+	 <button type="button" onclick="t1('value')">改变文字</button>
+	 <button type="button" onclick="t1('title')">鼠标经过显示title</button>
+	</p>
+	<p>定义函数的参数为name,两个onclick事件分别绑定标签属性调用参数的值。</p>
+   </div>
+   
+   <div class="c1" id="parameter3">
+     4、修改样式 通过调取className
+	 <p>
+	   <button type="button" onclick="tostyle()">变色 变高 变窄</button>
+	 </p>
+	 <p></p>
+   </div>
+   
+   <div class="c1">
+   <p>记录</p></br>
+      函数传参：参数就是占位符</br>方括号操作属性：当要修改的属性不固定的时候，就用方括号来操作。
+	   只要是可以用.的地方，都可以用方括号来表示。</br>
+      通过style，操作的只能是行间样式。无论是读还是写。</br>
+	   样式的优先级：*（通配符）标签 class Id 行间，如果先修改了行间，再修改class就会失败。
+	   因为优先级。所以对于一个元素，要么只修改行间，要么只修改class，不能混着来。</br>
+   </div>
+ </body>
+</html>

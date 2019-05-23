@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>打开、关闭窗口、当前浏览器信息、当前网址</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onclick=function()
+   {
+     var div1=document.getElementById("div1");
+	   var btn1=div1.getElementsByTagName("button");
+     var aTxt=div1.getElementsByTagName("textarea")[0];
+	   btn1[0].onclick=function()
+	   {
+	     window.open('http://www.baidu.com',"_blank"); 
+	   }
+	   btn1[1].onclick=function()
+	   {
+	     document.write("这是清空页面后的内容"); 
+	   }
+	   btn1[2].onclick=function()
+	   {
+	     var newWindow=window.open("about:blank","_blank");
+		   newWindow.document.write(aTxt.value);
+	   }
+	   
+	   var div2=document.getElementById("div2");
+	   var btn2=div2.getElementsByTagName("button")[0];
+	   var bTxt=div2.getElementsByTagName("textarea")[0];
+	   btn2.onclick=function()
+	   {
+	     var newWindow=window.open("about:blank","_blank"); //重新打开一个空白页
+		   newWindow.document.write(bTxt.value);
+	   }
+	   
+	   var div3=document.getElementById("div3");
+	   var btn3=div3.getElementsByTagName("button");
+	   var aCod=div3.getElementsByTagName("code")[0];
+	   btn3[0].onclick=function()
+	   {
+	     aCod.innerHTML="当前浏览器信息："+window.navigator.userAgent;
+	   }
+	   btn3[1].onclick=function()
+	   {
+	     aCod.innerHTML="当前页面地址："+window.location;
+	   }
+	   btn3[2].onclick=function()
+	   {
+	     window.location="http://www.baidu.com";
+	   }
+   }
+   </script>
+ </head>
+ <body>
+ <div class="c1" id="div1">
+ 1、window.open & write</br></br>
+ <button class="btn btn-color">打开窗口</button></br></br>
+ <button class="btn btn-color">document.write</button>先清空，再写入。</br></br>
+ <textarea  rows="1" cols="30" class="text-style"></textarea>
+ <button class="btn btn-color">运行代码框</button>
+ <code></code>
+ </div>
+ 
+ <div class="c1" id="div2">
+ 2、window.close</br></br>
+ <textarea rows="1" cols="30" class="text-style">
+ <button class="btn btn-color" onclick="window.close()">关闭窗口</button>
+ </textarea>
+ <button class="btn btn-color">运行代码框</button>
+ </div>
+ 
+ <div class="c1" id="div3">
+ 3、window.navigator.userAgent & window.location</br></br>
+ <button class="btn btn-color">查看当前浏览器信息</button>
+ <button class="btn btn-color">查看当前网址</button>
+ <button class="btn btn-color">赋值百度为当前网址</button>
+<code></code>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p>window.open：基本写法window.open('about:blank')，被执行后是新开启一个空白页。
+  open是有返回值的，他返回的就是新打开的窗口的内容。例如：var newWindow=window.open('about:blank', '_blank');
+  </p></br></br>
+  <p>write：基本写法document.write('abc')，被执行后是先把页面所有内容清空，然后再写入他的参数内容。
+  </p></br></br>
+  <p>document：完整写法是window.document，window是可以省略的。因为document必然属于window。
+  所以在open新窗口之后，新窗口也有document。例如：newWindow.document.write(aTxt2.value);
+  </p></br></br>
+  <p>window.close：基本写法window.close()，只能关闭由window.open打开的窗口。
+  </p></br></br>
+  <p>window.navigator.userAgent：获取当前浏览器的版本信息。
+  </p></br></br>
+  <p>window.location：获取当前页面的地址。不光可以获取，还可以赋值。例如：window.location='http://www.baidu.com/'</p></br></br>
+  <p></p></br></br>
+  </div>
+ </body>
+</html>

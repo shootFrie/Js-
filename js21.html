@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>表格应用、提取、添加、删除</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function()
+   {
+     var div1=document.getElementById("div1");
+     var btn1=div1.getElementsByTagName("button");
+     var tab1=div1.getElementsByTagName("table")[0];
+	   var tbodies=
+     btn1[0].onclick=function(){
+	     alert(tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[1].getElementsByTagName("td")[1].innerHTML);
+	     //tbody中的第二行第二列的内容
+	   }	
+     btn1[1].onclick=function()
+	   {
+	     alert(tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0].getElementsByTagName("td")[1].innerHTML);
+		   //tbody中的第一行第二列的内容
+	   }
+	   btn1[2].onclick=function()
+	   { 
+	      var  color="none";
+	     if(this.innerHTML=="关闭隔行变色")
+		   {
+		     color="";
+		     this.style.backgroundColor="";
+			   this.innerHTML="开启隔行变色";
+		   }else if(this.innerHTML=="开启隔行变色")
+		   {
+		     this.style.backgroundColor="red";
+			   this.innerHTML="关闭隔行变色";
+				 color="#eee"; 
+		   }
+		   for(var i=0;i<tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;i++)
+		   {
+		     if(i%2==0)
+			  {
+			    tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[i].style.background=color;
+			  }
+		   }
+	   }
+	   btn1[3].onclick=function()
+	   { 
+	     var oldColor="none"; //写空变量 
+	     var Simple=tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	     if(this.innerHTML=="开启移入变色")//当button的文字为a的时候改成b，为b的时候改成a
+	     {
+		     for(var i=0;i<tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;i++)
+          { //开启循环，当得到第i个元素时变色
+		        this.innerHTML="关闭移入变色";
+				   this.style.backgroundColor="red";
+				   Simple[i].onmouseover=function()
+				  {
+				     oldColor=this.style.background; //给现有的背景颜色赋值方便之后的调用
+				     this.style.background="yellow";
+ 				  }
+				   Simple[i].onmouseout=function()
+				  {
+				  this.style.background=oldColor;
+				  }
+			   }   
+			}else if(this.innerHTML=="关闭移入变色")
+		  {
+		     this.innerHTML="开启移入变色";
+		     this.style.backgroundColor="";
+		   	 for(var i=0;i<tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;i++)
+           { 
+				   Simple[i].onmouseover=Simple[i].onmouseout=function()
+				   //如果是从开启到关闭，移入移出都不会变化
+				   {
+			      }  
+			    }
+		   }
+	   } 
+	   
+	   var div2=document.getElementById("div2");
+	   var tab2=div2.getElementsByTagName("table")[0];
+	   var ipt2=div2.getElementsByTagName("input");
+	   var btn2=div2.getElementsByTagName("button")[0];
+	   var Simple=tab2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	   for(var i=0;i<Simple.length;i++)
+	   {
+	     Simple[i].getElementsByTagName("td")[3].getElementsByTagName("a")[0].onclick=function() 
+		 //点击第i个tr中的第三个td中的第一个a元素实现整行删除
+		  {
+		     tab2.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode);
+			 //在表格的tbody里removeChild这个a标签的父级（td）的父级（tr）
+		  }
+	   }
+	  btn2.onclick=function()
+	  {
+	     var aName=ipt2[0].value;
+		   var aAge=ipt2[1].value;
+         var aDel="<a href='javascript:;' class='astyle'>删除</a>";
+         if (aName==""||aAge==""||!isNaN(aName)||isNaN(aAge))
+		    //如果输入为空，或第一个空不是非数字，第二个空是非数字的弹出警告
+	     {
+		     alert("必须输入内容，且名字不能为数字");
+		   }else
+		   {
+		     var atr=document.createElement("tr");
+		     var atd1=document.createElement("td");
+			   atd1.innerHTML=Simple.length+1;
+			   atr.appendChild(atd1);
+			   //设置第一个td的ID是tr的个数加1，在新建的tr标签内指定元素节点的最后一个子节点之后添加tr节点
+			   
+			   var atd=document.createElement("td");
+			   atd.innerHTML=aName;
+			   atr.appendChild(atd);
+			   //设置第二个atd的内容为输入姓名的内容，在新建的tr标签内指定元素节点的最后一个子节点之后添加tr节点
+		      
+			  var atd=document.createElement("td");
+			   atd.innerHTML=aAge;
+			   atr.appendChild(atd);
+			   
+			   var atd=document.createElement("td");
+			   atd.innerHTML=aDel;
+			   atr.appendChild(atd);
+			   
+			  atd.getElementsByTagName("a")[0].onclick=function()
+			  {//点击新建的a标签就会删除
+			    tab2.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode);
+			  }			  
+			   
+			   tab2.getElementsByTagName("tbody")[0].appendChild(atr);
+			   //将tr标签从table标签中第一个tbody中的最后一个标签插入
+		  } 
+		   
+	  } 
+   }
+   </script> 
+ </head>
+ <body>
+ <div class="c1" id="div1">
+ 1、表格应用：隔行变色、移入变色</br></br>
+ <button class="btn btn-color">老方法 提取李四单元格</button>
+ <button class="btn btn-color">老方法 提取宅总单元格</button>
+ <button class="btn btn-color">开启隔行变色</button>
+ <button class="btn btn-color">开启移入变色</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+	    <td>43</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+	    <td>44</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+	    <td>32</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>折耳根</td>
+	    <td>38</td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+	    <td>42</td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+ <div class="c1" id="div2">
+ 2、表格应用：添加、删除</br></br>
+ 姓名：<input type="text" class="in-text" placeholder="必填">
+ 年龄：<input type="text" class="in-text" placeholder="必填">
+ <button class="btn btn-color">添加</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+	   <td>操作</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+		<td>43</td>
+	    <td><a href="javascript:;"class="astyle">删除</a></td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+		<td>44</td>
+	    <td><a href="javascript:;"class="astyle">删除</a></td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+		<td>32</td>
+	    <td><a href="javascript:;" class="astyle">删除</a></td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>折耳根</td>
+		<td>38</td>
+	    <td><a href="javascript:;" class="astyle">删除</a></td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+		<td>42</td>
+	    <td><a href="javascript:;" class="astyle">删除</a></td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p><b>隔行变色：</b>循环所有的tr，当第i个tr的模2等于0时，执行变色</p></br></br>
+  <p><b>移入变色：</b>↑ 当第i个rows进行onmouseover的时候，先不进行改颜色，而是先把它之前的颜色作为变量给存起来，然后再变色。
+  当进行onmouseout的时候，让它的变色变成之前存的变量。</p></br></br>
+  <p><b>添加表格：</b>当进行添加的时候，首先需要添加一个tr子节点 
+  然后在tr里再分别添加4个td子节点 然后分别把每个td放进tr，例如：atr.appendChild(atd);。最后把整个tr进行appendChild放进tbody
+  如：tab2.getElementsByTagName("tbody")[0].appendChild(atr);
+第一个td的innerHTML是ID，首先把tr个数的length作为一个变量存下。然后在innerHTML中赋值这个变量并加1。
+ID不重用，一旦出现了一次，就不会出现第二次。 
+第二个td和第三个td的innerHTML分别是两个输入框的value。 
+第四个td的innerHTML是删除连接。  </p></br></br>
+  <p><b>删除表格：</b>↑ 首先从atd里把第0个A标签选出来，加onlick，如：atd.getElementsByTagName("a")[0].onclick=function()
+  在表格的tbody里removeChild这个A标签的父级（td）的父级（tr）如：
+  tab2.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode);</p></br></br>
+  </div>
+ </body>
+</html>

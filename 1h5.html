@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canves</title>
+	<style>
+		.showMagin{
+			content:"";
+			display: block;
+			clear: both;
+			margin:10px auto; 
+			overflow: hidden;
+			width: 38%;
+		}
+		.cnt{
+			 width:200px;
+			 height:100px; 
+			 border:1px solid #C3C3C3;
+		}
+	</style>
+
+</head>
+<body style="margin:0;">
+	<!-- 第一个例子：div中的坐标查看 -->
+	<div class="showMagin">
+		<p>把鼠标悬停在下面的矩形上就可以看到坐标：</p>
+	  <div id="coordiv" style="float: left;width: 199px;height: 99px;border:1px solid #000;" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()">  
+	  </div>
+	  <div id="xycoordinates">
+	  </div>
+	  <script>
+	  		function cnvs_getCoordinates(e){
+	  			x=e.clientX;
+	  			y=e.clientY;
+	  			document.getElementById("xycoordinates").innerHTML="Coordinates:("+x+","+y+")";
+	  		}
+	  		function cnvs_clearCoordinates(){
+	  			document.getElementById("xycoordinates").innerHTML="";
+	  		}
+	  	</script>
+	</div>
+	<br>
+
+	<div class="showMagin">
+		<canvas id="FirstCanvas" class="cnt">你的浏览器不支持HTML5 Canvas元素</canvas>
+		<script>
+			function FirstCnvs(){
+				var c=document.getElementById("FirstCanvas");
+				var cxt=c.getContext('2d');
+				cxt.moveTo(10,10);  //开始位置，以左上角为圆点
+				cxt.lineTo(150,50);  //结束位置，以左下角为圆点，并连线
+				cxt.lineTo(10,50);
+				cxt.stroke();
+			}
+			FirstCnvs();
+		</script>
+	</div>
+	<br>
+
+	<div class="showMagin">
+		<canvas id="SecCanvas" class="cnt">你的浏览器不支持HTML5 Canvas元素</canvas>
+		<script>
+			function SecCnvs(){
+				var c=document.getElementById("SecCanvas");
+				var cxt=c.getContext('2d');
+				cxt.fillStyle="#ff0000";
+				cxt.beginPath();
+				cxt.arc(70,18,15,0,Math.PI*2,true);
+				cxt.closePath();
+				cxt.fill();
+			}
+			SecCnvs();
+		</script>
+	</div>
+	<br>
+
+	<div class="showMagin">
+		<canvas id="ThrCanvas" class="cnt">你的浏览器不支持HTML5 Canvas元素</canvas>
+		<script>
+			function ThrCnvs(){
+				var c=document.getElementById("ThrCanvas");
+				var cxt=c.getContext('2d');
+				var grd=cxt.createLinearGradient(0,0,175,50);
+				grd.addColorStop(0,"#ff0000");
+				grd.addColorStop(1,"#00ff00");
+				cxt.fillStyle=grd;
+				cxt.fillRect(0,0,175,50);
+			}
+			ThrCnvs();
+		</script>
+	</div>
+</body>
+</html>

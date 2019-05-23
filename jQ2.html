@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+ <title>jQuery</title>
+  <link  rel="stylesheet" type="text/css" href="css/index.css" />
+ <script src="js/jquery.js"></script>
+ <style>
+ /* 1.3 */
+#tool,#tooltip{
+  position: absolute;
+  border:1px solid #000;
+  display: none;
+  padding:1px;
+}
+ /* 1.4 */
+#content{
+  background: #999;
+}
+#content span{
+  background: #eee;
+  display: block;
+}
+</style>
+<script>
+</script>
+</head>
+<body>
+  <div class="divClass">
+    <h3>1.jQuery 中的DOM操作</h3>
+    <h4>1.1超链接提示效果</h4>
+    <p><a href="" class="tooltip" title="这是超链接1">jQuery效果提示1</a></p>
+    <p><a href="" class="tooltip" title="这是超链接2">jQuery效果提示2</a></p> 
+    <p><a href="" title="这是自带提示1">这是自带提示1</a></p>
+    <p><a href="" title="这是自带提示2">这是自带提示2</a></p>
+
+    <script>
+      $(function(){
+        smallTit();
+      })
+      function smallTit(){      
+        var x=10;
+        var y=20; //解决自制提示和鼠标距离太近 
+        $("a.tooltip").mouseover(function(e){
+          //移入显示title
+          this.myTitle=this.title;  //清除原先的title防止出现
+          this.title="";
+          var tooltip="<div id='tooltip'>"+this.myTitle+"<\/div>"; 
+          //创建一个div，内容为title属性
+          $("body").append(tooltip);  //追加到文档
+          $("#tooltip")
+          .css({
+            "top" :(e.pageY+y) +"px",
+            "left":(e.pageX+x)+"px"
+          }).show("fast");
+        }).mouseout(function(){
+          //移出隐藏title
+          $("#tooltip").remove();
+          this.title=this.myTitle; //鼠标滑出时还回
+        }).mouseover(function(e){  //提示跟着鼠标一起移动
+          $("#tooltip").css({
+            "top" : (e.pageY+y)+"px",
+            "left": (e.pageX+x)+"px"
+          })
+        })
+      }
+    </script>
+  </div>
+
+  <div class="divClass" style="height:150px;">
+    <h4>1.2 图片提示效果</h4>
+    <ul class="img_li">
+      <li><a href="img/apple_1_bigger.jpg" class="tool" title="苹果 MP3"><img src="img/apple_1.jpg" alt="苹果"></a></li>
+      <li><a href="img/apple_2_bigger.jpg" class="tool" title="苹果 MP4"><img src="img/apple_2.jpg" alt="苹果"></a></li>
+      <li><a href="img/apple_3_bigger.jpg" class="tool" title="苹果 手机"><img src="img/apple_3.jpg" alt="苹果"></a></li>
+      <li><a href="img/apple_4_bigger.jpg" class="tool" title="苹果 相机"><img src="img/apple_4.jpg" alt="苹果"></a></li>
+    </ul>
+    <script>
+      $(function(){
+        imgLi();
+      })
+      function imgLi(){
+        var x=10;
+        var y=20;
+        $("a.tool").mouseover(function(e){
+          var tooltip="<div id='tool'><img src='"+this.href+"' alt='产品预览图'/></div>";
+          $("body").append(tooltip);
+          $("#tool")
+            .css({
+              "top" : (e.pageY+y)+"px",
+              "left": (e.pageX+x)+"px"
+            }).show("fast");
+        }).mouseout(function(){
+          $("#tool").remove();
+        }).mouseover(function(e){
+          $("tool")
+            .css({
+              "top" : (e.pageY+y) +"px",
+              "left": (e.pageX+x) +"px"
+            })
+        })
+      }
+    </script>
+  </div>
+
+  <div class="divClass">
+    <h4>1.3 jQuery 中的事件，合成事件hover() 和 toggle()</h4>
+    <table class="tab" border="1">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+      <tbody class="hidd_tbody">
+        <tr>
+          <td>宅总</td>
+          <td>男</td>
+          <td>47</td>
+        </tr>
+        <tr>
+          <td>李四</td>
+          <td>男</td>
+          <td>49</td>
+        </tr>
+        <tr>
+          <td>根妹</td>
+          <td>女</td>
+          <td>38</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      $(function(){
+        tabShow();
+      })
+      function tabShow(){
+      /* $('table.tab thead').bind("click",function(){
+        if($(this).next().is(":visible")){
+          $(this).next().hide();
+        }else{
+          $(this).next().show();
+        }
+      })*/
+
+     /* $('table.tab thead').hover(function(){ //模拟mouseover和mouseout
+        $(this).next().show();
+      },function(){
+        $(this).next().hide();
+      });*/
+
+      $("table.tab thead").toggle(function(){   //模拟click
+        $(this).next().show();
+      },function(){
+        $(this).next().hide();
+      });
+     }
+    </script>
+  </div>
+
+  <div class="divClass">
+    <h4>1.4 事件冒泡</h4>
+    <div id="content">
+      外层div元素
+      <span>这是一个span的内嵌元素</span>
+      外层div 元素
+    </div>
+    <div id="msg"></div>
+    <script>
+      $(function(){
+        eventBubble();
+      })
+      function eventBubble(){ 
+        //事件冒泡
+        /*$('#content span').bind('click',function(){
+          var txt=$('#msg').html()+'<p>内层span元素被单击</p>';
+          $('#msg').html(txt);
+        })
+        $('#content').bind('click',function(){
+          var txt=$('#msg').html()+"<p>外层div元素被点击</p>";
+          $('#msg').html(txt);
+        })
+        $("body").bind('click',function(){
+          var txt=$('#msg').html()+"<p>body元素被点击</p>";
+          $("#msg").html(txt);
+        })*/
+
+        //阻止事件冒泡 event.stopPropagation();
+        $('#content span').click(function(event){
+          var txt=$("#msg").html()+'<p>内层span元素被单击</p>';
+          $("#msg").html(txt);
+          event.stopPropagation();
+        })
+        $("#content").click(function(event){
+          var txt=$("#msg").html()+'<p>外层div元素被点击</p>';
+          $('#msg').html(txt);
+          event.stopPropagation();
+        })
+        $("body").click(function(event){
+          var txt=$("#msg").html()+'<p>body元素被点击</p>';
+          $("#msg").html(txt);
+          event.stopPropagation();
+        })
+      }
+    </script>
+  </div>
+
+  <div class="divClass">
+    <h3>1.5 阻止默认行为 event.preventDefault() 或者是return false;</h3>
+    <p>阻止表单的默认跳转行为</p>
+    <form action="jQ3.html" method="get">
+      <label for="">用户名：
+        <input type="text" id="username" name="username">
+      </label>
+      <input type="submit" value="提交" id="sub">
+    </form>
+    <div id="notEmpty"></div>
+    <script>
+      $(function(){
+        $("#sub").bind("click",function(e){
+          var username = $('#username').val();
+          if(username==""){
+             $("#notEmpty").html("<p>文本框的值不能为空.</p>");
+             e.preventDefault();  //阻止表单的默认跳转
+             //return false;   一样的效果
+          };
+        });
+      });      
+    </script>
+  </div>
+  <div class="divClass">
+    <h3>记录</h3>
+    <ul>
+      <li>event.type   获取事件类型</li>
+      <li>event.preventDefault   阻止默认的事件行为</li>
+      <li>event.stopPropagation 阻止事件冒泡，IE浏览器中无效，jQuery 不支持事件捕获</li>
+      <li>event.target  获取触发事件的元素</li>
+      <li>event.pageX和event.pageY 获取光标相对于页面的x坐标和y坐标</li>
+      <li>IE中使用的是event.x /event.y</li>
+      <li>FireFox 使用的是event.pageX /event.pageY</li>
+      <li>event.which 在鼠标单击事件中获取鼠标的左，中、右键。1左，2中，3右</li>
+      <li>event.metaKey 为键盘事件中获取[Ctrl]按键</li>
+    </ul>
+  </div>
+</body>
+</html>

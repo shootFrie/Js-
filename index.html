@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>js基础</title>
+ <link  rel="stylesheet" type="text/css" href="css/js1.css" />
+ <link  rel="stylesheet" type="text/css" href="css/index.css" />
+ <style>
+ body{margin:0;padding: 0;}
+ .head{
+  height:120px;
+  background: #ccc;
+}
+.main{
+  margin:0 auto;
+  width:1000px;
+  height:100%;
+  background: #fff;
+  position: relative;
+}
+.clearfix{
+  clear: both;
+}
+.clearfix:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.Left{
+  width: 230px;
+  height: 100%;
+  float: left;
+  text-align: left;
+}
+.Left h3{
+  color:#000;
+  text-indent: 10px;
+}
+.Right{
+ width: 768px;
+ height: 1800px;
+ background: #fff;
+ float: right;
+}
+.foot{
+  margin:0 auto;
+  height:120px;
+  width: 100%;
+  background: #ccc;
+  position: absolute;
+}
+</style>
+<script>
+ window.onload=function(){
+    var change=document.getElementById("contentChange");//获取iframe的id
+    var div1=document.getElementById("div_li"); //获取li的div的id
+    var changLi=div1.getElementsByTagName("ul")[0].getElementsByTagName("li");
+    for(var i=0;i<changLi.length;i++){
+     changLi[i].index=i;
+     changLi[i].onclick=function(){
+       for(var i=0; i<changLi.length;i++)
+       {
+         var source=this.getElementsByTagName("a")[0].getAttribute("href");
+         change.setAttribute("src",source);
+       }
+     }
+   }
+ }
+</script>
+</head>
+<body>
+  <div class="head">    </div>
+  <div class="main clearfix">
+  	<div class="Left t1" id="div_li">
+     <ul>
+      <li><h3>JS例子</h3></li>
+      <li><a href="js1.html" onclick="return false;">事件、函数</a></li>
+      <li><a href="js2.html" onclick="return false;">函数、参数</a></li>
+      <li><a href="js3.html" onclick="return false;">提取行间事件</a></li>
+      <li><a href="js4.html" onclick="return false;">循环</a></li>
+      <li><a href="js5.html" onclick="return false;">this,索引值</a></li>
+      <li><a href="js6.html" onclick="return false;">innerHTML、字符串拼接、数组</a></li>
+      <li><a href="js7.html" onclick="return false;">综合练习-简易小日历</a></li>
+      <li><a href="js8.html" onclick="return false;">JAVAscript组成、变量的类型、数据类型转换</a></li>
+      <li><a href="js9.html" onclick="return false;">作用域、闭包、父函数、子函数、命名规范</a></li>
+      <li><a href="js10.html" onclick="return false;">运算符</a></li>
+      <li><a href="js11.html" onclick="return false;">程序流程控制、获取select选中值</a></li>
+      <li><a href="js12.html" onclick="return false;">Json、for in</a></li>
+      <li><a href="js13.html" onclick="return false;">函数返回值、arguments、取非行间样式</a></li>
+      <li><a href="js14.html" onclick="return false;">数组添加、删除、连接、分割、排序</a></li>
+      <li><a href="js15.html" onclick="return false;">定时器、日期对象</a></li>
+      <li><a href="js16.html" onclick="return false;">延时提示框、无缝滚动</a></li>
+      <li><a href="js17.html" onclick="return false;">DOM基础、子节点、父节点</a></li>
+      <li><a href="js18.html" onclick="return false;">首尾子节点、兄弟节点</a></li>
+      <li><a href="js19.html" onclick="return false;">DOM方式操作元素属性、DOM元素灵活查找</a></li>
+      <li><a href="js20.html" onclick="return false;">创建、插入和删除元素</a></li>
+      <li><a href="js21.html" onclick="return false;">表格应用、提取、添加、删除</a></li>
+      <li><a href="js22.html" onclick="return false;">表格应用、搜索</a></li>
+      <li><a href="js23.html" onclick="return false;">li、表格移动、排序</a></li>
+      <li><a href="js24.html" onclick="return false;">dom综合运用</a></li>
+      <li><a href="js25.html" onclick="return false;">打开、关闭窗口、当前浏览器信息、当前网址</a></li>
+      <li><a href="js26.html" onclick="return false;">可视区尺寸、滚动距离</a></li>
+      <li><a href="jssearch.html" onclick="return false;">别踩白块</a></li>
+      <li><a href="js.html" onclick="return false;">多物体运动</a></li>
+      <li>
+        <h3>jQuery例子</h3>
+      </li>
+      <li><a href="jQ1.html" onclick="return false;">选择器</a></li>
+	  <li><a href="jQ2.html" onclick="return false;">DOM</a></li>
+	  <li><a href="jQ3.html" onclick="return false;">获取数据</a></li>
+	  <li><a href="anchor.html" onclick="return false;">网页定位导航效果</a></li>
+      <li><h3>H5例子</h3></li>
+      <li><a href="1h5.html" onclick="return false;">canvas</a></li>
+      <li><a href="2H5.html" onclick="return false;">表单</a></li>
+	  <li><a href="3H5.html" onclick="return false;">H5播放器</a></li>
+	  <li><a href="4H5.html" onclick="return false;">Web存储及文件域</a></li>
+	  <li><a href="5H5.html" onclick="return false;">拖拽操作</a></li>
+	  <li><h3>小玩意</h3></li>
+	  <li><a href="小玩意/定时器.html" onclick="return false;">定时器</a></li>
+	  <li><a href="小玩意/静态选项卡.html" onclick="return false;">静态选项卡</a></li>
+	  <li><a href="小玩意/密码强弱.html" onclick="return false;">密码强弱</a></li>
+	  <li><a href="小玩意/选项卡.html" onclick="return false;">动态选项卡</a></li>
+    </ul>
+  </div>
+  <div class="Right">
+    <iframe id="contentChange"  src="js1.html" width="770px" height="100%"></iframe>
+  </div>
+</div>
+<div class="foot"></div>
+</body>
+</html>

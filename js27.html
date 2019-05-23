@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>创建、插入和删除元素</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style>
+   .c1-position{
+    position: relative;
+   }
+    #div1{
+      width:100px;
+      height:200px;
+      position: absolute;
+      background: red;
+      right: 0;
+      bottom: 0px;
+    }
+
+   #couple{
+      width:100px;
+      height:100px;
+      position: absolute;
+      background: red;
+      right:0px;
+    }
+    #di1{
+      width:1px;
+      height:200px;
+      position: absolute;
+      left: 100px;
+      background: #000;
+    }
+    #di2{
+      width:1px;
+      height:200px;
+      position: absolute;
+      left: 300px;
+      background: #000;
+    }
+  </style>
+   <script>
+   </script>
+   <script>
+   
+    window.onscroll=function(){  //为当前页面的页面滚动事件添加事件处理函数
+      var div1=document.getElementById("div1");
+      var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+
+      //这个是为了获取浏览器滚动条滚动的距离，而这种写法是为了兼容ie低版本和其他浏览器
+      //div1.style.top=document.documentElement.clientHeight-div1.offsetHeight+scroll+"px";
+      startMove1(document.documentElement.clientHeight-div1.offsetHeight+scroll);
+      
+      document.title=scroll+","+div1.style.top;
+     };
+
+
+       var timer = null; //放在函数内时效果无法成功
+      function startMove1(itarget){
+         var div1=document.getElementById("div1");
+         //放在函数外时无法成功
+          clearInterval(timer);
+          timer=setInterval(function(){
+          var speed=(itarget-div1.offsetTop)/4;
+
+          speed= speed>0?Math.ceil(speed):Math.floor(speed);
+          //取整数，如果speed是正数就向上取整，是负数就向下取整
+
+          if(div1.offsetTop == itarget)
+          {
+            clearInterval(timer);
+          }else
+          {
+            div1.style.top=div1.offsetTop+speed+"px";
+          }
+        },30);
+      }
+
+
+    
+  </script>
+
+
+ </head>
+ <body style="height: 2000px">
+ <div class="c1 ">
+  <div style="position: relative; width: 500px;height: 300px">
+  <input type="button" value="到100" onclick="startMove(100)" />
+<input type="button" value="到300" onclick="startMove(300)" />
+  <div id="couple">
+  </div>
+  <div id="di1">
+  </div>
+  <div id="di2"></div>
+ </div>
+ </div>
+
+
+ <div id="div1">
+ </div>
+
+
+  <div class="c1">
+  记录</br></br>
+  <p></p></br></br>
+  <p></p></br></br>
+  </div>
+ </body>
+ <script type="text/javascript">
+  var couple=document.getElementById("couple");
+  var atimer=null;
+   function startMove(target){
+    clearInterval(atimer);
+    atimer=setInterval(function(){
+    if(target<couple.offsetLeft){
+      var speed = -6;
+    }else{
+      speed = 6;
+    }
+
+    if(couple.offsetLeft==target){
+      clearInterval(atimer);
+      couple.style.left=target+"px";
+    }else{
+      couple.style.left=couple.offsetLeft+speed+"px";
+    }
+    },30);
+
+   }
+ </script>>
+</html>

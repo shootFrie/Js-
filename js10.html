@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js运算符</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function(){
+    var adiv1=document.getElementById("div1");
+    var aIpt1=adiv1.getElementsByTagName("input");	
+    var aBtn1=adiv1.getElementsByTagName("button");	
+	  aBtn1[0].onclick=function()
+	  {
+	   alert(parseInt(aIpt1[0].value)+parseInt(aIpt1[1].value));
+	  }
+	  aBtn1[1].onclick=function()
+	  {
+	   alert(aIpt1[2].value-aIpt1[3].value)
+	  }
+	  aBtn1[2].onclick=function()
+	  {
+	   alert(aIpt1[4].value*aIpt1[5].value);
+	  }
+	  aBtn1[3].onclick=function()
+	  {
+	   alert(aIpt1[6].value/aIpt1[7].value);
+	  }
+	  aBtn1[4].onclick=function()
+	  {
+	   alert(aIpt1[8].value%aIpt1[9].value);
+	  }
+	  //以上是div1的代码
+	  var adiv2=document.getElementById('div2');
+	  var ali2=adiv2.getElementsByTagName('li');
+	  var aBtn2=adiv2.getElementsByTagName('button')[0];
+	  aBtn2.onclick=function()
+	  {
+	   for(var i=0;i<ali2.length;i++)
+	   {
+	    if(i%2==0)
+		 {
+		   ali2[i].style.background="blue";
+		 }	else
+		 {
+		   ali2[i].style.background="yellow";
+		 }	
+	   }
+	  }
+	  //以上是div2的代码
+	  var adiv3=document.getElementById('div3');
+	  var aIpt3=adiv3.getElementsByTagName('input')[0];
+	  var aBtn3=adiv3.getElementsByTagName('button')[0];
+	  aBtn3.onclick=function()
+	  {
+	   var n=aIpt3.value;
+	   if(n==''||isNaN(n))
+	   {
+	    alert('输入有误，请重新输入数字');
+	   }else{
+	    alert(parseInt(n/60)+'分'+parseInt(n%60)+'秒') 
+	   }
+	  }
+	  //以上是div3的代码
+	  var adiv4=document.getElementById('div4');
+	  var aIpt4=adiv4.getElementsByTagName('input')[0];
+	  var aBtn4=adiv4.getElementsByTagName("button")[0];
+	  aBtn4.onclick=function()
+	  {
+	   var n=aIpt4.value;
+	   if(n==''||isNaN(n))
+	   {
+	    alert("输入有误，请重新输入数字");		 
+	   }else if(n>9&&n<100){
+	    alert('是两位数'); 
+	   }else{
+	    alert('不是两位数');
+	   }
+	  }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、算术练习<br></br>
+  <div class="c3">
+  例1：求和</br>
+  <input type="text" class="in-text">加
+  <input type="text" class="in-text">
+  <button type="button" class="btn btn-color">求和</button>
+  </div>
+  <div class="c3">
+  例2：求差</br>
+  <input type="text" class="in-text">减
+  <input type="text" class="in-text">
+  <button type="button" class="btn btn-color">求差</button>
+  </div>
+  <div class="c3">
+  例3：求积</br>
+  <input type="text" class="in-text">乘
+  <input type="text" class="in-text">
+  <button type="button" class="btn btn-color">求积</button>
+  </div>
+  <div class="c3">
+  例4：求商</br>
+  <input type="text" class="in-text">除
+  <input type="text" class="in-text">
+  <button type="button" class="btn btn-color">求商</button>
+  </div>
+  <div class="c3">
+  例5：求模</br>
+  <input type="text" class="in-text">模
+  <input type="text" class="in-text">
+  <button type="button" class="btn btn-color">求模</button>
+  </div>
+  </div>
+  
+  <div class="c1" id="div2">
+   2、取模应用于隔行换色</br></br>
+   <p>虽然现在需要实现这个应用只要通过CSS3的选择器进行偶数选择即可，但学习的进程还是要遵循的。
+   实现不管有多少个li，偶数li和奇数li使用不同背景颜色。分析：获取所有li，做一个li的for循环，
+   再进行判断当前这个li模上2等于0的时候执行变蓝色，不等于0的时候执行变黄色
+   </p>
+   <button type="button" class="btn btn-color">执行变色</button>
+   <ul class="list-group">
+    <li>隔行变色</li>
+    <li>隔行变色</li>
+    <li>隔行变色</li>
+    <li>隔行变色</li>
+    <li>隔行变色</li>
+   </ul>
+  </div>
+  
+  <div class="c1" id="div3">
+  3、求商取模应用于秒转时间</br></br>
+  <p>分析：检查是否为isNaN(变量)，不管输入框获取到的数字是多少，都执行除60取分钟，
+  最后取模为秒数。通过parseInt取整数。</p>
+  <div class="c3">
+  <input type="texe" class="in-text" placeholder="请输入数字" >
+ <button class="button" class="btn btn-color">秒转时间</button>
+  </div>
+  </div>
+  
+  <div class="c1" id="div4">
+  4、判断是否为两位数</br></br>
+  <p>分析：输入数字大于9且小于100为两位数。</p>
+  <div class="c3">
+  <input type="texe" class="in-text" placeholder="请输入数字" >
+  <button type="button" class="btn btn-color">检测</button>
+  </div>
+  </div>
+  
+  <div class="c3">
+  记录</br></br>
+  <p>算术：+加、-减、*乘、/除、%取模（求余数、求模）就是整除之后出来的余数。</p>
+  <p>赋值：=、+=（i+=1和i=i+1和i++是一个意思，都是加1，但是如果想一次加3，就不能用i++了，只能i=i+3或i+=3）、-=（减等）、*=（乘等）、/=（除等）、%=（模等）</p>
+  <p>关系：&lt;、>、&lt;=、>=、==（双等-先转换再比较）、===（三等-不转换直接比）、!=（不等）、!==&lt;（不等等）</p>
+  <p>逻辑：&amp;&amp;与（并且）、||或、!否（调换真假）</p>
+  <p>运算符优先级：括号</p>
+  
+  </div>
+ </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>DOM方式操作元素属性、DOM元素灵活查找</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function()
+   {
+    var div1=document.getElementById('div1');
+    var ipt1=div1.getElementsByTagName('input')[0];
+    var btn1=div1.getElementsByTagName('button');
+	  btn1[0].onclick=function()
+	  {
+	   ipt1.setAttribute('value','更改完毕');
+	  }
+	  btn1[1].onclick=function()
+	  {
+	   alert(ipt1.getAttribute('value'));
+	  }
+	  btn1[2].onclick=function()
+	  {
+	   ipt1.removeAttribute('value');
+	  }
+	  
+	  var div2=document.getElementById('div2');
+	  var ul2=div2.getElementsByTagName('ul')[0];
+	  var li2=div2.getElementsByTagName('li');
+	  var btn2=div2.getElementsByTagName('button');
+	  
+	  btn2[0].onclick=function()
+	  {
+	   for(var i=0;i<li2.length;i++){
+	    if (li2[i].className=='list-group class')
+		  {
+		   li2[i].style.background='yellow';
+		  }
+	   }
+	  }
+	  
+	  btn2[1].onclick=function(){
+	   alert(getClassName(ul2,'list-group class'));
+	   for(var i=0;i<getClassName(ul2,'list-group class').length;i++){
+	    getClassName(ul2,'list-group class')[i].style.background="blue";
+	   }
+	  }
+	  function getClassName(aParent,sClass)
+	  {
+	   var re=[];
+	   var aObj=aParent.getElementsByTagName('*');
+	   for(var i=0;i<aObj.length;i++)
+	   {
+	    if(aObj[i].className==sClass)
+	    re.push(aObj[i]); 
+	   }
+	   return re;
+	  }
+	  
+	  
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、DOM方式操作元素属性</br></br>
+  <div class="c3">
+  例1：setAttribute()创建或改变某个新属性</br></br>
+  <input class="in-text" type="text" value='还没修改' readonly>
+  </br></br>
+  <button class="btn btn-color">修改输入框的内容</button>
+   <code>pt1[0].setAttribute('value','更改完毕');</code></br></br>
+  <button class="btn btn-color">读取输入框的内容</button>
+   <code>alert(ipt1.getAttribute('value'));</code></br></br>
+  <button class="btn btn-color">移除输入框的内容</button>
+   <code>ipt1.removeAttribute('value');</code></br></br>
+  </div>
+  </div>
+  
+  <div class='c1' id="div2">
+  2、DOM元素灵活查找</br></br>
+   <div class='c3'>
+    例1：选出所有元素 通过className条件筛选</br></br>
+	<ul class="list-group">
+	 <li class="list-group">无</li>
+	 <li class="list-group class">class</li>
+	 <li class="list-group">无</li>
+	 <li class="list-group class">class</li>
+	 <li class="list-group class">class</li>
+	</ul>
+	<br>
+	<button class="btn btn-color">修改指定class的背景颜色</button>未封装<br></br>
+	<button class="btn btn-color">修改指定class的背景颜色</button>已封装<br></br>
+   </div>
+  </div>
+  
+  <div class="c1">
+  记录</br></br>
+  <p>元素属性操作：第一种：oDiv.style.display='block'; 第二种：oDiv.style['display']='block'; 第三种：DOM方式操作元素属性</p></br></br>
+  <p></p>DOM方式操作元素属性：获取：getAttribute(属性名)；设置：setAttribute(属性名,值)；删除：removeAttrebute(属性名)</br></br>
+  <p>DOM方式灵活查找：选出所有元素，通过className条件删选。封装函数时传两个参数进去，一个是要查找元素的父级，一个是要查找的class名。
+  循环所有找到的元素存入数组，最后return出数组。</p></br></br>
+  </div>
+ </body>
+</html>

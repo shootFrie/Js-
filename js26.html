@@ -1,0 +1,84 @@
+ <!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>可视区尺寸、滚动距离</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type="text/css">
+     #scrollTop{
+	    width:80px;
+		height:300px;
+		background:yellow;
+		position:absolute;
+		right:0;
+		bottom:0px;
+		transition:none;
+	 }
+   </style>
+   <script>
+   window.onload=function()
+   {
+     var div1=document.getElementById("div1");
+	   var btn1=div1.getElementsByTagName("button")[0];
+	   btn1.onclick=function()
+	   {
+	      alert("当前可视区宽度"+document.documentElement.clientWidth+"，当前可视区的高度："+document.documentElement.clientHeight);
+	   }
+	   var div2=document.getElementById("div2");
+	   var btn2=div2.getElementsByTagName("button")[0];
+	   btn2.onclick=function()
+	   {
+	     var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+		   alert("当前滚动距离："+scroll);
+	   }
+	   var div3=document.getElementById("div3");
+	   var btn3=div3.getElementsByTagName("button")[0];
+	   var sc=document.getElementById("scrollTop");
+	   btn3.onclick=function()
+	   {
+	     if(this.innerHTML=="展现浮动层")
+		   {
+		     this.innerHTML="关闭浮动层";
+			   this.style.background="red";
+			   sc.style.display="block";
+		   } 
+		   else if(this.innerHTML=="关闭浮动层")
+		   {
+		     this.innerHTML="开启浮动层";
+			   this.style.background="";
+			   sc.style.display="none";
+		   }
+	   }
+   }
+   </script>
+ </head>
+ <body>
+ <div class="c1" id="div1">
+  1、可视区尺寸</br></br>
+  <code>document.documentElement.clientWidth & document.documentElement.clientHeight</code>
+  </br></br>
+  <button class="btn btn-color">开启页面点击</button>
+ </div>
+ 
+ <div class="c1" id="div2">
+ 2、滚动距离</br></br>
+ <code>document.body.scrollTop || document.documentElement.scrollTop</code>
+ <button class="btn btn-color">查看滚动距离</button>
+ </div>
+ 
+ <div class="c1" id="div3">
+ 3、浮动层</br></br>
+ <code>window.onscroll & window.onresize</code>
+ <button class="btn btn-color">展现浮动层</button>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p>document.documentElement.clientWidth 获取浏览器窗口文档显示区域的宽度,不包括滚动条。</p></br></br>
+  <p></p></br></br>
+  </div>
+  
+  <div id="scrollTop" style="top:556px;display:none;">浮动层</div>
+ </body>
+</html>

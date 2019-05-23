@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js基本练习6 </title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+    window.onload=function(){
+	  var submit1=document.getElementById("submit1");
+	  submit1.onclick=function(){
+	   var input1=document.getElementById("input1");
+	   var show1=document.getElementById("show1");
+	   show1.innerHTML=show1.innerHTML+"<span class='point'>"+input1.value+"</span>"
+	  }
+	  document.getElementById("submit2").onclick=function()
+	  {
+	   var input2=document.getElementById("show2").getElementsByTagName("input");
+	   var show2=document.getElementById("show2").getElementsByTagName("div")[1];
+	   show2.innerHTML=show2.innerHTML+"<span class='point'>"+input2[0].value+input2[1].value+"</span>";
+	  }
+	  var show3=document.getElementById("show3");
+	  var text1=['这是第一句', '这是第二句', '这是第三句', '这是第四句'];
+	  var input3=show3.getElementsByTagName("input");
+	  var span1=show3.getElementsByTagName("span")[0];
+	  for(var i=0;i<input3.length;i++)
+	  {
+	   input3[i].index=i;
+	   input3[i].onclick=function()
+	   {
+	     span1.innerHTML=text1[this.index]; 
+	   }
+	   var submit3=document.getElementById("submit3");
+	   submit3.onclick=function()
+	   {
+	    for(var i=0;i<input3.length;i++)
+		  {
+	     alert(text1[i]);
+		  }
+	   }
+	  }
+	  
+	  
+	}
+   </script>
+ </head>
+ <body>
+  <div class="c1">
+   1、innerHTML的基本使用</br></br>
+   <span class="point">d2.innerHTML='提交后在这里显示：'+i1.value;</span>
+   </br>innerHTML的值等于value的值。
+   <div class="c3">
+     <div>
+       <input type="text" class="in-text" id="input1" placeholder="在这里输入文字"/>
+	    <input type="submit" id="submit1" value="提交" class="btn btn-color"/>
+     </div>
+   </div>
+   <div class="c3" id="show1">
+     提交后在这里显示：
+   </div>
+  </div>
+  
+  <div class="c1" id="show2">
+    2、innerHTML、字符串、判断的基本使用</br> </br>
+	<div class="c3">
+	   <input type="text" class="in-text" placeholder="在这里输入文字" />+
+	   <input type="text" class="in-text"  placeholder="在这里输入文字" />
+	   <input type="submit" id="submit2" value="提交" class="btn btn-color" />
+	</div>
+	<div class="c3">
+	 提交后在这里显示：
+	</div>
+  </div>
+   
+   <div class="c1" id="show3">
+    3、数组输出练习</br> </br>
+	<div class="c3">
+	  <p>已知数组内容：1、这是第一句，2、这是第二句，3、这是第三句，4、这是第四句。</p>
+	   <input type="submit" value="提取1" class="btn btn-color" />
+	   <input type="submit"  value="提取2" class="btn btn-color" />
+	   <input type="submit"  value="提取3" class="btn btn-color" />
+	   <input type="submit"  value="提取4" class="btn btn-color" />
+	   <button type="button" id="submit3">全部弹出提取  </button>
+	</div>
+	<div class="c3">
+	 提取后在这里显示：<span class='point'>这是第一句</span>
+	</div>
+  </div>
+  
+  <div class="c1">
+   <p>记录</p>
+   <p>在input文本框里面的值是用value引出来</p>
+   <p>数组都是从0开始的</p>
+   <p>innerHTML：某标签中的HTML</p>
+   <p>字符串拼接：用+可以把字符串连在一起。</p>
+   <p>最后全部弹出提取在function内是要重新进行循环。在function循环是不会被继承的</p>
+  </div>
+ </body>
+</html>

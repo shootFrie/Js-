@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>js基本练习4</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <script>
+    window.onload=function(){
+	  var b1=document.getElementById("button1");
+	  var b2=document.getElementById("button2");
+	  var b3=document.getElementById("button3");
+	  var b4=document.getElementById("button4");
+	  var b5=document.getElementById("button5");
+	  var b6=document.getElementById("button6");
+	  
+	  
+	  b1.onclick=function(){ //while循环直到不满足条件才结束循环
+	   var i=0;
+	   while(i<5){
+	    i++;
+	    alert("这是第"+i+'次弹出');
+	   }
+	  }
+	  b2.onclick=function(){
+	   for(var i=0;i<4;i++){
+	    var circle1=document.getElementById("circle1");
+		  var setcolor=circle1.getElementsByTagName("span");
+		  setcolor[i].style.background="yellow";
+	   }
+	  }
+	  b3.onclick=function(){
+	   var circle2=document.getElementById("circle2"); 
+	   var setvalue=circle2.getElementsByTagName("div");
+	   for(var i=0;i<setvalue.length;i++){
+	     if(setvalue[i].className=="c3"){
+		   setvalue[i].className="c4";
+		 }else{
+		   setvalue[i].className="c3";
+		 }
+	   }
+	   /*var i=0; //另一种解法
+	   if(setvalue[i].style.background=="yellow"){
+	     while(i<setvalue.length){
+		   setvalue[i].style.background="";
+		   setvalue[i].style.height="";
+		   setvalue[i].style.width="";
+		   i++;
+		 }
+		 }else
+		 {
+		   for(i=0;i<setvalue.length;i++)
+		   {
+		   setvalue[i].style.background="yellow";
+		   setvalue[i].style.height="150px";
+		   setvalue[i].style.width="300px";  
+		   }
+		 }*/
+		} 
+		
+		var inputbox=document.getElementById("inputbox").getElementsByTagName("input");
+		b4.onclick=function(){
+		 var i=0;
+		 while(i<inputbox.length){
+		  inputbox[i].checked=true;
+		  i++;
+		 }
+		}
+		b5.onclick=function(){
+		  for(var i=0;i<inputbox.length;i++){
+		   if(inputbox[i].checked==true){
+		    inputbox[i].checked=false;
+		   }else{
+		    inputbox[i].checked=true;
+		   }
+		  }
+		}
+		b6.onclick=function(){
+		 for(var i=0;i<inputbox.length;i++){
+		   inputbox[i].checked=false;
+		 }
+		}
+		
+		}
+	  
+
+   </script>
+ </head>
+ <body>
+  <div class="c1">
+   1、while循环
+    <p>
+	<button id="button1" type="button" class="bnt2">循环出现提示框5次</button>
+	</p>
+	<p>
+	任何一个循环，基本都包含4个部分。第一：<b>初始化</b>。
+	即：var i=0，var给i一个值，让i从0开始循环；第二：<b>条件</b>。
+	即：while(i&lt;5)，每次执行需要判断一下还成不成立，成立的话就继续重复。
+	第三：<b>语句</b>。
+	第四：<b>自增</b>。即：i=i+1，每执行一次语句自动加1，简化写法i++。
+	</p>
+	<p>while循环直到不满足条件才结束循环</p>
+  </div>
+  
+  <div class="c1" id="circle1">
+    2、for循环
+	<p>
+	 <button id="button2" type="button" class="bnt2">批量修改样式</button>
+	</p>
+	<p>固定元素个数，for循环修改样式</p>
+	<div class="js3_span">
+     <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	</div>
+  </div>
+  
+  <div class="c1" id="circle2">
+   3、if判断for循环
+    <p>
+	 <button id="button3" type="button" class="bnt2">批量修改样式</button>
+	</p>
+	<p>元素个数不定，for循环修改样式。加if判断，再次点击执行返回。</p>
+	<div class="c3">可循环变化</div>
+	<div class="c3">可循环变化</div>
+	<div class="c3">可循环变化</div>
+  </div>
+  
+  <div class="c1">
+    4、if判断for循环
+	<p id="inputbox"> 
+	 <input type="checkbox" />
+	 <input type="checkbox" />
+	 <input type="checkbox" />
+	 <input type="checkbox" />
+	 <input type="checkbox" />
+	</p>
+	<p>
+	 <button type="button" id="button4">全选</button>
+	 <button type="button" id="button5">反选</button>
+	 <button type="button" id="button6">不选</button>
+	</p>
+  </div>
+  
+  <div class="c1">
+  <p>记录</p>
+  <p>while循环与if用法差不多。if的格式是 if(条件){语句}，但不管条件成立与否，语句只会执行一次。while的格式是 while(条件){语句}，语句执行次数是条件不再成立为止。</p>
+  <p>for循环与while用法差不多。格式：for(初始化;条件;自增){语句}</p>
+  </div>
+ </body>
+</html>

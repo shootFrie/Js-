@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽操作</title>
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+		#target,#target2,#target3{
+			height: 200px;
+			border: 5px dashed #c0c0c0;
+			text-align: center;
+			line-height: 40px;
+			font-size: 20px;
+			color: #c0c0c0;
+		}
+		.over{
+			box-shadow: 20px 10px 20px #c0c0c0 inset; /* 内部加深 */
+			border-color: #999;
+		}
+	</style>
+</head>
+<body>
+	<div class="divClass" id="div1">
+		<h3>可以拖拽的元素</h3>
+		<h6>html中默认可以拖拽的属性是a和img，想让其他元素可以被拖拽就要设置draggable = "true"</h6>
+		<br>
+		<p draggable="true">^(*￣(oo)￣)^我被设置了可以拖拽</p>
+		<a href="">链接</a>
+		<img src="img/0.png" alt="">
+
+		<div id="target">
+			拽到这里来
+		</div>
+
+		<script>
+			//设置其拖拽前后的样式
+			//在H5中为每个DOM元素添加了一组ondragxxx事件
+			var p=document.querySelector('#div1 p');
+			var currentDragElement;
+			console.log(p);
+			p.addEventListener('dragstart', DragStart);
+			p.addEventListener('dragend',function(e){
+				//拖拽结束
+				this.style.border="";
+			});
+
+			//设置target上有元素经过时的样式
+			var target = document.querySelector("#target");
+			target.addEventListener('dragenter',function(e)
+			{
+				//元素进入当前区域触发
+				this.classList.add('over');
+			});
+			target.addEventListener('dragleave',function(e){
+				this.classList.remove('over');
+			});
+
+			//如果想要drop触发一定要在dragover阻止系统默认事件
+			target.addEventListener('dragover',function(e){
+				//阻止系统默认事件
+				e.preventDefault();
+				e.stopPropagation();
+			});
+			//注册目标元素 放事件
+			target.addEventListener('drop',function(e){
+				//当元素拽到target上时触发
+				//console.log('111');
+				this.appendChild(currentDragElement);
+			});
+
+			var a1 =document.querySelector('#div1 a');
+
+			a1.addEventListener("dragstart",DragStart);
+
+			var img1 = document.querySelector("#div1 img");
+
+			img1.addEventListener("dragstart",DragStart);
+
+			function DragStart(e){
+				//拖拽时的样式
+				this.style.border="1px solid #c0c0c0";
+				currentDragElement=this;
+			}
+		</script>
+	</div>
+
+	<div class="divClass" id="div2">
+		<h3>可以拖拽的元素</h3>
+		<p draggable="true" data-source-id="1">ヽ(￣︿￣　)—C<(/;◇;)/我被设置了可以拖拽</p>
+		<a href="" data-source-id='2'>链接</a>
+		<img src="img/0.png" alt="" data-source-id="3">
+
+		<div id="target2">
+			拽到这里来
+		</div>
+		<script>
+			var p2=document.querySelector("#div2 p");
+			var target2 = document.querySelector('#target2');
+
+			p2.addEventListener('dragstart',function(e){
+				//记录其数据
+				var sourceId = this.dataset.sourceId;
+				e.dataTransfer.setData('source',sourceId);
+				//注：只能传字符串
+			});
+
+			target2.addEventListener('dragover',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+			});
+			target2.addEventListener('drop',function(e){
+				var sourceId = e.dataTransfer.getData('source');
+				this.appendChild(document.querySelector('[data-source-id="'+sourceId+'"]'));
+			});
+
+			var a2 = document.querySelector("#div2 a");
+
+			a2.addEventListener("dragstart",Dragstart22);
+
+			var img2 = document.querySelector("#div2 img");
+
+			img2.addEventListener("dragstart", Dragstart22);
+
+			function Dragstart22(e){
+				//记录其数据
+				var sourceId = this.dataset.sourceId;
+				e.dataTransfer.setData('source',sourceId);
+				//注：只能传字符串
+			}
+		</script>
+	</div>
+
+	<div class="divClass">
+		<div id="target3">
+			拖拽外部文件到此
+		</div>
+		<script>
+			var target3 = document.querySelector("#target3");
+
+			target3.addEventListener('dragover',function(e){
+				//阻止默认事件
+				e.preventDefault();
+				e.stopPropagation();
+			});
+
+			target3.addEventListener('drop',function(e){
+				for(var i=0;i<e.dataTransfer.files.length; i++){
+					this.innerHTML=e.dataTransfer.files[i].name;
+					//获取文件名
+				}
+				e.preventDefault();
+				e.stopPropagation();
+			});
+		</script>
+	</div>
+</body>
+</html>

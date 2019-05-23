@@ -1,0 +1,34 @@
+#score{
+  text-align:center;
+}
+#main{
+ width:400px;
+ height:500px;
+ border:2px solid green;
+ margin:0 auto;
+ position:relative;
+ overflow:hidden; 
+}
+
+#contain{
+   width:100%;
+   height:500px;
+   position:relative;
+   top:-100px;
+   background:#fff;
+}
+
+.rows{
+  width:100%;
+  height:100px;
+}
+
+.cell{
+  width:100px;
+  height:100px;
+  float:left;
+}
+
+.black{
+ background:black;
+}

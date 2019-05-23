@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>DOM基础、子节点、父节点</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type="text/css">
+    .list-color{
+	 background-color:red;
+	}
+	.aright a{
+	 float:right;
+	 cursor:pointer;
+	 outline:none;
+	 color:#7698A7;
+	 text-decoration:none;
+	}
+	a:hover{
+	 text-decoration:underline;
+	}
+   </style>
+   <script>
+   window.onload=function()
+	{
+	 var div1=document.getElementById('div1');
+	 var adom1=div1.getElementsByTagName('div')[0];
+	 var aul=div1.getElementsByTagName('ul');
+	 var btn1=div1.getElementsByTagName('button');
+	 btn1[0].onclick=function(){
+	  alert('共有子节点'+aul[0].childNodes.length);
+	 }
+	 
+	 btn1[1].onclick=function(){
+	  for(var i=0;i<aul[0].childNodes.length;i++){
+	   alert('nodeType节点类型'+aul[0].childNodes[i].nodeType);
+	  }
+	  }
+	  btn1[2].onclick=function(){
+	  for(var i=0;i<aul[0].childNodes.length;i++){
+	   if(aul[0].childNodes[i].nodeType==1){
+	    aul[0].childNodes[i].className='list-group list-color';
+	    }
+	   }
+	  }
+	 btn1[3].onclick=function(){
+	  alert(aul[1].childNodes.length); 
+	 }
+	 btn1[4].onclick=function(){
+	  for(var i=0;i<aul[1].childNodes.length;i++){
+	   if(aul[1].childNodes[i].nodeType==1){
+	     aul[1].childNodes[i].className='list-groud list-color' ;
+	   }
+	  }
+	 }
+	 
+	 var div2=document.getElementById('div2');
+	 var btn2=div2.getElementsByTagName('button');
+	 var ul2=div2.getElementsByTagName('ul');
+	 var a2=div2.getElementsByTagName('a');
+	 
+	 btn2[0].onclick=function()
+	 {
+	  alert('当前节点的父节点是'+a2[0].parentNode);
+	 }
+	 btn2[1].onclick=function()
+	 {
+	  for(var i=0;i<a2.length;i++)
+	  {
+	   a2[i].parentNode.style.display='block';
+	  }
+	 }
+	 for(var i=0;i<a2.length;i++)
+	 {
+	  a2[i].onclick=function()
+	  {
+	   this.parentNode.style.display="none";
+	  }
+	 }
+	}
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、DOM节点 子节点</br></br>
+  <div class="c3">
+  例1：子节点 childNodes & nodeType</br></br>
+  <ul class="list-group " >
+  <li>子节点1</li>
+  <li>子节点2</li>
+  </ul>
+  <button class="btn btn-color">子节点个数</button>实际有2个li，但给出的结果是5。是因为childNodes把空的文本节点也算进去了。</br></br>
+  <button class="btn btn-color">判断节点类型</button>当nodeType等于3，说明是个文本节点，等于1，说明是个元素节点。</br></br>
+  <button class="btn btn-color">操作子节点</button>判断子节点类型是否等于1，如果等于1则改class。</br></br>
+  
+  </div>
+  
+  <div class="c3">
+  例2：子节点 children</br></br>
+  <ul class="list-group">
+   <li>子节点1</li>
+   <li>子节点2</li>
+  </ul>
+  <button class="btn btn-color">子节点个数</button>
+  <button class="btn btn-color">操作子节点</button>
+  </div>
+  </div>
+  
+  <div class="c1" id="div2">
+   2、DOM节点 父节点</br></br>
+   <div class="c3">
+    例1：父节点 parentNode</br></br>
+	 <button class="btn btn-color">查看隐藏的父节点</button>
+	 <button class="btn btn-color">显示被隐藏的父节点</button>
+    <ul class="list-group aright">
+	  <li>子节点1<a href="javascript:;">隐藏</a></li>
+	  <li>子节点2<a href="javascript:;">隐藏</a></li>
+	  <li>子节点3<a href="javascript:;">隐藏</a></li>
+	  <li>子节点4<a href="javascript:;">隐藏</a></li>
+	  <li>子节点5<a href="javascript:;">隐藏</a></li>
+	 </ul>
+   </div>
+  </div>
+  
+  <div class="c1">
+  记录<br></br>
+  <p>什么是DOM：DOM是JS组成部分之一，而且有自己得规范。
+  其实就是document，所有js对页面的操作都是通过document来进行的。</p></br><br>
+  <p>DOM节点：标签（CSS）、元素（JS）、节点（DOM），说的其实是一个东西，叫法不同而已。</p></br><br>
+  <p>浏览器支持DOM的程度：FF（火狐）对于他的兼容性是99%，IE（IE6-8）能支持到10%，
+  IE9可以到99%，Chrome可以达到60%。</p></br><br>
+  <p>节点类型：文本节点：，元素节点：。</p></br><br>
+  <p>子节点：只计算第一层的标签。</p></br><br>
+  <p>childNodes：包括文本节点与元素节点。</p></br><br>
+  <p>nodeType：获取节点类型。</p></br><br>
+  <p>children：只包括元素节点,不包括文本节点，也不必使用nodeType来判断。</p></br><br>
+  <p>父节点：parentNode、offsetParent（获取元素用于定位的那个父级）</p></br><br>
+  </div>
+ </body>
+</html>

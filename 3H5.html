@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<title>audio</title>
+	<link  rel="stylesheet" type="text/css" href="css/index.css" />
+	<!-- audio  定义音频播放组件
+	controls 决定是否显示控制菜单 
+	autoplay  自动播放
+	loop 循环播放
+	width="200" height="200"  高度宽度只在视频时使用
+	muted   规定音频的输出为静音
+	preload   预加载 如果使用autoplay则忽略此属性
+-->
+</head>
+<body>
+	<div class="divClass">
+		<audio src="source/NewRules.mp3" controls autoplay loop muted></audio>
+		<audio src="source/NewRules.mp3" controls preload>虽然不播放，但是会预先加载</audio>
+		<br>
+		<!-- 不管是audio还是video都不要直接去设置标签的src
+			格式问题：每个浏览器的音频视频兼容格式是不同的
+			html解析过程中会找到其中第一个能认识的格式播放，一旦找到认识的视频格式就不会往后找了 
+		-->
+		<video controls width="500">
+			<source src="source/notAfair.mp4">
+				<source src="source/notAfair.flv">
+					<span>不兼容</span>
+					<!-- 如果HTML遇到不能识别的标签。就会将该标签当做div -->
+				</video>
+				<input type="button" value="播放">
+				<input type="button" value="暂停">
+			</div>
+
+     <!-- 自定义播放器
+           1、隐藏controls
+ 		   2、加上控制元素
+  		   3、点击事件分别实现不同效果 -->
+  <div class="divClass">
+  	<h3>自定义播放器</h3>
+  	<video id="video" width="500">
+  		<source src="source/notAfair.mp4">
+  			<source src="source/notAfair.flv">
+  			</video>
+  			<p>进度条</p>
+  			<progress id="progress"  value="0" min="0" max="100" style="width:500px;"></progress>
+  			<span>00:00</span>
+  			<button id="btn_play">播放</button>
+  			<button id="btn_pause">暂停</button>
+  			<button id="btn_muted">静音</button>
+  			<input id="btn_volume" type="range" min="0" max="1" step="0.1"> 
+  			<button id="btn_fullscreen">全屏</button>
+  			<button id="btn_speed_up">加速</button>
+  			<button id="btn_speed_down">减速</button>
+  			<button id="btn_forward">前进5s</button>
+  			<button id="btn_back">后退5s</button>
+
+  			<script>
+  				var video=document.getElementById("video");
+  				var btn_play=document.getElementById("btn_play");
+  				var btn_pause=document.getElementById("btn_pause");
+  				var btn_volume=document.getElementById("btn_volume");
+  				var btn_fullscreen=document.getElementById("btn_fullscreen");
+  				var btn_muted=document.getElementById("btn_muted");
+  				var btn_speed_up=document.getElementById("btn_speed_up");
+  				var btn_speed_down=document.getElementById("btn_speed_down");
+  				var btn_forward=document.getElementById("btn_forward");
+  				var btn_back=document.getElementById("btn_back"); 
+  				var progress=document.getElementById("progress"); 
+
+  				//  addEventListener 将事件属性的on去掉 作为第一个参数传入
+  				btn_play.addEventListener('click',function()   // 添加事件的监听器
+  				{
+  					video.play();
+  					btn_play.disabled=true;  //play键禁止
+  					btn_pause.disabled=false;  //pause键开启
+  				});
+  				// 暂停
+  				btn_pause.addEventListener('click',function(){
+  					video.pause();
+  					btn_pause.disabled=true;
+  					btn_play.disabled=false;
+  				});
+  				//是否静音
+  				btn_muted.addEventListener('click',function(){   //静音
+  					//交互变换true 或 false
+  					video.muted=!video.muted;
+  					if(video.muted){       //代表当前已经静音
+  						btn_muted.innerHTML="取消静音";
+  					}else{
+  						btn_muted.innerHTML="静音";
+  					}
+  				});
+  				//音量  change
+  				btn_volume.addEventListener('change',function(){
+  					//当前的volume值，浏览器中的音量是0-1的区间
+  					video.volume = btn_volume.value;
+  				});
+  				//加速
+  				btn_speed_up.addEventListener('click',function(){
+  					
+  					video.playbackRate+=0.1;
+  				});
+  				//减速
+  				btn_speed_down.addEventListener('click',function(){
+  					video.playbackRate-=0.1;
+  				});
+  				// 前进5s
+  				btn_forward.addEventListener('click',function(){
+  					video.currentTime+=5;
+  				});
+  				//后退5s
+  				btn_back.addEventListener('click',function(){
+  					video.currentTime-=5;
+  				})
+
+  				//注册视频播放状态变化事件,进度条
+  				video.addEventListener('timeupdate',function(){
+  					progress.value=(video.currentTime/video.duration)*100;
+  					//video.duration总时长，如果max为1，则此处不必乘以100
+  				});
+
+  				//全屏
+  				btn_fullscreen.addEventListener('click',function(){
+  					fullScreen(video);
+  				});
+  				function fullScreen(ele){
+  					//兼容性判断
+  					if(ele.requestFullscreen){
+  						ele.requestFullscreen();
+  					}else if(ele.webkitRequestFullscreen){
+  						ele.webkitRequestFullscreen();
+  					}else if(ele.mozRequestFullscreen){
+  						ele.mozRequestFullscreen();
+  					}else if(ele.oRequestFullscreen){
+  						ele.oRequestFullscreen();
+  					}else if(ele.msRequestFullscreen){
+  						ele.msRequestFullscreen();
+  					}
+  				}
+  			</script>
+  		</div>
+
+  		<div class="divClass" id="try">
+  			<h3>HTML5选择器</h3>
+  			<ul class="list">
+  				<li class="item">document.querySelector('#try') 返回DOM对象</li>
+  				<li class="item">document.querySelectorAll('.list') 返回DOM对象的一个数组</li>
+  				<li class="item">addEventListener('click',function(){});注册事件</li>
+  				<li class="item" data-num="data-num" data-name="data-name">HTML5中自定义的属性，以data-开头。通过DOM，存储与DOM对象，强相关的数据</li>
+  				<li class="item"  data-num="01">setAttribute 设置元素属性</li>
+  				<li class="item" data-num="02">getAttribute 获取元素属性</li>
+  				<li class="item">jQuery的attr，既可以获取也可以设置</li>
+  				<li class="item">dataset  是HTML5新增的，专门用于操作自定义属性的，获取设置data-</li>
+  				<li class="item">循环所有li之后才能进行此操作</li>
+          <li class="item">console.log(lis[i].dataset);    获取全部的自定义属性</li>
+          <li class="item" data-name="这是一个">console.log(lis[i].dataset.num);   获取特定的属性 如data-num</li>
+          <li class="item" data-name="这是两个">console.log(lis[i].dataset['name-age']);   键值的方式可以方便data-name-age</li>
+          <li class="item" data-name="这是两个">lis[i].dataset['age']=i;   设置自定义属性</li>
+          <li class="item" data-name-age="这是三个">$('ul>li:eq(1)').data('name');   jQuery封装的data函数</li>
+  			</ul>
+  			<script>
+  				//var try=document.querySelector('#try');  //h5特有的,使用方法和jQuery相同
+          var lis=document.querySelectorAll('ul>li');
+
+          for(var i=0; i<lis.length;i++){
+           // lis[i].setAttribute('data-age', i);
+            //console.log(lis[i].getAttribute('data-num'));
+            //console.log(lis[i].dataset);    //获取全部的自定义属性
+            //console.log(lis[i].dataset.num);   //获取特定的属性 如data-num
+            //console.log(lis[i].dataset['name']);   //键值的方式获取
+            lis[i].dataset['age']=i;       //设置自定义属性
+          }
+
+  			</script>
+  		</div>
+      <div style="height:50px;"></div>
+  	</body>
+  	</html>

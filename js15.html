@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>定时器、日期对象 </title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <style type="text/css">
+   #div3 div{
+    width:100%;
+	height:60px;
+	transparent:none;
+   } 
+	.ad{
+	  float:left;
+	  display:inline;
+	  padding:20px;
+	  cursor:pointer;
+	  background:#efefef;
+	}
+	.bd{
+	  float:left;
+	  display:inline;
+	  padding:20px;
+	  cursor:pointer;
+	  background:#efefef;
+	  display:none;
+	}
+   </style>
+   <script>
+   window.onload=function()
+   {
+	  var Btn1=document.getElementById('div1').getElementsByTagName('button');
+	  Btn1[0].onclick=function()
+	  {
+	   var i=0;
+	   function show()
+	   {
+	    alert("这是弹出框"+i+'次弹出');
+		  return i+=1;
+	   }
+	   setInterval(show,1000);
+	  }
+	  Btn1[1].onclick=function()
+	  {
+	   var i=0;
+	   function show(){
+	    alert('这是弹出框'+i);
+      i+=1;		
+	   }
+	   setTimeout(show,1000);
+	  }
+	  Btn1[2].onclick=function()
+	  {
+	   var i=0;
+	   function show()
+	   {
+	    alert("这是弹出框"+i+'次弹出');
+		  return i+=1;
+	   }
+	   time1=setInterval(show,1000);
+	  }
+	  Btn1[3].onclick=function()
+	  {
+	   var i=0;
+	   function show()
+	   {
+	    alert("这是弹出框"+i+'次弹出');
+		  return i+=1;
+	   }
+	   clearInterval(time1);
+	  }
+	  
+	  var Btn2=document.getElementById('div2').getElementsByTagName('button');
+	  var Dte2=new Date;
+	  Btn2[0].onclick=function()
+	  {
+	   var a=Dte2.getHours();
+	   alert('当前时间是'+a+'时');
+	  }
+	  Btn2[1].onclick=function()
+	  {
+	   var a=Dte2.getMinutes();
+	   alert('当前时间是'+a+'分');
+	  }
+	  Btn2[2].onclick=function()
+	  {
+	   var a=Dte2.getSeconds();
+	   alert('当前时间是'+a+'秒');
+	  }
+	  
+	  var Img=div2.getElementsByTagName('img');
+	  
+	  function beString(n){
+	   if(n<10){
+	    return "0"+n; //执行个位数前面加个0
+	   }else{return ""+n;}//有前面的""空字符可以将获得日期或时间变成字符串
+	  }
+	  function tick(){
+	  var aDte=new Date();
+	  var str=beString(aDte.getHours())+beString(aDte.getMinutes())+beString(aDte.getSeconds());
+	  for(var i=0;i<str.length;i++)
+	  {
+	    Img[i].src="img/"+str[i]+'.png';
+	  }
+	  }
+	  setInterval(tick,1000);
+	  tick();//在开始就执行，就不会有setInterval刷新后一秒的延迟
+	  
+	  
+	  var div3=document.getElementById('div3');
+	  var Btn3=div3.getElementsByTagName('button');
+	  var Spn3=div3.getElementsByTagName('span');
+	  var time3=null;
+	  Spn3[0].onmouseover=function()
+	  {
+	    clearTimeout(time3);
+	    Spn3[1].style.display="block"; 
+	  }
+	  Spn3[0].onmouseout=function()
+	  {
+	    time3=setTimeout(function()
+	   {
+	    Spn3[1].style.display="none"; 
+	   },2000);
+	  }
+	  Spn3[1].onmouseover=function()
+	  {
+	   clearTimeout(time3);
+	   Spn3[1].style.display="block"; 
+	  }
+	  Spn3[1].onmouseout=function()
+	  {
+	   time3=setTimeout(function(){
+	    Spn3[1].style.display="none"; 
+	   },500);
+	  }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+  1、定时器</br></br>
+  例1：setInterval 定时型</br>
+  <code>setInterval(show,1000)</code>
+  <button class="btn btn-color">开始弹出</button>
+  <span>无终止的执行，每隔一秒执行一次函数</span>
+  <span>setInterval(show(),1000)将会只执行一次</span></br>
+  
+  例2：setTimeout 延时型</br>
+  <code>setTimeout(show,2000)</code>
+  <button class="btn btn-color">开始弹出</button>两秒后执行一
+  次弹出就结束</br>
+  
+  例3：开启和关闭</br>
+  <button class="btn btn-color">开启</button>
+  <button class="btn btn-color">关闭</button>clearInterval(函数名)</br>
+  clearTimeout(函数名)是关闭setTimeout延时器的方法
+  </div>
+  
+  <div class="c1" id="div2">
+  2、日期对象 Date</br></br>
+  <a href="http://www.mhero.com/javascript/js004/js001.html">本文原创出自</a>
+  获取<button class="btn btn-color">当前小时</button>
+  <span>new Date.getHours()</span>
+  <button class="btn btn-color">当前分钟</button>
+  <span>new Date.getMinutes()</span>
+  <button class="btn btn-color">当前秒数</button>
+  <span>new Date.getSeconds()</span></br>
+  假设当前时间是<code> var str1='105123';</code> 做一个6位数字图片的循环，第i个图片的src就是第i个png。
+  <div style="background:black;color:white;width:500px;height:40px;font-size:40px;">
+  <img src="img/0.png">
+  <img src="img/0.png">:
+  <img src="img/0.png">
+  <img src="img/0.png">:
+  <img src="img/0.png">
+  <img src="img/0.png">
+  </div>
+  </div>
+  
+  <div class="c1" id="div3">
+  3、延时提示框</br></br>
+  <div>
+  <span class="ad">鼠标经过触发二级</span>
+  <span class="bd">鼠标离开关闭二级</span>
+  </div>
+  </div>
+  
+  <div class="c1">
+  记录</br></br>
+  <p>定时器setInterval：setInterval(show, 1000) 无终止执行 每隔一秒执行1次函数。对应clearInterval(变量名)关闭定时器。</p></br>
+  <p>定时器setTimeout：setTimeout(show, 2000) 两秒后执行一次函数就结束。对应clearTimeout(变量名)关闭定时器。</p></br>
+  <p>关闭定时器：需要指定出需要关闭得是哪个定时器。通过time=null clearInterval(time参数)来指定关闭哪个定时器。</p></br>
+  <p>Date对象：首先需要创建个新日期对象出来，例如var oDate=new Date() 获取方法：getFullYear年、getMonth月、getDate日、
+  getDay星期、getHours时、getMinutes分、getSeconds秒。例如获取当前小时oDate.getHours()</p></br>
+  <p>时间补零&字符串连接：例如将6分改成06分。建立函数，做一个判断，如果这个数字小于10，那他就是个单数，就需要给他补
+  一个0返回出去。例如return '0'+n;，否则就是大于等于10的，说明已经是双数，那么就直接返回出去。例如return ''+n;。加''是
+  为了让返回出去的数字类型变成字符串。</p></br>
+  <p>变量调用匿名函数：任何需要添加函数名的变量，都可以直接把函数内容存进去，即匿名函数。</p></br>
+  <p>函数第一时间执行：例如有一个函数function show()需要在第一时间执行，就把函数名show()放到onload里。这样就会立刻执行show()。</p></br>
+  <p>charAt：charAt(0)作用于兼容 获取字符串上某一位的东西。例如var str='abcdefg'，如果想弹出第0位上的东西不可以直接写成alert(str[0])，
+  部分浏览器会不兼容。这个时候就需要用到charAt()。即alert(str.charAt(0))</p></br>
+  <p>延时提示框：当鼠标经过div1显示出div2，当鼠标移出div1隐藏div2（通过用setTimeout延时500毫秒执行隐藏），当鼠标从div1移动到div2的时候div2保持可见状态
+  （通过clearTimeout()执行关闭刚才的延时隐藏，这样就做到了div2保持可见），当鼠标移出div2则隐藏（再次用setTimeout延时500毫秒执行隐藏，同时设置当鼠标经过div1的时
+  候关闭刚才的延时隐藏）。</p></br>
+  </div>
+ </body>
+</html>

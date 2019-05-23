@@ -1,0 +1,71 @@
+ .c1{
+	border-bottom: 9px solid #E7EFF1;
+    box-shadow: 1px 0px 5px rgba(100, 100, 100, 0.3);
+	width:88%;
+	padding:10px 2px 0px 30px;
+	margin:30px 0 0 30px;
+	min-height:60px;
+	background:#fff;
+	color:#666;
+	   }
+#btn1{display:none;}
+ .c2{
+	    float:right;
+	    border:1px solid #ccc;
+	    color:red;
+        margin:0px 10px 0 0px;
+	   }
+.bnt1{
+  width:100px;
+  line-height:30px;
+  background:#CE0000;
+  color:#fff;
+  border-radius:10px;
+}
+.bnt2{
+  line-height:28px;
+  border-radius:5px;
+}
+.box1{
+  border:1px solid #000;
+  width:300px;
+  padding:10px 0 10px 30px;
+  margin:30px 0 0 100px;
+  min-height:300px;
+  background:yellow;
+  color:#666;
+}
+.js3_span {
+  height:50px;
+  margin:20px 5%;
+}
+.js3_span span{
+  float:left;
+  width:50px;
+  height:50px;
+  margin:5px;
+  border:1px solid red;
+}
+ .c3{
+ width:40%;
+ padding:10px 0 10px 30px;
+ margin:30px 0 0 10px;
+ min-height:60px;
+ background:#fff;
+ color:#666;
+	border-bottom: 9px solid #E7EFF1;
+    box-shadow: 1px 0px 5px rgba(100, 100, 100, 0.3);
+}
+.c4{
+	    border:1px solid #000;
+		 width:300px;
+		 padding:10px 0 10px 30px;
+		 margin:30px 0 0 10px;
+		 height:90px;
+		 background:yellow;
+		 color:#666;
+	   }
+.point{
+  color:red;
+  background:yellow;
+}	   

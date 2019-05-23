@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>li、表格移动、排序</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function()
+   {
+     var div1=document.getElementById("div1");
+	   var btn=document.getElementsByTagName("button");
+	   
+	   btn[0].onclick=function()
+	   {
+	     var aul=div1.getElementsByTagName("ul");
+		   var liNum=div1.getElementsByTagName("ul")[0].getElementsByTagName("li");
+        if(aul[0].children.length>=1){		    
+			  var ali=aul[0].children[0];
+			   aul[0].removeChild(ali);
+			   aul[1].appendChild(ali);
+			 }
+	   }
+	   
+	  var div2=document.getElementById("div2");
+     btn[1].onclick=function()
+	  { 
+	     var aul=div2.getElementsByTagName("ul")[0];
+		   var ali=aul.children[0];
+		   aul.removeChild(ali);
+		   aul.appendChild(ali);
+	  }	
+     
+     var div3=document.getElementById("div3");
+	   btn[2].onclick=function()
+	   {
+	     var aul=div3.getElementsByTagName("ul")[0];
+		   var ali=aul.children[0];
+			var aRr=[];    //创建新的数组
+        for(var i=0;i<aul.children.length;i++)
+	     {
+		     aRr[i]=aul.children[i];  //将元素集合里的元素放到数组里
+		   }	   
+		   aRr.sort(function(li1,li2){      //比较数组里面的li
+		     var n1=parseInt(li1.innerHTML);   //转换值方便相互比较
+			   var n2=parseInt(li2.innerHTML);
+			   return n1-n2;   //n1-n2值大于0，位置不变，值小于0，n2要排在n1位置之前。这是数组sort方法的
+		   });
+		   for(var i=0;i<aRr.length;i++)
+		   {
+		    alert('准备把'+aRr[i].innerHTML+'放在最下边');
+         aul.appendChild(aRr[i]);
+        if(i==aRr.length-1){
+		     alert("排序已完成");
+		   }		 
+		   }
+	   }
+   }
+   </script>
+ </head>
+ <body>
+ <div class="c1" id="div1">
+ 例1、移动li 从黄色区域移动到红色区域</br></br>
+ <button class="btn btn-color">移动li</button></br></br>
+ <div style="background:yellow;padding:2px; margin:10px;">
+  <ul class="list-group">
+   <li>1</li>
+   <li>2</li>
+   <li>3</li>
+   <li>4</li>
+   <li>5</li>
+  </ul>
+ </div>
+ <div style="background:red;padding:2px;">
+ <ul class="list-group">
+ </ul>
+ </div>
+ </div>
+ 
+ <div class="c1" id="div2">
+ 例2、appendChild到ul1里</br></br>
+  <button class="btn btn-color">移动li</button></br></br>
+ <div style="background:yellow;padding:2px;">
+  <ul class="list-group">
+   <li>1</li>
+   <li>2</li>
+   <li>3</li>
+   <li>4</li>
+   <li>5</li>
+  </ul>
+ </div>
+ </div>
+ 
+ <div class="c1" id="div3">
+  例3、排序</br></br>
+  <button class="btn btn-color">排序li</button></br></br>
+ <div style="background:yellow;padding:2px;">
+  <ul class="list-group">
+   <li>34</li>
+   <li>25</li>
+   <li>9</li>
+   <li>88</li>
+   <li>54</li>
+  </ul>
+ </div>
+ </div>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p>移动Li：首先找出要移动的Li是谁，其实就是Ul1的第一个子节点。
+  例如：var oLi1=oUl1[0].children[0];。首先需要把这个子节点从Ul1里移除掉，
+  例如：oUl1[0].removeChild(oLi1);。然后再把它添加到Ul2里，例如：oUl2.appendChild(oLi1);。
+  </p></br></br>
+  <p>关于appendChild：其实appendChild做了两件事，1、先把元素从原有的父级上删掉。2、添加到新的父级。
+  所以可以不需要在原有的父级上removeChild，而是直接在新的父级上直接appendChild就可以了。
+  </p></br></br>
+  <p>例2appendChild到Ul1里：其实这个子节点本身就是Ul1里的，而现在又添加了一遍。
+  结果就是Li1跑到最下边去了。它的原理就是先把1给删掉，同时2就会往上顶，然后又把1添加到最后边。
+  </p></br></br>
+  <p>排序原理：首先从所有li里找到最小的那一个。把最小的那一个appendChild加到最后，持续寻找最小的，持续添加到最后。
+  </p></br></br>
+  <p>元素集合：var aLi=oUl3[0].getElementsByTagName('li');。实际上这个aLi并不是一个数组，至少他不是一个Array。
+  aLi它叫做元素集合，就是把一大堆的元素给放到一起，跟数组差不多。只不过是元素集合也有length，也可以用方括号。
+  所以sort之类的对于元素集合来说就不好使了。</p></br></br>
+  <p>排序-元素集合转成数组：既然aLi不是一个数组，那就建立一个空数组，做一个循环，循环所有li的length。
+  每循环一次就把这个li里的值就添加到数组里去。这个时候数组就有了一堆的li了，然后对这个数组进行sort排序。
+  在做sort排序的时候需要一个比较函数，它有两个参数，这两个参数就是要比较的东西，也就是li1和li2的innerHTML的大小。
+  接下来按照数组的顺序给ul重新循环appendChild一遍所有li。</p></br></br>
+  </div>
+ </body>
+</html>

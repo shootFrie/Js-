@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>程序流程控制、获取select选中值</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function(){
+     var adiv=document.getElementById("adiv");
+	  var aBtn=adiv.getElementsByTagName('button');
+	  var json={div1a:5,div1b:12,div1c:'15'}
+	  aBtn[0].onclick=function(){
+	   alert(json.div1a);
+	  }
+	  aBtn[1].onclick=function(){
+	   alert(json.div1b);
+	  }
+	  aBtn[2].onclick=function(){
+	   alert(json.div1c);
+	  }
+	  var arr=[5,12,51]
+	  aBtn[3].onclick=function(){
+	   alert(arr[0]);
+	  }
+	  aBtn[4].onclick=function(){
+	   alert(arr[1]);
+	  }
+	  aBtn[5].onclick=function(){
+	   alert(arr[2]);
+	  }
+	  var bdiv=document.getElementById('bdiv');
+	  var bBtn=bdiv.getElementsByTagName('button');
+	  bBtn[0].onclick=function(){
+	    for(var i=0;i<arr.length;i++){
+		  alert('第'+i+'个内容是'+arr[i]);
+		}
+		}
+		bBtn[1].onclick=function(){
+	    for(var i in arr){
+		  alert('第'+i+'个内容是'+arr[i]);
+		}
+		}
+		bBtn[2].onclick=function(){
+	    for(var i in json){
+		  alert('第'+i+'个内容是'+json[i]);
+		}
+	  }
+   }
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="adiv">
+  1、Json简单用法 Json与数组对比</br>
+  <div class="c3">
+  例1、用Json定义变量并提取。
+  <code>var json={a:1, b:21, c:'51'};</code> 通过json.变量名获取</br>
+  <button class="btn btn-color">Jspn变量a</button>
+  <button class="btn btn-color">Jspn变量b</button>
+  <button class="btn btn-color">Jspn变量c</button>
+  </div>
+  <div class="c3">
+  </br>例2、用数组定义并提取。</br>
+  <code>var arr=[5,12,51]; 通过arr[数字]获取</br>
+  <button class="btn btn-color">数组1</button>
+  <button class="btn btn-color">数组2</button>
+  <button class="btn btn-color">数组3</button>
+  </div>
+  </div>
+  <div class="c1" id="bdiv">
+  </br>2、Json与数组的循环对比
+  <div class="c3">
+  例1、数组的循环</br>
+  <button class="btn btn-color">数组循环</button>基于for length
+  <button class="btn btn-color">数组循环</button>基于for in
+  </div>
+  <div class="c3">
+   例2、Json的循环</br>
+   <button class="btn btn-color">Json循环</button>基于for it
+   </br>
+   <code>for(var i in json)</code>
+   Json与数组的区别：1、Json的下标是个字符串，数组的下标是个数字。2、数组有length，Json没有length。
+  </div>
+  </div>
+  
+  <div class="c1">
+  记录</br></br>
+  <p>Json：用于存数据</p>
+  <p>循环：数组依然用for 0~length的方法，json用for in的方法。</p>
+  <p></p>
+  </div>
+ </body>
+</html>

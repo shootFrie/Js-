@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>首尾子节点、兄弟节点</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function ()
+	{
+	 var div1=document.getElementById('div1');
+	 var btn1=div1.getElementsByTagName('button');
+	 var aul=div1.getElementsByTagName('ul');
+	 
+	 btn1[0].onclick=function ()
+	 {//兼容性问题
+	  if(aul[0].firstElementChild)
+	  {
+	   aul[0].firstElementChild.innerHTML='成功修改 首节点'; 
+	  }else{
+	  aul[0].firstChild.innerHTML='成功修改 首节点';
+	  }
+	 }
+	 btn1[1].onclick=function ()
+	 {
+	  if (aul[0].lastElementChild)
+	  {
+	   aul[0].lastElementChild.innerHTML='成功修改 尾节点';
+	  }else{
+	   aul[0].lastElement.lastChild;
+	  }
+	 }
+	 
+	 var div2=document.getElementById('div2');
+	 var ul2=div2.getElementsByTagName('ul')[0];
+	 var li2=div2.getElementsByTagName('li');
+	 var btn2=div2.getElementsByTagName('button');
+	 btn2[0].onclick=function()
+	 {
+	  if(li2[1].previousElementSibling)
+	  {
+	    alert(li2[1].previousElementSibling.innerHTML);
+	  }else{
+	    alert(li2[1].previousElementSibling.innerHTML);
+	  }
+	 }
+	 
+	 btn2[1].onclick=function()
+	 {
+	  if(li2[1].nextElementSibling)
+	  {
+	    alert(li2[1].nextElementSibling.innerHTML);
+	  }else{
+	   alert(li2[1].nextSibling.innerHTML);
+	  }
+	 }
+	}
+   </script>
+ </head>
+ <body>
+  <div class="c1" id="div1">
+   1、DOM节点 首尾子节点</br></br>
+   <div class="c3">
+   例1：首尾节点</br></br>
+   <ul class="list-group">
+    <li>子节点1 首节点</li>
+    <li>子节点2</li>
+    <li>子节点3 尾节点</li>
+   </ul>
+   
+   <button class="btn btn-color">修改首节点文字</button>
+   firstChild & firstElementChild</br></br>
+   <button class="btn btn-color">修改尾节点文字</button>
+   lastChild & lastElementChild
+  </div>
+  </div >
+  
+  <div class="c1" id="div2">
+   2、DOM节点 兄弟节点</br></br>
+   <div class="c3">
+   例1：首尾节点</br></br>
+   <ul class="list-group">
+    <li>子节点1 首节点</li>
+    <li>子节点2</li>
+    <li>子节点3 尾节点</li>
+   </ul>
+   
+   <button class="btn btn-color">查看子节点2前兄弟节点</button>
+   previousSibling & previousElementSibling</br></br>
+   <button class="btn btn-color">查看子节点2后兄弟节点</button>
+   nextSibling & nextElementSibling
+  </div>
+  
+  <div class="c1">
+   记录</br></br>
+   <p>首尾子节点：firstChild & firstElementChild / lastChild & lastElementChild</p></br></br>
+   <p>兄弟子节点：previousSibling & previousElementSibling / nextSibling & nextElementSibling</p></br></br>
+   <p>兼容问题：都是通过判断来解决兼容问题</p></br></br>
+  </div>
+ </body>
+</html>

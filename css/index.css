@@ -1,0 +1,99 @@
+
+.t1{
+  border:1px solid #ccc;
+  padding：1px;
+  line-height:30px;
+  background-color:#eee;
+}
+.t1 ul{
+ display:block;
+ margin:16px 0 0 0 ;
+ padding:0;
+}
+.t1 ul li{
+ list-style-type:none;
+ line-height:30px;
+ color:#fff;
+ font-size:14px;
+ font-family: Î¢ÈíÑÅºÚ;
+
+ border-bottom:2px solid #ffffcc;
+ cursor:pointer;
+}
+.t1 ul li:hover {
+ background-color:#336699;
+ color:#fff;
+}
+
+.t1 ul li a:hover{
+ color:#fff
+}
+.t1 a{
+text-decoration:none;
+color:#336699;
+display:block;
+ text-indent:20px;
+}
+
+/* jQuery1中的css */
+/* 公用 */
+ .divClass{
+  width: 600px; 
+  border:1px solid #000; 
+  margin: 20px auto;
+  padding:10px;
+  clear: both;
+}
+.divClass:after{
+  clear:both;
+  content:"";
+}
+.divClass p{
+  margin-bottom: 20px;
+}
+
+.img_li li{
+  list-style: none;
+  float: left;
+  border:1px solid #333;
+  margin-left: 10px;
+  margin-bottom:20px;
+}
+.tab{
+  padding:10px;
+  text-align: center;
+  border-collapse: collapse;
+}
+.tab tr,.tab th{
+  border-bottom:1px solid #333;
+}
+.hidd_tbody{
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

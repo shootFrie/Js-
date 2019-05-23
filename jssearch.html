@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>别踩白块</title>
+   <link rel="stylesheet" style="text/css"  href="css/jssearch.css" />
+   
+ </head>
+ <body>
+ <h1 id="score">0</h1>
+   <div id="main">
+     <div id="contain">
+	   <!-- <div class="row">
+		  <div class="cell"></div>
+		  <div class="cell"></div>
+		  <div class="cell"></div>
+		  <div class="cell"></div>
+		 </div>
+		 
+		 <div class="row">
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 </div>
+		 
+		 <div class="row">
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 </div>
+		 
+		 <div class="row">
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 <div class="cell"></div>
+		 </div>
+		-->
+		 
+	  </div>
+   </div>
+   <input id="restart" type="submit" value="重新开始">
+   <script>
+   /*
+   *  大致框架 首先创建div，再为创建的div配置class函数。
+   *  创建className=row的div包含四个classN为cell的子div
+   *  最后将row的div放入id为contain中
+   */
+    function createDiv(className)
+	{                       //创建一个div，className是它的类名传参
+	  var div=document.createElement("div"); 
+	  div.className=className;
+	  return div;
+	}
+	//创建Row
+	function createRow()
+   {
+     var row = createDiv('row');  //创建div.row div class="row"
+	   var classes = createSn() ;   //得到数组
+	   for(var i=0;i<4;i++)
+	   {                 //在div中传参，查找creatSn()数组的className
+	     row.appendChild(createDiv(classes[i]));  //后面有随机数后传参不用row.appendChild(creatDiv("cell"));
+	   }
+	   
+	   if($("contain").firstChild == null)  //往上加行
+	   {
+	     $("contain").appendChild(row);
+	   }else{
+	     $("contain").insertBefore(row,$("contain").firstChild);
+	   }
+   }
+  /*
+  *  按id获取对象
+  */
+   function $(id)   
+   {
+    return document.getElementById(id); 
+   }
+   
+   /**
+   * 返回一个数组，随机抽取一个单元，值为"cell black",其他3个，值为"cell"
+   * 动态生成3行黑块
+   */
+   function createSn()
+   {
+    var arr=["cell","cell","cell","cell"];   //floor() 方法执行的是向下取整计算
+	 var n = Math.floor(Math.random()*4);  //random()*4 方法可返回介于 0 ~ 4 之间的一个随机数(小数)。
+	 arr[n]="cell black";
+	 return arr;
+   }
+   /*
+   *createRow();createRow();createRow();createRow();
+   * 初始化操作 有几行
+   */
+   function init()
+   {
+     for(var i=0;i<4;i++)  //设置4行
+	  {
+	    createRow();
+	  } 
+	  
+	  $("main").onclick = function(ev)  //点击后变色
+	  {
+	   judge(ev); //事件传过去
+	  }
+   }
+   var state = 0; //0是初始化，1是进行中，3失败
+   function judge(ev)
+   {
+     if(state==3){
+	   alert("你已经输了");
+	   return state;
+	  }
+     if(ev.target.className.indexOf("black") == -1) 
+	   {         //点到白块就输
+	    clearInterval(clock);
+		  alert("你输了");
+		  state=3;
+	   }else{
+	   ev.target.className="cell";
+	   ev.target.parentNode.pass=1;
+	   score();
+	   }
+   }
+   /*
+   *方块动起来
+   */ 
+   var clock=null;        //定时器操作句柄
+   function start()
+   {
+     clock=window.setInterval('move()',30); 
+   } 
+   /*  使黑白块动起来---contain动起来
+   *
+   */
+   function move()
+   {
+     var co=$("contain");
+     var top = parseInt(window.getComputedStyle(co,null)["top"]); 
+	 //获取浏览器渲染后在内存里最终存在的top，在IE中是currentStyle()
+	  top+=5;    //调节下来速度，要是100的约数，方便比较
+	  co.style.top=top+"px";
+	 
+	  if(top == 0) //添加新行
+	  {
+	   createRow();
+	   co.style.top="-100px";
+	   co.removeChild(co.lastChild);
+	  }else if(top == -95){
+	   if(co.lastChild.pass !== 1)
+	   {
+	    
+	   }
+	  }
+   }
+    
+   /*
+   *删除最后一行
+   */
+    init();
+    start();
+	
+	
+	/*
+	* 几分
+	*/
+	function score()
+	{
+	 $("score").innerHTML=parseInt($('score').innerHTML)+1;
+	}
+	
+	/*
+	*重新再来
+	*/
+	
+	
+   </script>
+   
+ </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <title></title>
+  <style type="text/css">
+	 #div1{
+	   width:500px;
+	   height:120px;
+	   margin:100px auto;
+	   position:relative;
+	   overflow:hidden;
+	 }
+	 #div1 ul{
+	   position:absolute;
+	   left:0;
+	   top:0;
+	 }
+	 #div1 ul li{ 
+	   float:left;
+	   list-style:none;
+	 }  
+  </style>
+  <script>
+     window.onload=function()
+	 {
+	   var odiv=document.getElementById('div1');
+		var ou1=odiv.getElementsByTagName('ul')[0];
+		var ali=ou1.getElementsByTagName('li');
+		
+		var speed=2;
+		
+		ou1.innerHTML=ou1.innerHTML+ou1.innerHTML;//innerHTML是ul里的li。把它自己内部的复制一份给它自己
+		ou1.style.width=ali[0].offsetWidth*ali.length+'px';//li的宽度等于所有li的个数乘以一个的li的宽度
+		
+		function move(){ //存入定时器，方便引用
+		if(ou1.offsetLeft<-ou1.offsetWidth/2){
+		//如果从右往左滚滚完一半
+		    ou1.style.left="0"; //返回第一个重复滚动
+		}
+		if(ou1.offsetLeft>0){ //如果从左往右滚到一半
+		  ou1.style.left=-ou1.offsetWidth/2+'px'; //将右边的复制过去
+		}
+		  ou1.style.left=ou1.offsetLeft+speed+'px';//+2为从左往右滚，-2位从右往左滚
+		}
+		
+		var timer=setInterval(move,30); //定时器，每30毫秒移动
+		
+		//鼠标点入暂停，定时器关闭
+		odiv.onmouseover=function(){
+		clearInterval(timer);
+		}
+		//鼠标离开继续动，定时器打开
+		odiv.onmouseout=function(){
+		  timer=setInterval(move,30);  
+		}
+		
+		document.getElementsByTagName('a')[0].onclick=function(){
+		   speed=-2;
+		}
+		document.getElementsByTagName('a')[1].onclick=function(){
+		   speed=2;
+		}//向左向右滚动
+		
+	 }
+  </script>
+  </head>
+  <body>
+  <a href="javascript:;">向左走</a> <!--更改左右，设置一个变量speed-->
+  <a href="javascript:;">向右走</a>
+    <div id="div1">
+	    <ul>
+		  <li><div style="background:red;width:170px;height:108px"></li>
+		  <li><div style="background:yellow;width:170px;height:108px"></li>
+		  <li><div style="background:green;width:170px;height:108px"></li>
+		  <li><div style="background:blue;width:170px;height:108px"></li>
+		</ul>
+	</div>
+  </body>
+</html>

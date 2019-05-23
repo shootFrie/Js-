@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>表格应用、搜索</title>
+   <link rel="stylesheet" type="text/css" href="css/js1.css" />
+   <link rel="stylesheet" type="text/css" href="css/css1.css" />
+   <script>
+   window.onload=function()
+   {
+    var div1=document.getElementById("div1");
+	  var btn1=div1.getElementsByTagName("button")[0];
+	  var tab1=div1.getElementsByTagName("table")[0];
+	  var ipt1=div1.getElementsByTagName("input")[0];
+	  btn1.onclick=function()
+	  {
+	     var Simple=tab1.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	     for(var i=0;i<Simple.length;i++)
+		  {
+		    var tdinner=Simple[i].getElementsByTagName("td")[1].innerHTML;
+		    
+			if(tdinner==ipt1.value) 
+			   { 
+			   Simple[i].style.background="yellow";
+			  }else{
+			    Simple[i].style.background="none";
+			  }
+		  }
+	  }
+	  
+	  var div2=document.getElementById("div2");
+	  var tab2=div2.getElementsByTagName("table")[0];
+	  var btn2=div2.getElementsByTagName("button")[0];
+	  var ipt2=div2.getElementsByTagName("input")[0];
+	  btn2.onclick=function()
+	  {
+	     var Simple=tab2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	     for(var i=0;i<Simple.length;i++)
+		  {
+		     var Lipt=ipt2.value.toLowerCase();
+			  var Ltd=Simple[i].getElementsByTagName("td")[1].innerHTML.toLowerCase();
+			
+			  if(Lipt==Ltd)
+			  {
+			    Simple[i].style.background="yellow";
+			  }else
+			  {
+			    Simple[i].style.background="none";
+			  }
+		  }
+	  }
+	  
+	  var div3=document.getElementById("div3");
+	  var tab3=div3.getElementsByTagName("table")[0];
+	  var btn3=div3.getElementsByTagName("button");
+	  var ipt3=div3.getElementsByTagName("input")[0];
+	  btn3[0].onclick=function()
+	  {
+	   var Simple=tab3.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	   for(var i=0;i<Simple.length;i++)
+	   {
+	     var Lipt=ipt3.value.toLowerCase();
+			var Ltd=Simple[i].getElementsByTagName("td")[1].innerHTML.toLowerCase();
+	     if(Ltd.search(Lipt)!=-1)
+		 // 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。如果没有找到任何匹配的子串，则返回 -1。
+		   {
+		      Simple[i].style.background="yellow";
+		   }else
+			{
+			    Simple[i].style.background="none";
+		  }
+	   }
+	  }
+	  btn3[1].onclick=function()
+	  {
+	     var arr="abcdef";
+		   alert(arr.search("c"));
+	  }
+	  
+	  var div4=document.getElementById("div4");
+	  var tab4=div4.getElementsByTagName("table")[0];
+	  var btn4=div4.getElementsByTagName("button");
+	  var ipt4=div4.getElementsByTagName("input")[0];
+	  btn4[0].onclick=function()
+	  {
+	   var Simple=tab4.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	   for(var i=0;i<Simple.length;i++)
+	   {
+	     var Lipt=ipt4.value.toLowerCase();
+		   var Ltd=Simple[i].getElementsByTagName("td")[1].innerHTML.toLowerCase();
+			var aArr=Lipt.split(" ");//将每个以空格分隔开的元素变成个体。如：how are you 转变 how,are,you,
+			Simple[i].style.background="none";
+			for(var j=0;j<aArr.length;j++)
+			{
+			 if(Ltd.search(aArr[j])!=-1)
+			 {
+			   Simple[i].style.background="yellow";
+			 }
+			}
+	   }
+	  }
+   }
+   </script>
+   
+ </head>
+ <body>
+ <div class="c1" id="div1">
+ 1、表格搜索：基础版本-字符串比较<br><br>
+ 岁数：<input type="text" class="in-text" placeholder="必填">
+ <button class="btn btn-color">逐行搜索</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+	    <td>43</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+	    <td>44</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+	    <td>32</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>折耳根</td>
+	    <td>38</td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+	    <td>42</td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+  <div class="c1" id="div2">
+ 2、表格搜索：忽略大小写-大小写转换<br><br>
+ 姓名：<input type="text" class="in-text" placeholder="必填">
+ <button class="btn btn-color">逐行搜索</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+	    <td>43</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+	    <td>44</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+	    <td>32</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>Root</td>
+	    <td>38</td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+	    <td>42</td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+   <div class="c1"id="div3">
+3、表格搜索：模糊搜素-search的使用<br><br>
+ 姓名：<input type="text" class="in-text" placeholder="必填">
+ <button class="btn btn-color">逐行搜索</button>
+ var arr='abcdef'
+ <button class="btn btn-color">用search例子找C</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+	    <td>43</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+	    <td>44</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+	    <td>32</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>Root</td>
+	    <td>38</td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+	    <td>42</td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+ <div class="c1" id="div4">
+ 4、表格搜索：多关键词-split<br><br>
+ 岁数：<input type="text" class="in-text" placeholder="必填">
+ <button class="btn btn-color">逐行搜索</button>
+ var str='abc def 123'
+ <button class="btn btn-color">split例子拆分</button></br></br>
+ <table class="table table-bordered">
+  <thead>
+    <tr> 
+	   <td>ID</td>
+	   <td>姓名</td>
+	   <td>年龄</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+	    <td>1</td>
+	    <td>宅总</td>
+	    <td>43</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>李四</td>
+	    <td>44</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>肖大锤</td>
+	    <td>32</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>折耳根</td>
+	    <td>38</td>
+	  </tr>
+	  <tr>
+	    <td>5</td>
+	    <td>莱豆豆</td>
+	    <td>42</td>
+	  </tr>
+  </tbody>
+ </table>
+ </div>
+ 
+  <div class="c1">
+  记录</br></br>
+  <p>注：不可将input的.value直接包含在变量内，要拿出用</p></br></br>
+  <p>表格搜索 基础版本-字符串比较：循环表格中所有tr，一行一行的找。
+已知要搜索的内容都是在每一行的第二个单元格里，判断第i行的第二个单元格的innerHTML是否等于输入框的value。如果等于，说明已经找到，则改颜色。
+如果未找到，就把颜色改回默认。</p></br></br>
+<p>表格搜索 忽略大小写-大小写转换：↑ toLowerCase，作用于就是把字符串都改为小写。例如：sTxt.toLowerCase()</p></br></br>
+<p>表格搜索 模糊搜素-search的使用：↑ search，作用于找到并且返回字符串出现的位置，如果没有找到则返回-1。可以在循环的判断中search一下文本框 
+value是否不等于-1。如果不等于-1，就说明已经找到了。例如：if(sTab.search(sTxt)!=-1)</p></br></br>
+<p>表格搜索：多关键词-split：如果一个字符串是用空格隔开的，例如：var str='abc def 123'，通过split可以把这个字符串切成三段，例如：var arr=str.split(' ')，
+意思就是从空格开始切，结果就是切成了3段的数组。↑ 假设用户输入的多个搜索词是用空格分开的字符串，那么可以用split把字符串切分开成为一个数组，例如var sArr=sTxt.split(' ')，
+然后不管找到未找到都先把颜色设置为默认。接下来做个循环，循环之前切开的那个数组的length。如果search数组的第i个，如果结果不等于-1，例如if(sTab.search(sArr[j])!=-1)，就是找到了，这个时候就执行变色。
+</p></br></br>
+
+  </div>
+ </body>
+</html>
