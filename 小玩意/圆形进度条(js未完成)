@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>圆环进度</title>
+		<style>
+			div {
+				border: 1px solid #000;
+				border-radius: 50%;
+			}
+
+			.wrap {
+				width: 238px;
+				height: 238px;
+				position: relative;
+			}
+
+			.wrap>div {
+				position: absolute;
+				top: 21px;
+				left: 21px
+			}
+
+			.cirle {
+				width: 196px;
+				height: 196px;
+				background: linear-gradient(to top left, #00ffff, blue);
+			}
+
+			.left {
+				width: 196px;
+				height: 196px;
+				clip: rect(0px, 88px, 196px, 0px);
+				background: #fff;
+				position: absolute;
+				transform: rotate(-60deg);
+			}
+
+			.right {
+				width: 196px;
+				height: 196px;
+				clip: rect(0px, 196px, 196px, 88px);
+				background: #fff;
+				position: absolute;
+			}
+
+			.mask {
+				width: 153px;
+				height: 153px;
+				margin-top: 20px;
+				margin-left: 20px;
+				background: #fff;
+				text-align: center;
+			}
+
+			.mask span {
+				line-height: 153px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="cirle">
+				<div class="left"></div>
+				<div class="right"></div>
+			</div>
+			<div class="mask">
+				<span id=percent>2000</span>
+			</div>
+		</div>
+	</body>
+	<script>
+		/* var percent=0;
+	var loading=setInterval(function(){
+		if(percent>100){
+			percent=0;
+			$('.circle').removeClass('clip-auto');
+			$('.right').addClass('wth0');
+		}else if(percent>50){
+			$('.circle').addClass('clip-auto');
+			$('.right').removeClass('wth0');
+		}
+		$('.left').css("-webkit-transform","rotate("+(18/5)*percent+"deg)");
+		$('.num>span').text(percent);
+		percent++;
+	},200); */
+	</script>
+	</body>
+</html>
