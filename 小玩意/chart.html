@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>echart</title>
+	</head>
+	<body>
+		<div style="height:300px;width:100%;text-align: center;">
+			<div id="chart" style="margin:0 auto; width:520px; height:500px"></div>
+		</div>
+		<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+		<script>
+			/* 获取后得整数
+			 * 返回整数
+			 */
+			var a = 23; //获取session值
+			console.log(expandedForm(a));
+			var gender = '男';
+			//返回数字整数
+			function expandedForm(num) {
+				res = {};
+				ans = [];
+				var weight = 1;
+				while (num) {
+					res[weight] = num % 10;
+					weight *= 10;
+					num = parseInt(num / 10);
+				}
+				for (var i in res) {
+					if (res[i])
+						ans.unshift(i * res[i])
+				}
+
+				//console.log(ans);
+				return ans[0];  //返回整数值
+			}
+
+			/* 折线图 */
+			var chart = echarts.init(document.getElementById('chart'));
+			window.onresize = chart.resize;
+			option = {
+				title: {
+					text: '保障',
+					textStyle: {
+						fontSize: 18,
+						fontWeight: 'bolder',
+						color: '#333'
+					},
+					x: 'center',
+				},
+				tooltip: {
+					show:true,
+					trigger: 'axis'
+				},
+				legend: {
+					data: ['男性', '女性'],
+					padding: 30,
+					x: 'center', //横坐标设为中间
+					textStyle: { //字颜色
+						color: '#333',
+					},
+					selectedMode:false, //取消图例点击事件
+				},
+				calculable: true,
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					data: ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', '岁'],
+					axisLine: {
+						lineStyle: {
+							type: 'dotted',
+						}
+					},
+					axisTick: {
+						show: false  //刻度线
+					},
+
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLabel: {
+						formatter: '{value}%'
+					},
+					axisLine: {  //坐标线去掉 
+						lineStyle: {
+							width: 0
+						}
+					},
+					axisTick: {
+						show: false //刻度线去掉
+					},
+					splitLine: {
+						lineStyle: {
+							color: ['#333', '#666', '#333', '#666'], //线条颜色,每条不一样
+							type: 'dotted'
+						}
+					}
+				}],
+				series: genderSelect(gender)
+			};
+			/* 如果session为男的,则到男性那边markLine,如果为女则到女性那边markLine */
+			function genderSelect(gender){
+				if(gender === '女'){
+					var app =[ {
+						name: '男性',
+						type: 'line',
+						smooth: true,
+						borderColor: '#436EEE',
+						data: [
+							1, 2, 3, 10, 12, 20, 32, 40, 42, 43
+						],
+						itemStyle: {
+							normal: {
+								color: 'blue', //图例颜色
+								lineStyle: { //折线颜色
+									color: 'blue'
+								}
+							}
+						}
+					
+					},
+					{
+						name: '女性',
+						type: 'line',
+						smooth: true,
+						symbol: 'circle', //实心圆
+						data: [
+							1, 2, 3, 8, 10, 16, 20, 30, 40, 50
+						],
+						itemStyle: {
+							normal: {
+								color: '#FF00FF',
+								lineStyle: { //折线颜色
+									color: '#FF00FF'
+								}
+							}
+						},
+						markLine: {
+							data: [
+								[{
+										name: expandedForm(a).toString()+'岁',
+										xAxis: expandedForm(a).toString(),
+										yAxis: 0
+									},
+									{
+										
+										xAxis: expandedForm(a).toString(),
+										yAxis: 50
+									}
+								]
+											
+							]
+						}
+					
+					}]
+				}else{
+					var app =[{
+						name: '男性',
+						type: 'line',
+						smooth: true,
+						borderColor: '#436EEE',
+						data: [
+							1, 2, 3, 10, 12, 20, 32, 40, 42, 43
+						],
+						itemStyle: {
+							normal: {
+								color: 'blue', //图例颜色
+								lineStyle: { //折线颜色
+									color: 'blue'
+								}
+							}
+						},
+						markLine: {
+							data: [
+								[{
+										name: expandedForm(a).toString()+'岁',
+										xAxis: expandedForm(a).toString(),
+										yAxis: 0
+									},
+									{
+										
+										xAxis: expandedForm(a).toString(),
+										yAxis: 50
+									}
+								]
+											
+							]
+						}
+					
+					}, 
+					{
+						name: '女性',
+						type: 'line',
+						smooth: true,
+						symbol: 'circle', //实心圆
+						data: [
+							1, 2, 3, 8, 10, 16, 20, 30, 40, 50
+						],
+						itemStyle: {
+							normal: {
+								color: '#FF00FF',
+								lineStyle: { //折线颜色
+									color: '#FF00FF'
+								}
+							}
+						}
+					
+					}
+				]}
+				
+				return app;
+			}
+			chart.setOption(option);
+		</script>
+	</body>
+</html>
