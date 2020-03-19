@@ -8,3 +8,8 @@
 #jssearch.html 
 这个网页是别踩白块的原生js。
 
+#2020/3
+更新了
+太阳系的canvas demo，cookie增删查改A七天免登陆，echart的一个demo，
+js的demo更新了 秒表，两球相互碰撞
+vue的demo的是一个文字跑马灯和todolist
