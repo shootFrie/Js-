@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>正在热播</title>
+		<style>
+			*{margin:0;padding:0;}
+			ul{list-style:none;}
+			a{text-decoration:none; color:#000;}
+			a:hover{color:#00bfff;}
+			
+			#nowPlaying{margin:20px auto; width:1100px;}
+			#nowPlaying .textPlaying{margin:20px;height:20px;}
+			#nowPlaying .textPlaying h2{float:left; line-height:20px;}
+			#nowPlaying .textPlaying p{float:left; margin-left:20px; line-height:20px;}
+			#nowPlaying .textPlaying p a:hover{color:#00bfff;}
+			
+			#nowPlaying ul{margin:10px;}
+			#nowPlaying ul li{float:left; border:1px solid #000; width:200px; margin-left:10px;}
+			#nowPlaying ul li h5{width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+			#nowPlaying ul li div{width:200px;height:100px; position:relative; background-color:#999;}
+			#nowPlaying ul li div span{position:absolute; font-size:11px;cursor:pointer;}
+			#nowPlaying ul li div span.vip,#nowPlaying ul li div span.independent{color:#fff; right:10px; top:10px; padding:1px 3px;}
+			#nowPlaying ul li div span.vip{background-color:yellow;}
+			#nowPlaying ul li div span.independent{background-color:red;}
+			#nowPlaying ul li div span.update{right:10px;bottom:10px; color:#fff;}
+			#nowPlaying ul li div span.score{color:red;font-size:18px; bottom:10px;right:10px;}
+			#nowPlaying ul li p{font-size:12px;color:#666;}
+		</style>
+	</head>
+	<body>
+		<div id="nowPlaying">
+		  <div class="textPlaying">
+		    <h2>正在热播</h2>
+		    <p><a href="#">歌唱祖国</a></p>
+		    <p><a href="#">青春的接力</a></p>
+		  </div>
+		  <ul>
+		    <li>
+		      <div>背景图片</div>
+		      <h5><a href="#">正直播亚冠 - 川崎VS上港</a></h5>
+		      <p>巴西三叉戟率队远征日本</p>
+		    </li>
+		    <li>
+		      <div>背景图片</div>
+		      <h5><a href="#">正直播CUBA男子附加赛</a></h5>
+		      <p>山东农大VS重庆大学</p>
+		    </li>
+		    <li>
+		      <div>
+		        背景图片
+		        <span class="vip" title="新水果篮子">VIP</span>
+		        <span class="update" title="新水果篮子">更新至5话</span>
+		      </div>
+		      <h5><a href="#" title="新水果篮子">新水果篮子</a></h5>
+		      <p>童年经典动画重制</p>
+		    </li>
+		    <li>
+		      <div>
+		        背景图片
+		        <span class="independent" title="德云社岳云鹏相声专场上海站...">独播</span>
+		        <span class="update" title="德云社岳云鹏相声专场上海站...">7期全</span>
+		      </div>
+		      <h5><a href="#" title="德云社岳云鹏相声专场上海站...">德云社岳云鹏相声专场上海站火爆上映</a></h5>
+		      <p>岳云鹏孙越逗趣现场</p>
+		    </li>
+		    <li>
+		      <div>
+		        背景图片
+		        <span class="vip" title="人间喜剧">VIP</span>
+		        <span class="score">6.7</span>
+		      </div>
+		      <h5><a href="#" title="人间喜剧">人间喜剧</a></h5>
+		      <p>艾伦爆笑上演怂人逆袭</p>
+		    </li>
+		  </ul>
+		</div>
+	</body>
+</html>

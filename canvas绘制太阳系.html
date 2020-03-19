@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#can{background:#000;}
+		</style>
+	</head>
+	<body>
+		<canvas id="can" width="800" height="800 "></canvas>
+		<script>
+			//面向过程，封装函数
+			var can = document.getElementById("can");
+			var ctx = can.getContext("2d"); //2d绘图环境
+			/*//找到圆心坐标点，绘制圆形
+			ctx.beginPath(); //开始路径
+			//ctx.arc(x,y,r,0,360,false); //设置圆形路径：圆心坐标x,y，半径r,从0度绘制到360度，逆时针
+			ctx.arc(400,400,100,0,360,false);
+			ctx.strokeStyle = "#fff"; //设置触笔方法的颜色
+			ctx.stroke(); //触笔方法:绘制空心圆
+			ctx.fillStyle = "#f00"; //设置填充方法的颜色
+			ctx.fill(); //填充方法:
+			弧度计算公式：度*PI/180
+			*/
+			//循环生成8个轨迹圆
+			//封装，以防后面清除画布时将轨迹清除掉
+			function drawTrack(){
+				for(var i = 0; i<8; i++){
+				  ctx.beginPath();
+				  ctx.arc(400,400,(i+1)*40,0,2*Math.PI,false);
+				  ctx.strokeStyle = "#fff";
+				  ctx.stroke();
+				}
+			}
+			/*ctx.save(); //保存之前的画布内容，相当于额外开辟一个空间
+			//canvas 变换 translate
+			ctx.translate(400,400); //设置画布的圆心坐标点
+			ctx.beginPath();
+			ctx.arc(0,0,20,0,2*Math.PI,false);
+			//设置径向渐变色
+			//var color = ctx.createRadiaGradient(x1,y1,r1,x2,y2,r2);
+			var color = ctx.createRadialGradient(0,0,0,0,0,20);
+			//添加颜色值
+			color.addColorStop(0,"#f00"); //0 起始颜色值
+			color.addColorStop(0.5, "#0f0"); 
+			color.addColorStop(1,"#00f"); //1 结束颜色值
+			ctx.fillStyle=color;
+			ctx.fill();
+			ctx.restore(); //释放之前的画布内容
+			//额外开一个层，互不干扰，最后重叠
+			*/
+			var time = 0;
+			//封装函数,坐标，半径，旋转周期，渐变开始颜色，渐变结束颜色
+			function drawStar(x,y,r,cycle,sColor,eColor){ 
+			  ctx.save();
+			  ctx.translate(400,400);
+			  ctx.rotate(time*(360/cycle)*Math.PI/180);//旋转
+			  ctx.beginPath();
+			  ctx.arc(x,y,r,0,2*Math.PI,false);
+			  var color = ctx.createRadialGradient(x,y,0,x,y,r);
+			  color.addColorStop(0,sColor);
+			  color.addColorStop(1,eColor);
+			  ctx.fillStyle=color;
+			  ctx.fill();
+			  ctx.restore();
+			  time++;
+			}
+			setInterval(function(){
+			  //不断换位置来写，擦掉前面的
+			  //清空画布
+			  ctx.clearRect(0,0,800,800); //x,y绘制的起点，w,h绘制的区域（宽高）
+			  drawTrack();
+			  drawStar(0,0,15,0,"#f00","#ffcc00");
+			  drawStar(40,0,15,87,"#5c3e40","#a69697");
+			  drawStar(80,0,15,224,"#c4bbac","#1f1315");
+			  drawStar(120,0,15,365,"#78b1e6","#76422d");
+			  drawStar(160,0,15,686,"#cec9b6","#76422d");
+			  drawStar(200,0,15,4332,"#c0a48e","#322222");
+			  drawStar(240,0,15,10759,"#f7e1e5","#5c4533");
+			  drawStar(280,0,15,30799,"#a7e1e5","#19243a");
+			  drawStar(320,0,15,59860,"#0661b2","#1e3b73");
+			},100)
+			
+			/*
+			*
+			var can = document.getElementById("can");
+			var ctx = can.getContext("2d");
+			function drawTrack(){
+				for(var i = 0; i<8; i++){
+				  ctx.beginPath();
+				  ctx.arc(400,400,(i+1)*40,0,2*Math.PI,false);
+				  ctx.strokeStyle = "#fff";
+				  ctx.stroke();
+				}
+			}
+
+
+			*每个星体看做一个对象，每个星体设置一样，参数不一样。
+			*创建星体实例的时候再重新设置参数
+
+			var time = 0;
+			function Star(x,y,r,cycle,sColor,eColor){
+				this.x = x;
+				this.y = y;
+				this.r = r;
+				this.cycle = cycle;
+				this.sColor = sColor;
+				this.eColor = eColor;
+				this.time = 0;
+				this.color = null;
+				this.draw = function(){
+				  ctx.save();
+						  ctx.translate(400,400);
+						  ctx.rotate(this.time*(360/this.cycle)*Math.PI/180);//旋转
+						  ctx.beginPath();
+						  ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+						  this.color = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r);
+						  this.color.addColorStop(0,this.sColor);
+						  this.color.addColorStop(1,this.eColor);
+						  ctx.fillStyle=this.color;
+						  ctx.fill();
+						  ctx.restore();
+						  this.time++;
+			  }
+			}
+			var sun = new Star(0,0,15,0,"#f00","#ffcc00");
+			var mer = new Star(40,0,15,87,"#5c3e40","#a69697");
+			var ven = new Star(80,0,15,224,"#c4bbac","#1f1315");
+			var ear = new Star(120,0,15,365,"#78b1e6","#76422d");
+			var mar = new Star(160,0,15,686,"#cec9b6","#76422d");
+			var jup = new Star(200,0,15,4332,"#c0a48e","#322222");
+			var sat = new Star(240,0,15,10759,"#f7e1e5","#5c4533");
+			var ura = new Star(280,0,15,30799,"#a7e1e5","#19243a");
+			var nep = new Star(320,0,15,59860,"#0661b2","#1e3b73");
+
+			setInterval(function(){
+			  ctx.clearRect(0,0,800,800);
+			  drawTrack();
+			  sun.draw();
+			  mer.draw();
+			  ven.draw();
+			  ear.draw();
+			  mar.draw();
+			  jup.draw();
+			  sat.draw();
+			  ura.draw();
+			  nep.draw();
+			},30);
+			*/
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<title>ToDoList</title>
+		<style>
+			#todo{margin:30px auto;}
+			.show_list{margin-top:20px;width:80%;padding:20px;min-height:20px;border:1px solid #ddd;}
+		</style>
+	</head>
+	<body>
+		<div id="todo">
+			<input type="text" v-model="message">
+			{{message}}
+			<input type="submit" value="添加" @click="add">
+			<div id="list">
+				<div v-for="(item,index) in lists" :key="index">
+					{{index+1}}
+					<input type="text" disabled="disabled" v-bind:value="item.content">
+					<input type="submit" value="编辑" @click="edit(item,index)">
+					<input type="submit" value="删除" @click="del(index)">
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<script>
+			var app = new Vue({
+				el:'#todo',
+				data:{
+					message:'',
+					lists:[]
+				},
+				methods:{
+					add:function(){
+						if(this.message != null || this.message !=''){
+							this.lists.push({
+								content:this.message
+							});
+							this.message = '';
+						}
+					},
+					edit:function(item, index){
+						var j=prompt('请输入编辑内容',item.content);
+						Vue.set(this.lists[index],'content',j);
+					},
+					del:function(index){
+						var qr = confirm('是否删除');
+						if(qr == true){
+							this.lists.splice(--index,1);
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

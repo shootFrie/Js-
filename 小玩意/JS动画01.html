@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>物体运动</title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			body{overflow: hidden;}
+			div{
+				width:100px;
+				height:100px;
+				position:absolute;
+				left:0;
+				right:0;
+				background-color:#000;
+			}
+			div:nth-of-type(2){
+				left:500px;
+				top:500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<script>
+			var speedx = 3;
+			var speedy = 2;
+			var oDiv = document.querySelector("div");
+			var div2 = document.querySelector("div:nth-of-type(2)");
+			//给每个div设定速率
+			oDiv.speedx = 5;
+			oDiv.speedy = 3;
+			div2.speedx = 5;
+			div2.speedy = 3;
+			console.log(oDiv.speedx);//获取当前元素的left值,得0px ,且0是一个字符串
+			console.log(parseInt(window.getComputedStyle(oDiv).left));//parseInt()解析一个字符串,得到0
+			
+			function move(el){
+				var currentLeft =parseInt(window.getComputedStyle(el).left); 
+				var currentTop = parseInt(window.getComputedStyle(el).top); //获取top
+				
+				check_border_collision(el);
+				var tempx , tempy;
+				//如果两个元素相撞,将两个speed进行交换
+				if(check_block_collision(oDiv,div2)){					
+					console.log(oDiv.speedx,oDiv.speedy,div2.speedx,div2.speedy);
+					/* tempx = oDiv.speedx;
+					tempy = oDiv.speedy;
+					
+					oDiv.speedx = div2.speedx;
+					oDiv.speedy = div2.speedy;
+					
+					div2.speedx = tempx;
+					div2.speedy = tempy; */
+					[oDiv.speedx,div2.speedx] = [div2.speedx,oDiv.speedx]; //解构赋值 ES6 交换值 【注】不能[oDiv,div2] = [div2,oDiv]
+					[oDiv.speedy,div2.speedy] = [div2.speedy,oDiv.speedy]; 
+					console.log(oDiv.speedx,oDiv.speedy,div2.speedx,div2.speedy);
+				}
+				var left = currentLeft + el.speedx;
+				var top = currentTop + el.speedy;
+				//只更改left,水平运动
+				el.style.left = left+'px';
+				//top和left一起改变,斜线运动
+				//只更改top,垂直运动
+				el.style.top = top + 'px';
+			}
+			
+			//四周碰撞检测
+			function check_border_collision(el){
+				var style = window.getComputedStyle(el); //获取当前el的style
+				var left = parseInt(style.left); //获取当前元素的left
+				var top = parseInt(style.top); //获取当前元素的top
+				var w = parseInt(style.width); //获取当前元素的宽度
+				var h = parseInt(style.height); //获取当前元素的高度
+				
+				//元素左边缘碰撞
+				if(left < 0){
+					left = 0;
+					el.speedx *= -1; //原来速度变成反方向的
+				}
+				//右边缘检测相撞，如果left的值大于浏览器宽度-元素宽度则说明碰到了
+				if(left > window.innerWidth - w){
+					left = window.innerWidth - w;
+					el.speedx *= -1; //将speedx改为负值
+				}
+				//元素上边缘
+				if(top < 0){
+					top = 0 ;
+					el.speedy *= -1;
+				}
+				
+				if(top > window.innerHeight - h){
+					top = window.innerHeight - h;
+					el.speedy *= -1; //将speedx改为负值
+				}
+			}
+			
+			//两元素块检测相撞
+			function check_block_collision(block1,block2){
+				var style1 =window.getComputedStyle(block1);
+				var style2 = window.getComputedStyle(block2);
+				
+				var left1 = parseInt(style1.left);
+				var left2 = parseInt(style2.left);
+				var top1 = parseInt(style1.top);
+				var top2 = parseInt(style2.top);
+				var w1 = parseInt(style1.width);
+				var w2 = parseInt(style2.width);
+				var h1 = parseInt(style1.height);
+				var h2 = parseInt(style2.height);
+				
+				//获取两个块元素中心点的距离
+				var center1 = {
+					x : left1 + w1 / 2,
+					y : top1 + h1 / 2
+				};
+				var center2 = {
+					x : left2 + w2 / 2,
+					y : top2 + h2 / 2
+				};
+				//获取两个块相差的距离
+				var diffx = Math.abs(center1.x - center2.x);
+				var diffy = Math.abs(center1.y - center2.y);
+				
+				//判断两个元素之间的距离是否小于两中心之和
+				if(diffx < (w1 + w2)/2 && diffy < (h1 + h2)/2 ){
+					return true;
+				}
+				return false;
+			}
+			
+			setInterval(function(){
+				move(oDiv); //不断调用函数
+				move(div2);
+			},10);
+		</script>
+	</body>
+</html>

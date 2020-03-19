@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>cookie基础</title>
+		<script>
+			
+			//cookie的查
+			//alert(document.cookie);
+
+			//增 加时效性
+			/* var date = new Date();
+			date.setDate(date.getDate()+3);//3天之后
+			document.cookie="username = shaw ; expires = " + date; */
+			
+			//修改
+			//document.cookie = "username = root";
+
+			//删除 时间过期
+			/* var date = new Date();
+			date.setDate(date.getDate()-1);//过期
+			document.cookie="username = shaw ; expires= " + date; */
+
+			//封装函数 设置cookie
+			function setCookie(name,value,day){
+				//获取具体的时间，天数
+				var d = new Date();
+				d.setDate(d.getDate()+day);
+				//设置cookie
+				document.cookie = name + "=" + value + ";expires=" +d; 
+			}
+			//获取cookie
+			function getCookie(name){
+				//获取所有的cookie值
+				var str = document.cookie;
+				//将每个cookie值分割开得到数组
+				var arr = str.split("; ");
+				//遍历数组
+				for(var i = 0; i<arr.length; i++){
+					//再次分割等号两边的内容
+					var arr1 = arr[i].split("=");
+					if(arr1[0] == name){
+						return arr1[1]; //返回name的值
+					}
+				}
+			}
+			
+			//删除
+			function removeCookie(name){
+				setCookie(name,1,-5);
+			}
+			
+			//验证
+			//setCookie("username", "shaw" , 3);
+			//setCookie("username1" , "root" , 3);
+			//console.log(getCookie("username")+2);
+			//console.log(getCookie("username1")+1);
+			/* removeCookie("username");
+			removeCookie("username1");
+			getCookie("username1"); */
+		</script>
+	</head>
+	<body>
+		<label>
+			用户名：<input type="text">
+		</label>
+		<label>
+			密码：<input type="password">
+		</label>
+		<label><input type="checkbox" style="font-size:28px">七天免登陆</label>
+		<input type="button" value="登陆">
+		<script>
+			var aInput = document.getElementsByTagName("input");
+			//页面加载时检查是否有cookie值
+			if(getCookie("username")){
+				aInput[0].value = getCookie("username");
+				aInput[1].value = getCookie("password");
+			}
+			//点击登录之后
+			aInput[3].onclick = function(){
+				//保存写好的账号密码
+				var username = aInput[0].value;
+				var password = aInput[1].value;
+				console.log(username);
+				console.log(password);
+				//如果七天免登陆是选中的状态
+				if(aInput[2].checked){
+					setCookie("username",username,7);
+					setCookie("password", password, 7);
+				}
+				
+			}
+		</script>
+	</body>
+</html>

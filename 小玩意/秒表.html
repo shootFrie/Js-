@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>秒表</title>
+		<style>
+			#div1{margin:30% auto;background:#ddd; width:800px;height:1000px; text-align: center;font-size: 9rem;}
+			.btn{background:yellow; width:400px;height:100px; margin:30px;font-size: 4rem;}
+		</style>
+		<script>
+			window.onload = function(){
+				var timer = null ;
+				var count = 0; //开始计数以后累加的总秒数
+				var isClick = true; //防止重复点击
+				$("start").onclick=function(){
+					if(isClick){
+						isClick = false; //防止重复点击
+						timer = setInterval(function(){
+							count++;
+							//需要改变页面上时分秒的值
+							$("id_S").innerHTML = showNum(count%60);
+							$("id_M").innerHTML = showNum(parseInt(count / 60) % 60);
+							$("id_H").innerHTML = showNum(parseInt(count/3600));
+					},1);
+					}
+				}
+				
+				$("pause").onclick=function(){
+					clearInterval(timer);
+					isClick = true;
+				}
+				
+				$("stop").onclick = function(){
+					//<1>s数据清零<2>页面数据清零
+					clearInterval(timer);
+					count = 0;
+					$("id_S").innerHTML = "00";
+					$("id_M").innerHTML = "00";
+					$("id_H").innerHTML = "00";
+					isClick = true;
+				}
+				
+			}
+			function $(id){
+				return document.getElementById(id);
+			}
+			//处理10以下的数字
+			function showNum(num){
+				if(num < 10){
+					return "0"+num;
+				}else{
+					return num;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id= "div1">
+			<div id="count">
+				<span id= "id_H">00</span>:
+				<span id= "id_M">00</span>:
+				<span id= "id_S">00</span>
+			</div>
+			<input id="start" type="button" value="开始" class="btn">
+			<input id="pause" type="button" value="暂停" class="btn">
+			<input id="stop" type="button" value="归零" class="btn">
+		</div>
+	</body>
+</html>

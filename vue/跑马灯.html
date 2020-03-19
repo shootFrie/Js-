@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<title>跑马灯</title>
+	</head>
+	<body>
+		<div id="turnRun">
+			{{message}}
+			<input type="submit" value="开始轮播" @click="startMove">
+			<input type="submit" value="停止" @click="stopMove">
+		</div>
+		<script>
+			var turn = new Vue({
+				el:'#turnRun',
+				data:{
+					message:'这是一个跑马灯的效果图，用Vue实现的',
+					intervalId:null
+				},
+				methods:{
+					startMove:function(){
+						if (this.intervalId != null) return; //【注意】这个定时器的this，一定不要忘记了
+						this.intervalId = setInterval(()=> {
+							var start = this.message.substring(0,1);
+							var end = this.message.substring(1);
+							this.message = end + start;
+						},400);
+					},
+					stopMove:function(){
+						clearInterval(this.intervalId);
+						this.intervalId = null;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
