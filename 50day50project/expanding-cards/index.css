@@ -1,0 +1,77 @@
+/* 引入谷歌字体 */
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+/* box-sizing: border-box; 
+   盒子模型：盒子宽高 = 内外边距+border+content；
+   标准盒子模型： 
+   IE盒子模型：盒子宽高只有content，不包括内外边距和border
+   box-sizing: content-box; 标准盒子模型
+   box-sizing: border-box; IE盒子模型
+ */
+*{box-sizing: border-box;}
+
+body {
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center; /*交叉轴上对齐方式*/
+  justify-content: center; /*主轴上对齐方式*/
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  width: 90vw;
+}
+
+/*  flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto
+   - flex-grow属性定义项目的放大比例，默认为0
+   - flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+   - flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。
+   浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。 */
+.panel{
+  background-size: cover; /* 把背景图像扩展至足够大，以使背景图像完全覆盖背景区域。*/
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  flex: 0.5;
+  margin: 5px;
+  color: #fff;
+  position: relative;
+  cursor:pointer;
+}
+
+.panel h3 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.panel.active{
+  flex: 5;
+}
+
+/* transition 状态切换时定义不同的过渡效果
+  transition: 属性 持续时间 速度效果的速度曲线 延迟时间;
+  ease-in 规定以慢速开始的过渡效果
+*/
+.panel.active h3 {
+  opacity: 1;
+  transform: opacity 0.9s ease-in 0.7s;
+}
+
+/* 宽度比480px小的页面 */
+@media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+
+  /* 第四第五个元素不显示 不要空格*/
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+}
