@@ -17,7 +17,9 @@ vue的demo的是一个文字跑马灯和todolist
 #2022/6
 学习 [50 Projects in 50 Days](https://github.com/bradtraversy/50projects50days) ； 整理目录  
 | 01  | [原生jsdemo汇总](https://shootfrie.github.io/Js-/) | index.html |
-|---|---|
+|---|---|---|
 |  02 | 别踩白块  | jssearch.html |
-|  03 | 折叠卡  | expanding-cards |
-|  03 | 步骤条  | progress-steps |
+|  03 | canvas绘制太阳系 | canvas绘制太阳系.html |
+|  04 | 折叠卡  | expanding-cards |
+|  05 | 步骤条  | progress-steps |
+
