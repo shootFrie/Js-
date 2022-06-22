@@ -15,7 +15,7 @@ js的demo更新了 秒表，两球相互碰撞
 vue的demo的是一个文字跑马灯和todolist
 
 #2022/6
-看到了 [50 Projects in 50 Days](https://github.com/bradtraversy/50projects50days) 学习下；顺便整理目录
+学习 [50 Projects in 50 Days](https://github.com/bradtraversy/50projects50days) ； 整理目录  
 | 01  | [原生jsdemo汇总](https://shootfrie.github.io/Js-/) | index.html |
 |---|---|
 |  02 | 别踩白块  | jssearch.html |
